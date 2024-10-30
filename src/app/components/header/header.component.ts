@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../service/auth.service';
@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
   user: any;
   dropDown: boolean = false;
   carrinho: number = 0;
+  isScroll = false;
+
 
   constructor(
     private dialog: MatDialog,
@@ -41,6 +43,19 @@ export class HeaderComponent implements OnInit {
 
     this.carrinho = this.carrinhoService.getCarrinho()
     console.log('Carrinho: ', this.carrinho)
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Pega a posição de scroll atual
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    // Se a posição for maior que 0, adiciona a classe, senão remove
+    if (scrollPosition > 1) {
+      this.isScroll = true;
+    } else {
+      this.isScroll = false;
+    }
   }
 
   login() {
