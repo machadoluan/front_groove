@@ -1,105 +1,71 @@
 @import '../../../../public/variables.scss';
 
-.container-dashboard {
-  display: flex;
+.container-profile {
+  width: 100%;
+  height: 100%;
+  background-color: #1A1A1AE3;
 
-  .slidebar {
-    position: fixed;
-    padding: 5rem 0 20px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 300px;
-    height: 100vh;
-    background-color: #0F111A;
+  main {
+    width: 50%;
+    margin: 0 auto;
+    padding: 15% 0;
 
-    .informs {
+    .profile {
       display: flex;
-      gap: 1rem;
-      flex-direction: column;
+      gap: 2rem;
       align-items: center;
 
-      .logo img {
-        border-radius: 50%;
+      .photo {
+        img {
+          width: 250px;
+          height: 250px;
+          border-radius: 50%;
+          border: 5px solid $primary;
+        }
+      }
+
+      .name{
+        display: flex;
+        align-items: end;
+        gap: 0.5rem;
+        font-size: 32px;
+
+        #vip{
+          font-size: 12px;
+          padding:  0 5px;
+          background-color: $primary;
+          color: $secundary;
+          font-weight: bold;
+        }
+      }
+
+      .inform {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+
+      .description {
+        color: #d1d1d1;
+        font-size: 14px;
       }
 
       .dados {
-        font-size: 24px;
-      }
-
-      .status {
-        padding: 10px;
         display: flex;
-        flex-direction: column;
         gap: 1rem;
         align-items: center;
 
-        .wl {
-          background-color: #6d6d6d3f;
-          padding: 5px 40px;
-          border-radius: 5px;
-          font-size: 14px;
-        }
-
-        .conectar {
-          background-color: #dd9d5c;
-          padding: 5px 79px;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: all 200ms ease-in-out;
-
-          &:hover {
-            background-color: #dd9d5ca1;
-
-          }
-        }
-
-        .steam {
+        div {
           display: flex;
-          gap: 5px;
-          font-size: 14px;
-
-          span {
+          gap: 1rem;
+          align-items: center;
+          span{
+            color: $primary;
             font-size: 12px;
+            font-weight: bold;
           }
         }
       }
     }
-
-    .vip {
-      width: 75%;
-      height: 40%;
-      border-radius: 10px;
-      border: 1px solid #dd9d5c;
-      font-size: 14px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: all 500ms ease-in-out;
-
-      &:hover {
-        background-color: #dd9d5c15;
-      }
-    }
-
-    .logout {
-      padding: 10px 100px;
-      border-radius: 5px;
-      border: 1px solid #dd9d5c;
-      cursor: pointer;
-      transition: all 500ms ease-in-out;
-
-      &:hover {
-        background-color: #dd9d5ca1;
-
-      }
-    }
-  }
-
-
-  main{
-    margin-left: 330px;
   }
 }
