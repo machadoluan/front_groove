@@ -3,7 +3,7 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
-import { LoginComponent } from './components/login/login.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -22,5 +22,9 @@ export const routes: Routes = [
   {
     path: 'home',
     component: InicioComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];

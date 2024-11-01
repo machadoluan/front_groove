@@ -20,12 +20,21 @@ export class AuthService {
   }
 
   handleAuthCallback(code: string) {
-    this.http.get<{ token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
+    this.http.get<{ discordID: string, needsSteamLink: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
       (response) => {
         localStorage.setItem('Token', response.token)
 
         const nomeGuild = 'New York City';
         const userGuilds = response.guilds.map(guild => guild.name)
+        console.log(response.needsSteamLink)
+        console.log(response.discordID)
+
+        if (response.needsSteamLink) {
+          const discordID = response.discordID;
+          localStorage.setItem('discordID', discordID);
+          window.location.href = `http://localhost:3000/auth/steam?discordID=${discordID}`;
+          return;
+        }
 
         if (userGuilds.includes(nomeGuild)) {
           this.router.navigate(['/dashboard'])
