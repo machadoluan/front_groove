@@ -44,14 +44,31 @@
       <mat-tab-group animationDuration="200ms">
         <mat-tab label="Ranking">
           <div class="content">
-           <div class="personagem">
-            Selecione seu personagem
-            
-           </div> 
+            <div class="personagem">
+              Selecione seu personagem
+              <div class="personagem-img">
+                <img src="/img/profile.png" [class.selected]="selectedImage === 0" (click)="selectImage(0)" alt="">
+                <img src="/img/profile.png" [class.selected]="selectedImage === 1" (click)="selectImage(1)" alt="">
+                <img src="/img/profile.png" [class.selected]="selectedImage === 2" (click)="selectImage(2)" alt="">
 
-           <div class="seuVip">
+                <div class="comprar-personagem">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+              </div>
+            </div>
 
-           </div>
+            <div class="dados">
+              <div class="vip">
+                <div class="icone">
+
+                </div>
+
+                <div class="dados-personagem">
+                  
+                </div>
+              </div>
+              <div class="diamante"></div>
+            </div>
           </div>
         </mat-tab>
         <mat-tab label="Perfil">

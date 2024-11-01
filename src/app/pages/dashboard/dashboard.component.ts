@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
 
   user: any
   avatar: string = '';
+  selectedImage: number = 0;
 
   constructor(
     private auth: AuthService
@@ -33,5 +34,9 @@ export class DashboardComponent implements OnInit {
 
   sair() {
     this.auth.logout()
+  }
+
+  selectImage(index: number) {
+    this.selectedImage = index;
   }
 }

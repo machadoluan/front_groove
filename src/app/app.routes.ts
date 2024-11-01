@@ -4,6 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { RegistroComponent } from './pages/registro/registro.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'home',
     component: InicioComponent
+  },
+  {
+    path: 'cadastro',
+    component: RegistroComponent
   },
   {
     path: '**',

@@ -32,7 +32,7 @@ export class AuthService {
         if (response.needsSteamLink) {
           const discordID = response.discordID;
           localStorage.setItem('discordID', discordID);
-          window.location.href = `http://localhost:3000/auth/steam?discordID=${discordID}`;
+          // window.location.href = `http://localhost:3000/auth/steam?discordID=${discordID}`;
           return;
         }
 
