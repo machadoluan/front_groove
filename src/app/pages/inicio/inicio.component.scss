@@ -439,19 +439,32 @@ mat-accordion {
 /* Estilo para cada painel de expansão */
 mat-expansion-panel {
   width: 900px;
-  border: 1px solid $primary;
+  border: 2px solid $primary;
   margin-bottom: 5px;
   background-color: transparent;
 
 }
 
 mat-panel-title {
-  color: white;
+  color: $secundary;
+}
+
+mat-expansion-panel-header {
+  background-color: $primary !important;
+
+  &:hover {
+    background-color: $primary !important;
+    /* Cor do cabeçalho ao passar o mouse */
+  }
 }
 
 /* Estilo para o conteúdo do painel */
 mat-expansion-panel {
+
   p {
+    margin-top: 20px;
     color: white;
+    font-weight: 300;
+    font-size: 14px;
   }
 }

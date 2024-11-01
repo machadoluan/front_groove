@@ -8,12 +8,13 @@
   main {
     width: 50%;
     margin: 0 auto;
-    padding: 15% 0;
+    padding: 10% 0;
 
     .profile {
       display: flex;
       gap: 2rem;
       align-items: center;
+      justify-content: center;
 
       .photo {
         img {
@@ -24,15 +25,15 @@
         }
       }
 
-      .name{
+      .name {
         display: flex;
         align-items: end;
         gap: 0.5rem;
         font-size: 32px;
 
-        #vip{
+        #vip {
           font-size: 12px;
-          padding:  0 5px;
+          padding: 0 5px;
           background-color: $primary;
           color: $secundary;
           font-weight: bold;
@@ -59,7 +60,8 @@
           display: flex;
           gap: 1rem;
           align-items: center;
-          span{
+
+          span {
             color: $primary;
             font-size: 12px;
             font-weight: bold;
@@ -67,5 +69,36 @@
         }
       }
     }
+
+    .tabs {
+      margin-top: 3rem;
+
+      .content {
+        padding: 1rem;
+        margin-top: 1rem;
+        background-color: $secundary;
+        border-radius: 10px;
+
+        .personagem {
+          font-size: 14px;
+          color: #d1d1d1;
+        }
+      }
+    }
   }
+}
+
+
+::ng-deep .mdc-tab__text-label {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+::ng-deep .mdc-tab--active .mdc-tab__text-label {
+  color: $primary !important; // Color para la pestaña activa
+  font-weight: bold !important;
+  font-size: 16px;
+}
+
+::ng-deep .mdc-tab-indicator {
+  display: none !important; // Remove o indicador da aba
 }

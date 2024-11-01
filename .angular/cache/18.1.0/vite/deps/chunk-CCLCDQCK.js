@@ -1,7 +1,7 @@
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-K2HRYD3Y.js";
+} from "./chunk-E2ZJCS73.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
@@ -81,27 +81,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-DAYIPQ73.js";
-
-// node_modules/@angular/cdk/fesm2022/coercion.mjs
-function coerceNumberProperty(value, fallbackValue = 0) {
-  return _isNumberValue(value) ? Number(value) : fallbackValue;
-}
-function _isNumberValue(value) {
-  return !isNaN(parseFloat(value)) && !isNaN(Number(value));
-}
-function coerceArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-function coerceCssPixelValue(value) {
-  if (value == null) {
-    return "";
-  }
-  return typeof value === "string" ? value : `${value}px`;
-}
-function coerceElement(elementOrRef) {
-  return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
-}
+} from "./chunk-UWZUXFYY.js";
 
 // node_modules/@angular/cdk/fesm2022/platform.mjs
 var hasV8BreakIterator;
@@ -303,6 +283,26 @@ function hasModifierKey(event, ...modifiers) {
     return modifiers.some((modifier) => event[modifier]);
   }
   return event.altKey || event.shiftKey || event.ctrlKey || event.metaKey;
+}
+
+// node_modules/@angular/cdk/fesm2022/coercion.mjs
+function coerceNumberProperty(value, fallbackValue = 0) {
+  return _isNumberValue(value) ? Number(value) : fallbackValue;
+}
+function _isNumberValue(value) {
+  return !isNaN(parseFloat(value)) && !isNaN(Number(value));
+}
+function coerceArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+function coerceCssPixelValue(value) {
+  if (value == null) {
+    return "";
+  }
+  return typeof value === "string" ? value : `${value}px`;
+}
+function coerceElement(elementOrRef) {
+  return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
 }
 
 // node_modules/@angular/cdk/fesm2022/observers.mjs
@@ -4919,30 +4919,35 @@ var _MatInternalFormField = __MatInternalFormField;
 })();
 
 export {
-  coerceNumberProperty,
-  coerceArray,
-  coerceCssPixelValue,
-  coerceElement,
   Platform,
+  normalizePassiveListenerOptions,
   RtlScrollAxisType,
   supportsScrollBehavior,
   getRtlScrollAxisType,
   _getFocusedElementPierceShadowDom,
   _getEventTarget,
   _isTestEnvironment,
-  Directionality,
-  BidiModule,
   ENTER,
   ESCAPE,
   SPACE,
   hasModifierKey,
+  coerceNumberProperty,
+  coerceArray,
+  coerceCssPixelValue,
+  coerceElement,
+  CdkObserveContent,
   FocusKeyManager,
   InteractivityChecker,
   FocusTrapFactory,
   FocusMonitor,
+  CdkMonitorFocus,
   A11yModule,
+  Directionality,
+  BidiModule,
   MatCommonModule,
+  MAT_RIPPLE_GLOBAL_OPTIONS,
+  MatRipple,
   MatRippleModule,
   MatRippleLoader
 };
-//# sourceMappingURL=chunk-JWXSN7HC.js.map
+//# sourceMappingURL=chunk-CCLCDQCK.js.map

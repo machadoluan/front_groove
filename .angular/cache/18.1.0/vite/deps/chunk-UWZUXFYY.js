@@ -27278,6 +27278,7 @@ export {
   concat,
   defer,
   fromEvent,
+  timer,
   merge,
   filter,
   auditTime,
@@ -27816,4 +27817,4 @@ export {
    * found in the LICENSE file at https://angular.io/license
    *)
 */
-//# sourceMappingURL=chunk-DAYIPQ73.js.map
+//# sourceMappingURL=chunk-UWZUXFYY.js.map
