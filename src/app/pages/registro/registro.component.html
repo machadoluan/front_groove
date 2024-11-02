@@ -11,7 +11,7 @@
         <div class="cadastro">
             <span>Preencha abaixo seus dados pessoais reais</span>
 
-            <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="registroForm">
                 <div class="form-group">
                     <label for="nome-completo" [ngClass]="{'class': true}">Nome completo</label>
                     <input type="text" id="nome-completo" formControlName="nome"
@@ -39,7 +39,7 @@
                     <label for="whatsapp" [ngClass]="{'class': true}">Whatsapp</label>
                     <input type="tel" id="whatsapp" formControlName="whatsapp"
                         [ngClass]="{'check': registroForm.get('whatsapp')?.valid}" mask="(00) 0 0000-0000" prefix="+55 "
-                        [(ngModel)]="dadosCadastro.whatsapp">
+                        [(ngModel)]="dadosCadastro.telefone">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
                 </div>
 
@@ -70,7 +70,7 @@
 
 
 
-                <button type="submit" [disabled]="registroForm.invalid">Avançar</button>
+                <button type="submit" (click)="cadastrar()" [disabled]="registroForm.invalid">Avançar</button>
             </form>
         </div>
     </div>

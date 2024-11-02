@@ -6,6 +6,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ToastrService } from 'ngx-toastr';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { provideNativeDateAdapter } from '@angular/material/core'
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,12 +23,13 @@ export class RegistroComponent implements OnInit {
     nome: '',
     dataNascimento: '',
     email: '',
-    whatsapp: '',
-    indicacao: ''
+    telefone: '',
+    indicacao: '',
+    discordID: localStorage.getItem('discordID')
   }
 
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -47,13 +49,6 @@ export class RegistroComponent implements OnInit {
         this.registroForm.get(key)?.markAsTouched();
       });
     });
-  }
-
-  onSubmit() {
-    if (this.registroForm.valid) {
-      console.log(this.registroForm.value);
-      // Aqui você pode implementar a lógica para enviar os dados
-    }
   }
 
   private idadeMinima(idade: number): ValidatorFn {
@@ -87,8 +82,18 @@ export class RegistroComponent implements OnInit {
     };
   }
 
-  cadastrar(){
-    console.log(this.dadosCadastro);
-  }
+  cadastrar() {
+    // console.log(this.dadosCadastro);
 
+    this.authService.cadastrar(this.dadosCadastro).subscribe(
+      response => {
+        alert("Usuario cadastrado com sucesso!")
+        console.log(this.dadosCadastro);
+      },
+      err => {
+        alert("Erro ao cadastrar usuario.")
+        console.error("Erro: ", err)
+      }
+    )
+  }
 }

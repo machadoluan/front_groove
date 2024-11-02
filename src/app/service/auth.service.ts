@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class AuthService {
         if (response.needsSteamLink) {
           const discordID = response.discordID;
           localStorage.setItem('discordID', discordID);
-          // window.location.href = `http://localhost:3000/auth/steam?discordID=${discordID}`;
+          window.location.href = `http://localhost:3000/auth/steam?discordID=${discordID}`;
           return;
         }
 
@@ -74,5 +75,9 @@ export class AuthService {
   logout() {
     localStorage.removeItem('Token');
     this.router.navigate(['']);
+  }
+
+  cadastrar(dadosCadastro: any): Observable<any> {
+    return this.http.post(`${this.UrlApi}/cadastro`, dadosCadastro);
   }
 }
