@@ -8,8 +8,70 @@
             <img src="/img/imgCadastro-1.png" alt="foto">
         </div>
 
-        <div class="form">
-        
+        <div class="cadastro">
+            <span>Preencha abaixo seus dados pessoais reais</span>
+
+            <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="nome-completo" [ngClass]="{'class': true}">Nome completo</label>
+                    <input type="text" id="nome-completo" formControlName="nome"
+                        [ngClass]="{'check': registroForm.get('nome')?.valid}" [(ngModel)]="dadosCadastro.nome">
+                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('nome')?.valid"></i>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="dataNascimento">Data de nascimento</label>
+                    <input type="date" id="dataNascimento" formControlName="dataNascimento"
+                        [ngClass]="{'check': registroForm.get('dataNascimento')?.valid}"
+                        [(ngModel)]="dadosCadastro.dataNascimento">
+                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('dataNascimento')?.valid"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" formControlName="email"
+                        [ngClass]="{'check': registroForm.get('email')?.valid}" [(ngModel)]="dadosCadastro.email">
+                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('email')?.valid"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp" [ngClass]="{'class': true}">Whatsapp</label>
+                    <input type="tel" id="whatsapp" formControlName="whatsapp"
+                        [ngClass]="{'check': registroForm.get('whatsapp')?.valid}" mask="(00) 0 0000-0000" prefix="+55 "
+                        [(ngModel)]="dadosCadastro.whatsapp">
+                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="indicacao" [ngClass]="{'class': true}">Fonte de indicação</label>
+                    <div class="select">
+                        <select id="indicacao" formControlName="indicacao"
+                            [ngClass]="{'check': registroForm.get('indicacao')?.valid}"
+                            [(ngModel)]="dadosCadastro.indicacao">
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="amigos">Amigos</option>
+                            <option value="redes-sociais">Discord</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="anuncio">TikTok</option>
+                            <option value="anuncio">Instagram</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('indicacao')?.valid"></i>
+                </div>
+
+                <div class="checkbox">
+                    <mat-checkbox formControlName="checkbox">
+                        <span class="checkbox-label">Estou ciente que preciso ter acima de 18 anos para continuar</span>
+                    </mat-checkbox>
+                </div>
+
+
+
+
+                <button type="submit" [disabled]="registroForm.invalid">Avançar</button>
+            </form>
         </div>
     </div>
 </div>
