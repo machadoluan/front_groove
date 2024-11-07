@@ -9,7 +9,7 @@
         </div>
 
         <div class="cadastro">
-            <span>Preencha abaixo seus dados pessoais reais</span>
+            <span>Olá, {{user.global_name}}, Preencha abaixo seus dados pessoais reais</span>
 
             <form [formGroup]="registroForm">
                 <div class="form-group">
@@ -51,10 +51,10 @@
                             [(ngModel)]="dadosCadastro.indicacao">
                             <option value="" disabled selected>Selecione uma opção</option>
                             <option value="amigos">Amigos</option>
-                            <option value="redes-sociais">Discord</option>
+                            <option value="Discord">Discord</option>
                             <option value="youtube">YouTube</option>
-                            <option value="anuncio">TikTok</option>
-                            <option value="anuncio">Instagram</option>
+                            <option value="TikTok">TikTok</option>
+                            <option value="Instagram">Instagram</option>
                             <option value="outros">Outros</option>
                         </select>
                     </div>

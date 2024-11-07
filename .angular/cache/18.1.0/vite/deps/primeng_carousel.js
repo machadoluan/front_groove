@@ -7,7 +7,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-E2ZJCS73.js";
+} from "./chunk-WPJQYADU.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -72,7 +72,7 @@ import {
   ɵɵrestoreView,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-UWZUXFYY.js";
+} from "./chunk-AEJOJQBP.js";
 
 // node_modules/primeng/fesm2022/primeng-utils.mjs
 var ObjectUtils = class _ObjectUtils {

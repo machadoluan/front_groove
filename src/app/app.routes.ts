@@ -21,10 +21,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'home',
-    component: InicioComponent
-  },
-  {
     path: 'cadastro',
     component: RegistroComponent
   },

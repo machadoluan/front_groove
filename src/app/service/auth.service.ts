@@ -21,27 +21,24 @@ export class AuthService {
   }
 
   handleAuthCallback(code: string) {
-    this.http.get<{ discordID: string, needsSteamLink: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
+    this.http.get<{ discordID: string, needSteamLink: boolean, needsCadastro: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
       (response) => {
         localStorage.setItem('Token', response.token)
+        localStorage.setItem('discordID', response.discordID)
 
         const nomeGuild = 'New York City';
-        const userGuilds = response.guilds.map(guild => guild.name)
-        console.log(response.needsSteamLink)
-        console.log(response.discordID)
+        const userGuilds = response.guilds.map(guild => guild.name);
 
-        if (response.needsSteamLink) {
-          const discordID = response.discordID;
-          localStorage.setItem('discordID', discordID);
-          window.location.href = `http://localhost:3000/auth/steam?discordID=${discordID}`;
-          return;
+        if (!userGuilds.includes(nomeGuild)) {
+          console.error('Usuário não pertence ao servidor necessário')
+          this.logout()
+          return
         }
 
-        if (userGuilds.includes(nomeGuild)) {
-          this.router.navigate(['/dashboard'])
+        if (response.needsCadastro) {
+          this.router.navigate(['/cadastro'])
         } else {
-          console.error('Você não esta não esta no servidor.')
-          this.logout()
+          this.router.navigate(['/dashboard'])
         }
       }, (error) => {
         console.error('Deu erro:', error)
@@ -73,7 +70,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('Token');
+    localStorage.removeItem('Token')
     this.router.navigate(['']);
   }
 

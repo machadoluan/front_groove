@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { provideNativeDateAdapter } from '@angular/material/core'
 import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -18,7 +19,10 @@ import { AuthService } from '../../service/auth.service';
 })
 export class RegistroComponent implements OnInit {
 
+  user: any;
+
   registroForm: FormGroup;
+  
   dadosCadastro = {
     nome: '',
     dataNascimento: '',
@@ -29,7 +33,7 @@ export class RegistroComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -49,6 +53,8 @@ export class RegistroComponent implements OnInit {
         this.registroForm.get(key)?.markAsTouched();
       });
     });
+
+    this.user = this.authService.getUserFromToken()
   }
 
   private idadeMinima(idade: number): ValidatorFn {
@@ -83,11 +89,8 @@ export class RegistroComponent implements OnInit {
   }
 
   cadastrar() {
-    // console.log(this.dadosCadastro);
-
     this.authService.cadastrar(this.dadosCadastro).subscribe(
-      response => {
-        alert("Usuario cadastrado com sucesso!")
+      sucess => {
         console.log(this.dadosCadastro);
       },
       err => {
