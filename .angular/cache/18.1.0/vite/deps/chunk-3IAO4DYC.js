@@ -1,7 +1,7 @@
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-WPJQYADU.js";
+} from "./chunk-D6NLALMU.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
@@ -81,7 +81,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-AEJOJQBP.js";
+} from "./chunk-CGXCUSSG.js";
 
 // node_modules/@angular/cdk/fesm2022/platform.mjs
 var hasV8BreakIterator;
@@ -5130,6 +5130,7 @@ export {
   SPACE,
   hasModifierKey,
   coerceNumberProperty,
+  _isNumberValue,
   coerceArray,
   coerceCssPixelValue,
   coerceElement,
@@ -5188,4 +5189,4 @@ export {
   MatRippleLoader,
   _MatInternalFormField
 };
-//# sourceMappingURL=chunk-A36H5TKX.js.map
+//# sourceMappingURL=chunk-3IAO4DYC.js.map

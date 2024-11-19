@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../types/itens.type';
+import { Item } from '../types/models.type';
 
 @Injectable({
   providedIn: 'root'

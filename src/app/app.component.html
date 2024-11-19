@@ -1,3 +1,9 @@
-<app-header *ngIf="!isRegistrationRoute()"></app-header>
-<router-outlet />
-<app-footer *ngIf="!isRegistrationRoute()"></app-footer>
+<div class="layout">
+    <app-header *ngIf="!isRegistrationRoute()"></app-header>
+
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+
+    <app-footer *ngIf="!isRegistrationRoute()"></app-footer>
+</div>

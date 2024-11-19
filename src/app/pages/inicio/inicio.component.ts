@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../components/login/login.component';
 import { AuthService } from '../../service/auth.service';
 import { CarouselModule } from 'primeng/carousel';
-import { Item } from '../../types/itens.type';
+import { Item } from '../../types/models.type';
 import { findIndex } from 'rxjs';
 import { HeaderComponent } from '../../components/header/header.component';
 import { MatExpansionModule } from '@angular/material/expansion';

@@ -1,10 +1,10 @@
 import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
-} from "./chunk-AAQNQZ6K.js";
+} from "./chunk-UA723IYP.js";
 import {
   DOCUMENT
-} from "./chunk-WPJQYADU.js";
+} from "./chunk-D6NLALMU.js";
 import {
   Directive,
   ElementRef,
@@ -30,7 +30,7 @@ import {
   ɵɵdefinePipe,
   ɵɵgetInheritedFactory,
   ɵɵlistener
-} from "./chunk-AEJOJQBP.js";
+} from "./chunk-CGXCUSSG.js";
 
 // node_modules/ngx-mask/fesm2022/ngx-mask.mjs
 var NGX_MASK_CONFIG = new InjectionToken("ngx-mask config");
@@ -863,7 +863,7 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
     if (result || result === "") {
       this._previousValue = this._currentValue;
       this._currentValue = result;
-      this._emitValue = this._previousValue !== this._currentValue || this.maskChanged || this._previousValue === this._currentValue && justPasted;
+      this._emitValue = this._previousValue !== this._currentValue || this.maskChanged || this.writingValue || this._previousValue === this._currentValue && justPasted;
     }
     this._emitValue ? this.writingValue && this.triggerOnMaskChange ? requestAnimationFrame(() => this.formControlResult(result)) : this.formControlResult(result) : "";
     if (!this.showMaskTyped || this.showMaskTyped && this.hiddenInput) {
@@ -1149,6 +1149,10 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
    * @param inputValue the current form input value
    */
   formControlResult(inputValue) {
+    if (this.writingValue && !inputValue) {
+      this.onChange("");
+      return;
+    }
     if (this.writingValue || !this.triggerOnMaskChange && this.maskChanged) {
       this.triggerOnMaskChange && this.maskChanged ? this.onChange(this.outputTransformFn(this._toNumber(this._checkSymbols(this._removeSuffix(this._removePrefix(inputValue)))))) : "";
       this.maskChanged = false;
@@ -1172,7 +1176,10 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
     ) && (this.leadZero || !this.dropSpecialCharacters)) {
       return value;
     }
-    if (String(value).length > 16 && this.separatorLimit.length > 14) {
+    if (String(value).length > 14 && this.maskExpression.startsWith(
+      "separator"
+      /* MaskExpression.SEPARATOR */
+    )) {
       return String(value);
     }
     const num = Number(value);
@@ -1274,7 +1281,7 @@ var _NgxMaskService = class _NgxMaskService extends NgxMaskApplierService {
       if (processedResult === this.decimalMarker) {
         return null;
       }
-      if (this.separatorLimit.length > 14) {
+      if (separatorValue.length > 14) {
         return String(separatorValue);
       }
       return this._checkPrecision(this.maskExpression, separatorValue);
@@ -1585,6 +1592,14 @@ var _NgxMaskDirective = class _NgxMaskDirective {
     if (timeMasks.includes(this._maskValue)) {
       return this._validateTime(processedValue);
     }
+    if (this._maskValue === "A*@A*.A*") {
+      const emailPattern = /^[^@]+@[^@]+\.[^@]+$/;
+      if (!emailPattern.test(processedValue) && processedValue) {
+        return this._createValidationError(processedValue);
+      } else {
+        return null;
+      }
+    }
     if (processedValue && processedValue.length >= 1) {
       let counterOfOpt = 0;
       if (this._maskValue.includes(
@@ -1734,7 +1749,8 @@ var _NgxMaskDirective = class _NgxMaskDirective {
           const selectRangeBackspace = this._maskService.selStart === this._maskService.selEnd;
           const selStart = Number(this._maskService.selStart) - prefixLength;
           const selEnd = Number(this._maskService.selEnd) - prefixLength;
-          if (this._code === "Backspace") {
+          const backspaceOrDelete = this._code === "Backspace" || this._code === "Delete";
+          if (backspaceOrDelete) {
             if (!selectRangeBackspace) {
               if (this._maskService.selStart === prefixLength) {
                 this._maskService.actualValue = `${this.prefix}${this._maskService.maskIsShown.slice(0, selEnd)}${this._inputValue.split(this.prefix).join("")}`;
@@ -1753,8 +1769,9 @@ var _NgxMaskDirective = class _NgxMaskDirective {
                 this._maskService.actualValue = `${part1}${this._maskService.placeHolderCharacter}${part2}`;
               }
             }
+            position = this._code === "Delete" ? position + 1 : position;
           }
-          if (this._code !== "Backspace") {
+          if (!backspaceOrDelete) {
             if (!checkSymbols && !checkSpecialCharacter && selectRangeBackspace) {
               position = Number(el.selectionStart) - 1;
             } else if (this._maskService.specialCharacters.includes(el.value.slice(position, position + 1)) && checkSpecialCharacter && !this._maskService.specialCharacters.includes(el.value.slice(position + 1, position + 2))) {
