@@ -2,13 +2,13 @@
   <main>
     <div class="profile">
       <div class="photo">
-        <img [src]="getAvatar(user.id, user.avatar)" alt="">
+        <img [src]="getAvatar(userDiscord.id, userDiscord.avatar)" alt="">
       </div>
       <div class="inform">
 
 
         <div class="name">
-          <span id="name">{{user.global_name}}</span>
+          <span id="name">{{userDiscord.global_name}}</span>
           <span id="vip">VIP Diamante</span>
         </div>
 
@@ -94,34 +94,30 @@
         </mat-tab>
         <mat-tab label="Perfil">
           <div class="content">
-            <form>
+            <div class="dados-perfil">
               <div class="grid-container">
                 <div>
                   <label for="nome">Nome:</label>
-                  <input id="nome" formControlName="nome" type="text" required>
-                </div>
-                <div>
-                  <label for="sobrenome">Sobrenome:</label>
-                  <input id="sobrenome" formControlName="sobrenome" type="text" required>
+                  <input id="nome" [(ngModel)]="userData.nome" type="text" required>
                 </div>
                 <div>
                   <label for="email">E-mail:</label>
-                  <input id="email" formControlName="email" type="email" required>
+                  <input id="email" [(ngModel)]="userData.email" type="email" required>
                 </div>
                 <div>
                   <label for="whatsapp">WhatsApp:</label>
-                  <input id="whatsapp" formControlName="whatsapp" type="text" required>
+                  <input id="whatsapp" [(ngModel)]="userData.telefone" type="text" required>
                 </div>
                 <div>
                   <label for="datanascimento">Data de Nascimento:</label>
-                  <input id="datanascimento" formControlName="datanascimento" type="date" required>
+                  <input id="datanascimento" [(ngModel)]="userData.data_nascimento" type="string" required>
                 </div>
               </div>
               <div class="btn-perfil">
                 <button><i class="fas fa-plus" style="color: #000;"></i> Salvar informações </button>
               </div>
 
-            </form>
+            </div>
 
           </div>
         </mat-tab>

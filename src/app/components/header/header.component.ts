@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       this.entrar = true;
     }
 
-    this.user = this.auth.getUserFromToken()
+    this.user = this.auth.getUserFromToken()?.user
 
     console.log('User: ', this.user)
 

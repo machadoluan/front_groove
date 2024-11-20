@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   handleAuthCallback(code: string) {
-    this.http.get<{ discordID: string, needSteamLink: boolean, needsCadastro: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
+    this.http.get<{ userData: string, discordID: string, needSteamLink: boolean, needsCadastro: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
       (response) => {
         localStorage.setItem('Token', response.token)
         localStorage.setItem('discordID', response.discordID)

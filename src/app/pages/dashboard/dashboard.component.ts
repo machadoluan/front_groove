@@ -7,7 +7,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { historicoCompra, historicoSuporte } from '../../types/models.type';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -16,7 +16,9 @@ import { historicoCompra, historicoSuporte } from '../../types/models.type';
     MatTabsModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   animations: [
     trigger('detailExpand', [
@@ -32,32 +34,14 @@ export class DashboardComponent implements OnInit {
 
   // Dados Historico de compras
   displayedColumnsCompras: string[] = ['nome', 'dataCompra', 'produto', 'valor'];
-  dataSourceCompra: historicoCompra[] = [
-    { nome: 'Enzo da Silva', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'Maria Oliveira', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'João Santos', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'Enzo da Silva', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'Maria Oliveira', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'João Santos', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'Enzo da Silva', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'Maria Oliveira', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'João Santos', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 },
-    { nome: 'Enzo da Silva', dataCompra: '15/05/2024', produto: 'Pack 30.000 diamantes', valor: 850 }
-
-  ];
+  dataSourceCompra: historicoCompra[] = [];
 
   // Dados historico suporte
   displayedColumnsSuporte: string[] = ['nome', 'dataSuporte', 'personagem', 'status'];
-  dataSourceSuporte: historicoSuporte[] = [
-    { nome: 'Carro desaparecido', dataSuporte: '15/04/2021', personagem: 'Bia Machada', status: 'Em andamento' },
-    { nome: 'Problema com login', dataSuporte: '16/04/2021', personagem: 'João Silva', status: 'Resolvido' },
-    { nome: 'Erro de conexão', dataSuporte: '17/04/2021', personagem: 'Maria Oliveira', status: 'Em andamento' },
-    { nome: 'Dúvida sobre pagamento', dataSuporte: '18/04/2021', personagem: 'Enzo da Silva', status: 'Resolvido' },
-  ]
+  dataSourceSuporte: historicoSuporte[] = []
 
-
-
-  user: any
+  userData: any;
+  userDiscord: any
   avatar: string = '';
   selectedImage: number = 0;
 
@@ -67,9 +51,12 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.auth.getUserFromToken()
-    console.log('User: ', this.user)
-  }
+    this.userDiscord = this.auth.getUserFromToken()?.user
+    this.userData = this.auth.getUserFromToken().userData
+    console.log('User Discord: ', this.userDiscord)
+    console.log('User Data: ', this.userData)
+    this.userData.data_nascimento = this.formData(this.userData.data_nascimento)
+  } 
 
   getAvatar(userId: string, avatar: string) {
     return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
@@ -81,5 +68,14 @@ export class DashboardComponent implements OnInit {
 
   selectImage(index: number) {
     this.selectedImage = index;
+  }
+
+  formData(data: string): string {
+    const date = new Date(data)
+    const dia = String(date.getDate()).padStart(2, '0')
+    const mes = String(date.getMonth() + 1).padStart(2, '0')
+    const ano = date.getFullYear()
+
+    return `${dia}/${mes}/${ano}`
   }
 }
