@@ -9,13 +9,13 @@
         </div>
 
         <div class="cadastro">
-            <span>Olá, {{user.global_name}}, Preencha abaixo seus dados pessoais reais</span>
+            <span>Preencha abaixo seus dados pessoais reais</span>
 
             <form [formGroup]="registroForm">
                 <div class="form-group">
                     <label for="nome-completo" [ngClass]="{'class': true}">Nome completo</label>
                     <input type="text" id="nome-completo" formControlName="nome"
-                        [ngClass]="{'check': registroForm.get('nome')?.valid}" [(ngModel)]="dadosCadastro.nome">
+                        [ngClass]="{'check': registroForm.get('nome')?.valid}" [(ngModel)]="dadosCadastro.nome" placeholder="Bastião da Silva">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('nome')?.valid"></i>
 
                 </div>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" formControlName="email"
-                        [ngClass]="{'check': registroForm.get('email')?.valid}" [(ngModel)]="dadosCadastro.email">
+                        [ngClass]="{'check': registroForm.get('email')?.valid}" [(ngModel)]="dadosCadastro.email" placeholder="bastiao@email.com">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('email')?.valid"></i>
                 </div>
 
@@ -39,9 +39,10 @@
                     <label for="whatsapp" [ngClass]="{'class': true}">Whatsapp</label>
                     <input type="tel" id="whatsapp" formControlName="whatsapp"
                         [ngClass]="{'check': registroForm.get('whatsapp')?.valid}" mask="(00) 0 0000-0000" prefix="+55 "
-                        [(ngModel)]="dadosCadastro.telefone">
+                        [(ngModel)]="dadosCadastro.telefone" placeholder="(00) 9 9999-9999">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
                 </div>
+                <p-button label="Clique Aqui"></p-button>
 
                 <div class="form-group">
                     <label for="indicacao" [ngClass]="{'class': true}">Fonte de indicação</label>

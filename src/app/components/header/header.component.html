@@ -15,8 +15,7 @@
             </div>
 
             <div class="login" (click)="login()" [ngClass]="{'d-flex': entrar, 'd-none': !entrar}">
-                <i class="fa-solid fa-user"></i>
-                Login
+                Fazer login
             </div>
 
             <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user">

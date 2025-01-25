@@ -19,9 +19,7 @@ import { CarrinhoService } from '../../service/carrinho.service';
   imports: [
     CommonModule,
     CarouselModule,
-    HeaderComponent,
-    MatExpansionModule,
-    FooterComponent
+    MatExpansionModule
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
@@ -45,16 +43,19 @@ export class InicioComponent implements OnInit {
   entrar: boolean = true;
   showCarrinho: boolean = false;
   user: any;
+  
   vipItem: Item[] = [
     { title: 'Passaporte VIP PRATA', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'prata' },
     { title: 'Passaporte VIP OURO', description: "Seja o destaque na cidade com nosso pacote VIP. Domine o jogo e surpreenda a todos!", quantity: 1, price: 65, class: 'ouro' },
-    { title: 'Passaporte VIP DIAMANTE', description: "Desfrute de privilégios especiais com nosso VIP. Conquiste a cidade com estilo e vantagens exclusivas!", quantity: 1, price: 125, class: 'diamante' }
+    { title: 'Passaporte VIP DIAMANTE', description: "Desfrute de privilégios especiais com nosso VIP. Conquiste a cidade com estilo e vantagens exclusivas!", quantity: 1, price: 125, class: 'diamante' },
+    { title: 'Passaporte VIP esmeralda', description: "Desfrute de privilégios especiais com nosso VIP. Conquiste a cidade com estilo e vantagens exclusivas!", quantity: 1, price: 125, class: 'esmeralda' },
   ];
 
   dimaItem: Item[] = [
     { title: '1.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 10, class: 'onek-dima' },
     { title: '4.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 30, class: 'fourk-dima' },
-    { title: '8.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'eightk-dima' }
+    { title: '8.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'eightk-dima' },
+    { title: '16.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'sixteen-dima' }
   ];
 
   carrinho: Item[] = []

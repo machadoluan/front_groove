@@ -8,11 +8,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { provideNativeDateAdapter } from '@angular/material/core'
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatCheckboxModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatCheckboxModule, ButtonModule],
   providers: [provideNgxMask(), provideNativeDateAdapter()],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss'
