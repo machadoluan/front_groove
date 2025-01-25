@@ -8,15 +8,14 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatButtonModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    standalone: true,
+    imports: [
+        MatDialogContent,
+        MatButtonModule
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   constructor(

@@ -14,16 +14,15 @@ import { CarrinhoService } from '../../service/carrinho.service';
 
 
 @Component({
-  selector: 'app-inicio',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CarouselModule,
-    MatExpansionModule
-  ],
-  templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-inicio',
+    imports: [
+        CommonModule,
+        CarouselModule,
+        MatExpansionModule
+    ],
+    templateUrl: './inicio.component.html',
+    styleUrl: './inicio.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InicioComponent implements OnInit {
   readonly panelOpenState = signal(false);

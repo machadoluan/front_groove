@@ -9,21 +9,25 @@ import { provideNativeDateAdapter } from '@angular/material/core'
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { Select } from 'primeng/select';
+import { DatePicker } from 'primeng/datepicker';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatCheckboxModule, ButtonModule],
-  providers: [provideNgxMask(), provideNativeDateAdapter()],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatCheckboxModule, ButtonModule, Select, DatePicker, ToastModule],
+  providers: [provideNgxMask(), provideNativeDateAdapter(), MessageService],
   templateUrl: './registro.component.html',
-  styleUrl: './registro.component.scss'
+  styleUrl: './registro.component.scss',
 })
 export class RegistroComponent implements OnInit {
 
   user: any;
 
   registroForm: FormGroup;
-  
+
   dadosCadastro = {
     nome: '',
     dataNascimento: '',
@@ -33,8 +37,18 @@ export class RegistroComponent implements OnInit {
     discordID: localStorage.getItem('discordID')
   }
 
+  indicacoes = [
+    { label: 'Amigos', value: 'amigos' },
+    { label: 'Discord', value: 'Discord' },
+    { label: 'YouTube', value: 'youtube' },
+    { label: 'TikTok', value: 'TikTok' },
+    { label: 'Instagram', value: 'Instagram' },
+    { label: 'Outros', value: 'outros' },
+  ];
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router) {
+
+
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -81,7 +95,7 @@ export class RegistroComponent implements OnInit {
       const idadeReal = mesAnterior ? diffAnos - 1 : (mesmoMes && !mesmoDia ? diffAnos - 1 : diffAnos);
 
       if (idadeReal < idade) {
-        this.toastr.error('Você precisa ter pelo menos 18 anos para se registrar');
+        this.showError();
         return { menorIdade: true };
       }
 
@@ -100,4 +114,8 @@ export class RegistroComponent implements OnInit {
       }
     )
   }
+
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Você precisa ter pelo menos 18 anos para se registrar' });
+}
 }

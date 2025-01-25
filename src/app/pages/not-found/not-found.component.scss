@@ -1,4 +1,4 @@
-@import '../../../../public/variables.scss';
+@use '../../../../public/variables.scss'  as *;;
 
 .not-found-container {
   display: flex;

@@ -9,26 +9,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { historicoCompra, historicoSuporte } from '../../types/models.type';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    imports: [
+        CommonModule,
+        MatTabsModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
 

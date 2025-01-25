@@ -1,3 +1,5 @@
+<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"></p-toast>
+
 <div class="container-registro">
     <div class="content">
         <div class="logo">
@@ -22,9 +24,9 @@
 
                 <div class="form-group">
                     <label for="dataNascimento">Data de nascimento</label>
-                    <input type="date" id="dataNascimento" formControlName="dataNascimento"
+                    <p-datepicker id="dataNascimento" formControlName="dataNascimento"
                         [ngClass]="{'check': registroForm.get('dataNascimento')?.valid}"
-                        [(ngModel)]="dadosCadastro.dataNascimento">
+                        [(ngModel)]="dadosCadastro.dataNascimento" class="custom-datepicker" placeholder="00/00/0000"/>
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('dataNascimento')?.valid"></i>
                 </div>
 
@@ -42,25 +44,23 @@
                         [(ngModel)]="dadosCadastro.telefone" placeholder="(00) 9 9999-9999">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
                 </div>
-                <p-button label="Clique Aqui"></p-button>
 
                 <div class="form-group">
-                    <label for="indicacao" [ngClass]="{'class': true}">Fonte de indicação</label>
-                    <div class="select">
-                        <select id="indicacao" formControlName="indicacao"
-                            [ngClass]="{'check': registroForm.get('indicacao')?.valid}"
-                            [(ngModel)]="dadosCadastro.indicacao">
-                            <option value="" disabled selected>Selecione uma opção</option>
-                            <option value="amigos">Amigos</option>
-                            <option value="Discord">Discord</option>
-                            <option value="youtube">YouTube</option>
-                            <option value="TikTok">TikTok</option>
-                            <option value="Instagram">Instagram</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
+                    <label for="indicacao">Fonte de indicação</label>
+                    <p-select
+                        id="indicacao"
+                        formControlName="indicacao" 
+                        [options]="indicacoes" 
+                        optionLabel="label" 
+                        placeholder="Selecione uma opção" 
+                        class="w-full"
+                        [ngClass]="{'check': registroForm.get('indicacao')?.valid}">
+                    </p-select>
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('indicacao')?.valid"></i>
                 </div>
+                
+
+                
 
                 <div class="checkbox">
                     <mat-checkbox formControlName="checkbox">

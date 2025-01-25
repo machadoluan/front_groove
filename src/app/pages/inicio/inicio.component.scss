@@ -1,4 +1,4 @@
-@import '../../../../public/variables.scss';
+@use '../../../../public/variables.scss'  as *;;
 
 .container-main {
 

@@ -6,11 +6,11 @@ import { CommonModule } from '@angular/common';
 import { CarrinhoService } from '../../service/carrinho.service';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
 
