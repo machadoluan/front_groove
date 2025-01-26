@@ -203,10 +203,17 @@
         padding: 5px 1rem;
 
         &:enabled:focus {
-            border: 2px solid $primary;
+            border: 2px solid rgba(255, 255, 255, 0.38);
+        }
+
+        &.check {
+
+            border: 2px solid $primary !important;
+            /* Ou qualquer estilo que desejar */
         }
     }
 }
+
 
 ::ng-deep .p-datepicker-day-selected {
     background-color: $primary !important;
@@ -216,7 +223,22 @@
     background-color: $primary !important;
 }
 
+::ng-deep p-datepicker.ng-invalid.ng-dirty .p-datepicker.p-inputwrapper .p-inputtext {
+    border: 2px solid #9b3d3d !important;
+}
+
+::ng-deep .p-select-option.p-select-option-selected {
+    background-color: rgba($color: $primary, $alpha: 0.5) !important;
+}
+.d-flex{
+    width: 400px !important;
+}
+.p-dropdown {
+    width: 75px !important;
+    padding: 0;
+    border: none !important;
+}
+
 p-toast {
     z-index: 9999;
-    /* Garante que o toast ficará sobre outros elementos */
 }

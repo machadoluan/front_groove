@@ -17,50 +17,78 @@
                 <div class="form-group">
                     <label for="nome-completo" [ngClass]="{'class': true}">Nome completo</label>
                     <input type="text" id="nome-completo" formControlName="nome"
-                        [ngClass]="{'check': registroForm.get('nome')?.valid}" [(ngModel)]="dadosCadastro.nome" placeholder="Bastião da Silva">
+                        [ngClass]="{'check': registroForm.get('nome')?.valid}" [(ngModel)]="dadosCadastro.nome"
+                        placeholder="Bastião da Silva">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('nome')?.valid"></i>
 
                 </div>
 
                 <div class="form-group">
                     <label for="dataNascimento">Data de nascimento</label>
-                    <p-datepicker id="dataNascimento" formControlName="dataNascimento"
-                        [ngClass]="{'check': registroForm.get('dataNascimento')?.valid}"
-                        [(ngModel)]="dadosCadastro.dataNascimento" class="custom-datepicker" placeholder="00/00/0000"/>
+                    <p-datepicker #dataNascimento id="dataNascimento" formControlName="dataNascimento"
+                        [(ngModel)]="dadosCadastro.dataNascimento" class="custom-datepicker" placeholder="00/00/0000" />
+
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('dataNascimento')?.valid"></i>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" formControlName="email"
-                        [ngClass]="{'check': registroForm.get('email')?.valid}" [(ngModel)]="dadosCadastro.email" placeholder="bastiao@email.com">
+                        [ngClass]="{'check': registroForm.get('email')?.valid}" [(ngModel)]="dadosCadastro.email"
+                        placeholder="bastiao@email.com">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('email')?.valid"></i>
                 </div>
 
                 <div class="form-group">
                     <label for="whatsapp" [ngClass]="{'class': true}">Whatsapp</label>
-                    <input type="tel" id="whatsapp" formControlName="whatsapp"
-                        [ngClass]="{'check': registroForm.get('whatsapp')?.valid}" mask="(00) 0 0000-0000" prefix="+55 "
-                        [(ngModel)]="dadosCadastro.telefone" placeholder="(00) 9 9999-9999">
+                    <div class="d-flex">
+                        <p-dropdown [options]="countryList" [(ngModel)]="selectedCountry" optionLabel="name"
+                            (onChange)="onCountryChange($event)">
+                            <ng-template let-country pTemplate="selectedItem">
+                                <div class="country-item">
+                                    <img [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.png'"
+                                        alt="flag" class="flag" />
+                                    {{ country.code }}
+                                </div>
+                            </ng-template>
+
+                            <ng-template let-country pTemplate="item">
+                                <div class="country-item">
+                                    <img [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.png'"
+                                        alt="flag" class="flag" />
+                                    {{ country.label }} {{ country.dialCode }}
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+
+
+                        <input type="tel" id="whatsapp" formControlName="whatsapp"
+                        [ngClass]="{'check': registroForm.get('whatsapp')?.valid}" 
+                        [value]="selectedCountry.dialCode "
+                        [prefix]=" selectedCountry.dialCode"
+                        [mask]="phonePlaceholder"
+                        [placeholder]="phonePlaceholder">
+                 
+                    
+                    
+
+                    </div>
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
+
                 </div>
+
 
                 <div class="form-group">
                     <label for="indicacao">Fonte de indicação</label>
-                    <p-select
-                        id="indicacao"
-                        formControlName="indicacao" 
-                        [options]="indicacoes" 
-                        optionLabel="label" 
-                        placeholder="Selecione uma opção" 
-                        class="w-full"
+                    <p-select id="indicacao" formControlName="indicacao" [options]="indicacoes" optionLabel="label"
+                        placeholder="Selecione uma opção" class="w-full"
                         [ngClass]="{'check': registroForm.get('indicacao')?.valid}">
                     </p-select>
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('indicacao')?.valid"></i>
                 </div>
-                
 
-                
+
+
 
                 <div class="checkbox">
                     <mat-checkbox formControlName="checkbox">
