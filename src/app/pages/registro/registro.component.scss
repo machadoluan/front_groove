@@ -46,12 +46,89 @@
             }
         }
 
-        .cadastro {
+        section {
             flex: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+
+            &.verify-code {
+                gap: 3rem;
+            }
+
+            &.steam {
+                justify-content: space-around;
+                // align-items: start;
+
+
+
+                .content-steam {
+                    display: flex;
+                    font-size: 24px;
+                    font-weight: bold;
+                    flex-direction: column;
+                    width: 100%;
+                    gap: 2rem;
+
+                    span {
+                        padding: 0;
+                        font-weight: normal;
+                    }
+
+                    .btn-steam {
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-between;
+                        padding: 0 80px 0 0;
+
+                        img {
+                            width: 300px;
+                        }
+
+                        div {
+                            display: flex;
+                            align-items: center;
+                            gap: 1.5rem;
+
+                            .btn-style {
+                                margin: 0;
+                                padding: 8px 30px;
+                            }
+
+                            i {
+                                font-size: 18px;
+                                color: rgba($color: white, $alpha: 0.5);
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .titles {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 24px;
+                font-weight: bold;
+                gap: 1.2rem;
+
+                span {
+                    padding: 0;
+                    font-weight: normal;
+                }
+
+                #number {
+                    color: $primary;
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
 
             span {
                 font-size: 14px;
@@ -109,11 +186,6 @@
                         font-size: 12px;
                         border-radius: 5px;
 
-
-
-
-
-
                         &.p-select {
                             padding: 0;
                             margin: 0;
@@ -146,34 +218,46 @@
                     justify-content: center;
 
                     .checkbox-label {
-                        font-size: 12px;
+                        font-size: 1.5vh;
                         color: white;
                     }
                 }
+            }
 
-                button {
-                    background-color: $primary;
-                    border: none;
-                    border-radius: 6px;
-                    padding: 5px 60px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    color: $secundary;
-                    margin-top: 20px;
+            .btn-style {
+                background-color: $primary;
+                border: none;
+                border-radius: 6px;
+                padding: 10px 50px;
+                font-size: 14px;
+                font-weight: 600;
+                color: $secundary;
+                margin-top: 20px;
 
-                    &:disabled {
-                        background-color: rgba($color: $primary, $alpha: 0.5);
-                    }
+                &:disabled {
+                    background-color: rgba($color: $primary, $alpha: 0.5);
                 }
-
-
             }
         }
     }
 }
 
+::ng-deep .p-inputotp {
+    .p-inputtext {
+        width: 40px !important;
+        height: 40px !important;
+        background-color: transparent !important;
+        font-size: 12px;
+
+
+        &:enabled:focus {
+            border-color: $primary !important;
+        }
+    }
+}
 
 ::ng-deep .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background,
+
 .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background {
     border-color: $primary !important;
     background-color: $primary !important;
@@ -190,7 +274,6 @@
 ::ng-deep .mdc-checkbox .mdc-checkbox__native-control:focus:checked~.mdc-checkbox__ripple {
     background-color: $primary !important;
 }
-
 
 ::ng-deep .p-datepicker {
     .p-inputtext {
@@ -230,9 +313,11 @@
 ::ng-deep .p-select-option.p-select-option-selected {
     background-color: rgba($color: $primary, $alpha: 0.5) !important;
 }
-.d-flex{
+
+.d-flex {
     width: 400px !important;
 }
+
 .p-dropdown {
     width: 75px !important;
     padding: 0;
@@ -241,4 +326,283 @@
 
 p-toast {
     z-index: 9999;
+}
+
+
+
+@media screen and (max-width: 910px) {
+
+    .container-registro {
+        .content {
+            height: 90vh;
+
+            .foto {
+                display: none;
+            }
+
+
+            .cadastro {
+                form {
+                    .form-group {
+                        width: 80%;
+
+                        input,
+                        .p-select {
+                            width: 100%;
+                            padding: 5px 10px;
+                            background-color: transparent;
+                            border: 2px solid rgba(255, 255, 255, 0.38);
+                            outline: none;
+                            font-size: 12px;
+                            border-radius: 5px;
+                        }
+                    }
+
+                    .checkbox {
+                        display: flex;
+                        justify-content: center;
+
+
+                        .checkbox-label {
+                            text-align: center;
+                            color: white;
+
+                            span {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+
+            .steam {
+                margin: 0 50px;
+
+                .content-steam {
+
+                    .btn-steam {
+                        img {
+                            width: 150px !important;
+                        }
+
+                        padding: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+
+
+    ::ng-deep .p-datepicker {
+        width: 100%;
+
+        .p-inputtext {
+            width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.38);
+            outline: none;
+            font-size: 12px;
+            border-radius: 5px;
+            background-color: transparent;
+            padding: 5px 1rem;
+
+            &:enabled:focus {
+                border: 2px solid rgba(255, 255, 255, 0.38);
+            }
+
+            &.check {
+
+                border: 2px solid $primary !important;
+                /* Ou qualquer estilo que desejar */
+            }
+        }
+    }
+
+    .d-flex {
+        width: 100% !important;
+    }
+
+
+
+
+}
+
+@media screen and (max-width: 520px) {
+
+    .container-registro {
+        .content {
+            .steam {
+                margin: 0 50px;
+
+                .content-steam {
+
+                    .btn-steam {
+                        padding: 0 !important;
+
+                        img {
+                            width: 100px !important;
+                        }
+
+                        .btn-style {
+                            padding: 5px 20px !important;
+                        }
+
+                        div {
+                            gap: 0.5rem !important;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    ::ng-deep .p-datepicker {
+        width: 100%;
+
+        .p-inputtext {
+            width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.38);
+            outline: none;
+            font-size: 12px;
+            border-radius: 5px;
+            background-color: transparent;
+            padding: 5px 1rem;
+
+            &:enabled:focus {
+                border: 2px solid rgba(255, 255, 255, 0.38);
+            }
+
+            &.check {
+
+                border: 2px solid $primary !important;
+                /* Ou qualquer estilo que desejar */
+            }
+        }
+    }
+
+    .d-flex {
+        width: 100% !important;
+    }
+
+
+
+
+}
+
+
+
+@media screen and (max-width: 400px) {
+
+    .container-registro {
+        .content {
+            height: 90vh;
+
+            .foto {
+                display: none;
+            }
+
+
+            .cadastro {
+                span {
+                    font-size: 12px;
+                    color: #d1d1d1;
+                    padding-bottom: 2rem;
+                }
+
+                form {
+                    .form-group {
+                        width: 80%;
+
+                        input,
+                        .p-select {
+                            width: 100%;
+                            padding: 5px 10px;
+                            background-color: transparent;
+                            border: 2px solid rgba(255, 255, 255, 0.38);
+                            outline: none;
+                            font-size: 12px;
+                            border-radius: 5px;
+                        }
+                    }
+
+                    .checkbox {
+                        width: 80%;
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 20px;
+
+
+                        .checkbox-label {
+                            font-size: 10px;
+                            text-align: center;
+                            color: white;
+                            line-height: 1px;
+                        }
+                    }
+                }
+
+
+            }
+
+            .steam {
+                margin: 0 20px !important;
+
+                .content-steam {
+
+                    .btn-steam {
+                        padding: 0 !important;
+
+                        img {
+                            width: 100px !important;
+                        }
+
+                        .btn-style {
+                            padding: 5px 20px !important;
+                        }
+
+                        div {
+                            gap: 0.5rem !important;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    ::ng-deep .p-datepicker {
+        width: 100%;
+
+        .p-inputtext {
+            width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.38);
+            outline: none;
+            font-size: 12px;
+            border-radius: 5px;
+            background-color: transparent;
+            padding: 5px 1rem;
+
+            &:enabled:focus {
+                border: 2px solid rgba(255, 255, 255, 0.38);
+            }
+
+            &.check {
+
+                border: 2px solid $primary !important;
+                /* Ou qualquer estilo que desejar */
+            }
+        }
+    }
+
+    .d-flex {
+        width: 100% !important;
+    }
+
+
+
+
 }

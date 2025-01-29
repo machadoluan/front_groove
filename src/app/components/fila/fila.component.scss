@@ -1,0 +1,224 @@
+@use '../../../../public/variables.scss' as *;
+
+.container-fila {
+    width: 90%;
+    height: 90%;
+    position: fixed;
+    background-image: url(/img/background-fila.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #1A1A1A, $alpha: 0.8);
+        z-index: -1;
+    }
+
+    header {
+        z-index: 2;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+
+        .logo {
+            img {
+                width: 10rem;
+            }
+        }
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
+    .content-fila {
+        width: 100%;
+        display: flex;
+
+        .img {
+            flex: 0.5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            img {
+                width: 100%;
+                height: auto;
+                overflow: hidden;
+            }
+        }
+
+        .inform {
+            flex: 1;
+
+            .content-inform {
+                padding: 0 5rem;
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+
+                #title {
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 52px;
+                    line-height: 60px;
+                    width: 80%;
+                }
+
+                p {
+                    color: white;
+                    font-size: 1rem;
+                }
+
+                div {
+                    margin-top: 2rem;
+                    display: flex;
+                    flex-direction: column;
+
+                    span {
+                        font-size: 16px;
+                    }
+
+                    .vantagens {
+                        list-style: none;
+                        padding: 0;
+                        margin: 2rem 0;
+
+                        li {
+                            color: white;
+                            font-size: 14px;
+                            margin-bottom: 0.5rem;
+                            position: relative;
+                            padding-left: 1.5rem;
+
+                            &::before {
+                                content: '✔';
+                                position: absolute;
+                                left: 0;
+                                color: #4CAF50;
+                            }
+                        }
+                    }
+                }
+
+                .btn {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    button {
+                        padding: 10px 50px;
+                        background-color: $primary;
+                        border: none;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: $secundary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+    .container-fila {
+        .content-fila {
+            flex-direction: column;
+
+            .img {
+                display: none; // Remove a div .img em telas menores
+            }
+
+            .inform {
+                .content-inform {
+                    padding: 0 2rem;
+
+                    #title {
+                        font-size: 32px;
+                        line-height: 40px;
+                        width: 100%;
+                    }
+
+                    p {
+                        font-size: 0.9rem;
+                    }
+
+                    div {
+                        span {
+                            font-size: 14px;
+                        }
+
+                        .vantagens {
+                            li {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+
+                    .btn {
+                        button {
+                            padding: 8px 40px;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .container-fila {
+        .content-fila {
+            .inform {
+                .content-inform {
+                    padding: 0 1rem;
+
+                    #title {
+                        font-size: 24px;
+                        line-height: 30px;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                    }
+
+                    div {
+                        span {
+                            font-size: 12px;
+                        }
+
+                        .vantagens {
+                            li {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+
+                    .btn {
+                        button {
+                            padding: 6px 30px;
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

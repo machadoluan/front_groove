@@ -11,6 +11,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { CarrinhoService } from '../../service/carrinho.service';
+import { FilaComponent } from '../../components/fila/fila.component';
 
 
 @Component({
@@ -18,7 +19,8 @@ import { CarrinhoService } from '../../service/carrinho.service';
     imports: [
         CommonModule,
         CarouselModule,
-        MatExpansionModule
+        MatExpansionModule,
+        FilaComponent
     ],
     templateUrl: './inicio.component.html',
     styleUrl: './inicio.component.scss',

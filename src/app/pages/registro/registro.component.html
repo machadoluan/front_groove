@@ -10,7 +10,7 @@
             <img src="/img/imgCadastro-1.png" alt="foto">
         </div>
 
-        <div class="cadastro">
+        <section class="cadastro section" *ngIf="!verifyCode && !steam">
             <span>Preencha abaixo seus dados pessoais reais</span>
 
             <form [formGroup]="registroForm">
@@ -63,14 +63,12 @@
 
 
                         <input type="tel" id="whatsapp" formControlName="whatsapp"
-                        [ngClass]="{'check': registroForm.get('whatsapp')?.valid}" 
-                        [value]="selectedCountry.dialCode "
-                        [prefix]=" selectedCountry.dialCode"
-                        [mask]="phonePlaceholder"
-                        [placeholder]="phonePlaceholder">
-                 
-                    
-                    
+                            [ngClass]="{'check': registroForm.get('whatsapp')?.valid}"
+                            [value]="selectedCountry.dialCode " [prefix]=" selectedCountry.dialCode"
+                            [mask]="phonePlaceholder" [placeholder]="phonePlaceholder">
+
+
+
 
                     </div>
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
@@ -99,8 +97,47 @@
 
 
 
-                <button type="submit" (click)="cadastrar()" [disabled]="registroForm.invalid">Avançar</button>
+                <button type="submit" class="btn-style" (click)="cadastrar()"
+                    [disabled]="registroForm.invalid">Avançar</button>
             </form>
-        </div>
+        </section>
+
+
+        <section class="verify-code" *ngIf="verifyCode">
+            <div class="titles">
+                Verificar SMS
+                <span>Enviamos um código de 6 dígitos para o seu celular: </span>
+                <span id="number">{{dadosCadastro.telefone}}</span>
+            </div>
+
+            <div class="codes">
+                <p-inputotp size="large" [length]=6/>
+            </div>
+
+
+            <button class="btn-style">Avançar</button>
+
+        </section>
+
+
+        <section class="steam" *ngIf="steam">
+            <div class="content-steam">
+                Conta Steam
+                <span>Conecte sua conta Steam para realizar a WL:</span>
+
+                <div class="btn-steam">
+                    <img src="/img/steam.png" alt="steam">
+                    <div>
+                        <button class="btn-style">Vincular</button>
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+
+           
+
+            <button class="btn-style">Avançar</button>
+
+        </section>
     </div>
 </div>

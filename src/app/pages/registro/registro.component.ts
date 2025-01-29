@@ -14,29 +14,45 @@ import { DatePicker } from 'primeng/datepicker';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
-import { HttpClient } from '@angular/common/http';
+import { InputOtp } from 'primeng/inputotp';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [DropdownModule, ReactiveFormsModule, CommonModule, NgxMaskDirective, MatCheckboxModule, ButtonModule, Select, DatePicker, ToastModule, FormsModule],
+  imports: [
+    DropdownModule, 
+    ReactiveFormsModule, 
+    CommonModule, 
+    NgxMaskDirective, 
+    MatCheckboxModule, 
+    ButtonModule, 
+    Select, 
+    DatePicker, 
+    ToastModule, 
+    FormsModule,
+    InputOtp
+  ],
   providers: [provideNgxMask(), provideNativeDateAdapter(), MessageService],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss',
 })
 export class RegistroComponent implements OnInit, AfterViewInit {
-  
+
   @ViewChild('dataNascimento', { static: false, read: ElementRef }) datePicker!: ElementRef;
 
   user: any;
 
   registroForm: FormGroup;
 
+
+  verifyCode: boolean = false;
+  steam: boolean = false;
+
   dadosCadastro = {
     nome: '',
     dataNascimento: '',
     email: '',
-    telefone: '',
+    telefone: '(11) 10148-5485',
     indicacao: '',
     discordID: localStorage.getItem('discordID')
   }
@@ -62,7 +78,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     { label: 'South Korea', name: 'KR', dialCode: '+82', code: 'KR', placeholder: ' 000-0000-0000' },
     { label: 'Nigeria', name: 'NG', dialCode: '+234', code: 'NG', placeholder: ' 000 000 0000' }
   ];
-  
+
 
   selectedCountry: any;
   phonePrefix: string = '+55';  // Prefixo do telefone
@@ -90,7 +106,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     'KR': '000-0000-0000', // Coreia do Sul
     'NG': '000 000 0000', // Nigéria
   };
-  
+
 
   indicacoes = [
     { label: 'Amigos', value: 'amigos' },
@@ -101,7 +117,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     { label: 'Outros', value: 'outros' },
   ];
 
-  constructor( private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService) {
+  constructor(private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -109,7 +125,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
         this.idadeMinima(18)
       ]],
       email: ['', [Validators.required, Validators.email]],
-      whatsapp: ['', [Validators.required,Validators.pattern(/^\+?\d{1,4}[-.\s]?(\d{1,4}[-.\s]?)?\d{1,14}$/)]],
+      whatsapp: ['', [Validators.required, Validators.pattern(/^\+?\d{1,4}[-.\s]?(\d{1,4}[-.\s]?)?\d{1,14}$/)]],
       indicacao: ['', [Validators.required]],
       checkbox: [false, [Validators.requiredTrue]]
     });
@@ -126,7 +142,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     this.user = this.authService.getUserFromToken()
     this.selectedCountry = this.countryList.find(c => c.code === 'BR'); // Garante que inicia com o Brasil
     this.onCountryChange({ value: this.selectedCountry }); // Atualiza os placeholders e prefixos
-  
+
     console.log("País selecionado:", this.selectedCountry);
   }
 
@@ -154,16 +170,16 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     this.selectedCountry = country;
     this.phonePrefix = country.dialCode;
     this.phonePlaceholder = this.getPhonePlaceholder(country.code);
-  
+
     this.cdRef.detectChanges(); // Força a atualização da view
   }
-  
-  
+
+
 
   getPhonePlaceholder(countryCode: string): string {
     return this.phonePlaceholders[countryCode] || '(00) 9 99-9999'; // Padrão caso não esteja na lista
   }
-  
+
   private idadeMinima(idade: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {
