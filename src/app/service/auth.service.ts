@@ -20,38 +20,38 @@ export class AuthService {
     window.location.href = `${this.UrlApi}/auth/discord`
   }
 
-  handleAuthCallback(code: string) {
-    this.http.get<{ userData: string, discordID: string, needSteamLink: boolean, needsCadastro: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
-      (response) => {
-        localStorage.setItem('Token', response.token)
-        localStorage.setItem('discordID', response.discordID)
+  // handleAuthCallback(code: string) {
+  //   this.http.get<{ userData: string, discordID: string, needSteamLink: boolean, needsCadastro: boolean, token: string, guilds: { name: string }[] }>(`${this.UrlApi}/auth/callback?code=${code}`).subscribe(
+  //     (response) => {
+  //       localStorage.setItem('Token', response.token)
+  //       localStorage.setItem('discordID', response.discordID)
 
-        const nomeGuild = 'New York City';
-        const userGuilds = response.guilds.map(guild => guild.name);
+  //       const nomeGuild = 'New York City';
+  //       const userGuilds = response.guilds.map(guild => guild.name);
 
-        if (!userGuilds.includes(nomeGuild)) {
-          console.error('Usuário não pertence ao servidor necessário')
-          this.logout()
-          return
-        }
+  //       if (!userGuilds.includes(nomeGuild)) {
+  //         console.error('Usuário não pertence ao servidor necessário')
+  //         this.logout()
+  //         return
+  //       }
 
-        if (response.needsCadastro) {
-          this.router.navigate(['/cadastro'])
-        } else {
-          this.router.navigate(['/dashboard'])
-        }
-      }, (error) => {
-        console.error('Deu erro:', error)
-      }
-    )
-  }
+  //       if (response.needsCadastro) {
+  //         this.router.navigate(['/cadastro'])
+  //       } else {
+  //         this.router.navigate(['/dashboard'])
+  //       }
+  //     }, (error) => {
+  //       console.error('Deu erro:', error)
+  //     }
+  //   )
+  // }
 
   getGuilds() {
     return this.guilds;
   }
 
   getToken() {
-    return localStorage.getItem('Token');
+    return localStorage.getItem('token');
   }
 
   isAuthenticado(): boolean {
@@ -70,11 +70,11 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('Token')
+    localStorage.removeItem('token')
     this.router.navigate(['']);
   }
 
   cadastrar(dadosCadastro: any): Observable<any> {
-    return this.http.post(`${this.UrlApi}/cadastro`, dadosCadastro);
+    return this.http.post(`${this.UrlApi}/auth/cadastro`, dadosCadastro);
   }
 }

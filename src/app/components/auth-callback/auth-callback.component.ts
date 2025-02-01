@@ -20,7 +20,7 @@ export class AuthCallbackComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       const code = params['code'];
       if (code) {
-        this.auth.handleAuthCallback(code)
+        // this.auth.handleAuthCallback(code)
       } else {
         this.router.navigate(['/'])
       }

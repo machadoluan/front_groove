@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-fila',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './fila.component.scss'
 })
 export class FilaComponent {
+  @Output() close = new EventEmitter<void>();
 
+  closeModal(){
+    this.close.emit()
+  }
 }

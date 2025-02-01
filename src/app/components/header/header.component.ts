@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const token = localStorage.getItem('Token');
+    const token = localStorage.getItem('token');
 
     if (token) {
       this.entrar = false;
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       this.entrar = true;
     }
 
-    this.user = this.auth.getUserFromToken()?.user
+    this.user = this.auth.getUserFromToken()
 
     console.log('User: ', this.user)
 

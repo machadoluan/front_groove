@@ -1,25 +1,26 @@
 <div class="container-header">
     <header [ngClass]="{'scrolled': isScroll}">
-        <div class="logo">
-            <a href=""><img src="img/logo.png" alt=""></a>
-        </div>
-        <nav>
-            <li><a href="#">INICIO</a></li>
-            <li><a href="#vips" >VIP</a></li>
-            <li><a href="#diamente">DIAMANTE</a></li>
-            <li><a href="#perguntas">COMO CONECTAR</a></li>
-        </nav>
-        <div class="dados">
-            <div class="compra">
-                <i class="fa-solid fa-cart-shopping"></i>
+        <div class="margin-site">
+            <div class="logo">
+                <a href=""><img src="img/logo.png" alt=""></a>
             </div>
-
-            <div class="login" (click)="login()" [ngClass]="{'d-flex': entrar, 'd-none': !entrar}">
-                Fazer login
-            </div>
-
-            <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user">
-                <a href="/dashboard"><img [src]="getAvatar(user.id, user.avatar)" alt=""></a>
+            <nav>
+                <li><a href="#">INICIO</a></li>
+                <li><a href="#vips" >VIP</a></li>
+                <li><a href="#diamente">DIAMANTE</a></li>
+                <li><a href="#perguntas">COMO CONECTAR</a></li>
+                <li><a href="#">LOJA</a></li>
+            </nav>
+            <div class="dados">
+                <div class="compra">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div class="login" (click)="login()" [ngClass]="{'d-flex': entrar, 'd-none': !entrar}">
+                    Fazer login
+                </div>
+                <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user">
+                    <a href="/dashboard"><img [src]="getAvatar(user.discordId, user.avatar)" alt=""></a>
+                </div>
             </div>
         </div>
 

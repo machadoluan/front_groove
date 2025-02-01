@@ -19,10 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginComponent {
   constructor(
-    private auth: AuthService
   ) { }
 
-  login() {
-    this.auth.loginWithDiscord()
+  loginWithDiscord() {
+    window.location.href = 'http://localhost:3000/auth/discord';
   }
 }

@@ -39,8 +39,7 @@ export class DashboardComponent implements OnInit {
   displayedColumnsSuporte: string[] = ['nome', 'dataSuporte', 'personagem', 'status'];
   dataSourceSuporte: historicoSuporte[] = []
 
-  userData: any;
-  userDiscord: any
+  user: any;
   avatar: string = '';
   selectedImage: number = 0;
 
@@ -50,11 +49,8 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userDiscord = this.auth.getUserFromToken()?.user
-    this.userData = this.auth.getUserFromToken().userData
-    console.log('User Discord: ', this.userDiscord)
-    console.log('User Data: ', this.userData)
-    this.userData.data_nascimento = this.formData(this.userData.data_nascimento)
+    this.user = this.auth.getUserFromToken()
+    this.user.dataNascimento = this.formData(this.user.dataNascimento)
   } 
 
   getAvatar(userId: string, avatar: string) {

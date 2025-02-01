@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { provideNativeDateAdapter } from '@angular/material/core'
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { Select } from 'primeng/select';
 import { DatePicker } from 'primeng/datepicker';
@@ -20,15 +20,15 @@ import { InputOtp } from 'primeng/inputotp';
   selector: 'app-registro',
   standalone: true,
   imports: [
-    DropdownModule, 
-    ReactiveFormsModule, 
-    CommonModule, 
-    NgxMaskDirective, 
-    MatCheckboxModule, 
-    ButtonModule, 
-    Select, 
-    DatePicker, 
-    ToastModule, 
+    DropdownModule,
+    ReactiveFormsModule,
+    CommonModule,
+    NgxMaskDirective,
+    MatCheckboxModule,
+    ButtonModule,
+    Select,
+    DatePicker,
+    ToastModule,
     FormsModule,
     InputOtp
   ],
@@ -48,14 +48,6 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   verifyCode: boolean = false;
   steam: boolean = false;
 
-  dadosCadastro = {
-    nome: '',
-    dataNascimento: '',
-    email: '',
-    telefone: '(11) 10148-5485',
-    indicacao: '',
-    discordID: localStorage.getItem('discordID')
-  }
 
   countryList = [
     { label: 'Brazil', name: 'BR', dialCode: '+55', code: 'BR', placeholder: ' (00) 9 9999-9999' },
@@ -117,7 +109,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     { label: 'Outros', value: 'outros' },
   ];
 
-  constructor(private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService) {
+  constructor(private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService, private route: ActivatedRoute) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -125,31 +117,35 @@ export class RegistroComponent implements OnInit, AfterViewInit {
         this.idadeMinima(18)
       ]],
       email: ['', [Validators.required, Validators.email]],
-      whatsapp: ['', [Validators.required, Validators.pattern(/^\+?\d{1,4}[-.\s]?(\d{1,4}[-.\s]?)?\d{1,14}$/)]],
+      telefone: ['', [Validators.required, Validators.pattern(/^\+?\d{1,4}[-.\s]?(\d{1,4}[-.\s]?)?\d{1,14}$/)]],
       indicacao: ['', [Validators.required]],
-      checkbox: [false, [Validators.requiredTrue]]
+      checkbox: [false, [Validators.requiredTrue]],
+      discordId: ''
     });
 
   }
 
   ngOnInit(): void {
-    Object.keys(this.registroForm.controls).forEach(key => {
-      this.registroForm.get(key)?.valueChanges.subscribe(() => {
-        this.registroForm.get(key)?.markAsTouched();
-      });
-    });
+
 
     this.user = this.authService.getUserFromToken()
     this.selectedCountry = this.countryList.find(c => c.code === 'BR'); // Garante que inicia com o Brasil
     this.onCountryChange({ value: this.selectedCountry }); // Atualiza os placeholders e prefixos
 
     console.log("País selecionado:", this.selectedCountry);
+
+    this.route.queryParams.subscribe(params => {
+      const token = params['tokend'];
+      if (token) {
+        console.log("token",token)
+        this.registroForm.patchValue({ discordId: token });
+      }else{
+        console.error('Nao achei')
+      }
+    })
   }
 
-  onTelefoneInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.dadosCadastro.telefone = inputElement.value;
-  }
+
 
   ngAfterViewInit(): void {
     const input = this.datePicker.nativeElement.querySelector('.p-inputtext');
@@ -212,15 +208,17 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   cadastrar() {
-    this.authService.cadastrar(this.dadosCadastro).subscribe(
-      sucess => {
-        console.log(this.dadosCadastro);
+    this.authService.cadastrar(this.registroForm.value).subscribe({
+      next: (response: any) => {
+        if (response.sucess) {
+          localStorage.setItem('token', response.token)
+          this.router.navigate(['/'])
+        }
       },
-      err => {
-        alert("Erro ao cadastrar usuario.")
-        console.error("Erro: ", err)
+      error: (error) => {
+        console.error('Erro ao cadastrar usuário:', error);
       }
-    )
+    })
   }
 
   showError() {

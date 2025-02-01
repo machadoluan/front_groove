@@ -2,11 +2,11 @@
   <main>
     <div class="profile">
       <div class="photo">
-        <img [src]="getAvatar(userDiscord.id, userDiscord.avatar)" alt="">
+        <img [src]="getAvatar(user.discordId, user.avatar)" alt="">
       </div>
       <div class="inform">
         <div class="name">
-          <span id="name">{{userDiscord.global_name}}</span>
+          <span id="name">{{user.username}}</span>
           <span id="vip">VIP Diamante</span>
         </div>
 
@@ -96,19 +96,19 @@
               <div class="grid-container">
                 <div>
                   <label for="nome">Nome:</label>
-                  <input id="nome" [(ngModel)]="userData.nome" type="text" required>
+                  <input id="nome" [(ngModel)]="user.nome" type="text" required>
                 </div>
                 <div>
                   <label for="email">E-mail:</label>
-                  <input id="email" [(ngModel)]="userData.email" type="email" required>
+                  <input id="email" [(ngModel)]="user.email" type="email" required>
                 </div>
                 <div>
                   <label for="whatsapp">WhatsApp:</label>
-                  <input id="whatsapp" [(ngModel)]="userData.telefone" type="text" required>
+                  <input id="whatsapp" [(ngModel)]="user.telefone" type="text" required>
                 </div>
                 <div>
                   <label for="datanascimento">Data de Nascimento:</label>
-                  <input id="datanascimento" [(ngModel)]="userData.data_nascimento" type="string" required>
+                  <input id="datanascimento" [(ngModel)]="user.dataNascimento" type="string" required>
                 </div>
               </div>
               <div class="btn-perfil">

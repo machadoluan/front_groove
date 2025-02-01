@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label for="nome-completo" [ngClass]="{'class': true}">Nome completo</label>
                     <input type="text" id="nome-completo" formControlName="nome"
-                        [ngClass]="{'check': registroForm.get('nome')?.valid}" [(ngModel)]="dadosCadastro.nome"
+                        [ngClass]="{'check': registroForm.get('nome')?.valid}"
                         placeholder="Bastião da Silva">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('nome')?.valid"></i>
 
@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="dataNascimento">Data de nascimento</label>
                     <p-datepicker #dataNascimento id="dataNascimento" formControlName="dataNascimento"
-                        [(ngModel)]="dadosCadastro.dataNascimento" class="custom-datepicker" placeholder="00/00/0000" />
+                       class="custom-datepicker" placeholder="00/00/0000" />
 
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('dataNascimento')?.valid"></i>
                 </div>
@@ -34,15 +34,15 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" formControlName="email"
-                        [ngClass]="{'check': registroForm.get('email')?.valid}" [(ngModel)]="dadosCadastro.email"
+                        [ngClass]="{'check': registroForm.get('email')?.valid}"
                         placeholder="bastiao@email.com">
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('email')?.valid"></i>
                 </div>
 
                 <div class="form-group">
-                    <label for="whatsapp" [ngClass]="{'class': true}">Whatsapp</label>
+                    <label for="telefone" [ngClass]="{'class': true}">Telefone</label>
                     <div class="d-flex">
-                        <p-dropdown [options]="countryList" [(ngModel)]="selectedCountry" optionLabel="name"
+                        <p-dropdown [options]="countryList"  optionLabel="name"
                             (onChange)="onCountryChange($event)">
                             <ng-template let-country pTemplate="selectedItem">
                                 <div class="country-item">
@@ -62,24 +62,25 @@
                         </p-dropdown>
 
 
-                        <input type="tel" id="whatsapp" formControlName="whatsapp"
-                            [ngClass]="{'check': registroForm.get('whatsapp')?.valid}"
+                        <input type="tel" id="telefone" formControlName="telefone"
+                            [ngClass]="{'check': registroForm.get('telefone')?.valid}"
                             [value]="selectedCountry.dialCode " [prefix]=" selectedCountry.dialCode"
-                            [mask]="phonePlaceholder" [placeholder]="phonePlaceholder">
+                            [mask]="phonePlaceholder" [placeholder]="phonePlaceholder"
+                           >
 
 
 
 
                     </div>
-                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('whatsapp')?.valid"></i>
+                    <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('telefone')?.valid"></i>
 
                 </div>
 
 
                 <div class="form-group">
                     <label for="indicacao">Fonte de indicação</label>
-                    <p-select id="indicacao" formControlName="indicacao" [options]="indicacoes" optionLabel="label"
-                        placeholder="Selecione uma opção" class="w-full"
+                    <p-select  id="indicacao" formControlName="indicacao"
+                        [options]="indicacoes" optionValue="value" optionLabel="label" placeholder="Selecione uma opção" class="w-full"
                         [ngClass]="{'check': registroForm.get('indicacao')?.valid}">
                     </p-select>
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('indicacao')?.valid"></i>
@@ -107,11 +108,11 @@
             <div class="titles">
                 Verificar SMS
                 <span>Enviamos um código de 6 dígitos para o seu celular: </span>
-                <span id="number">{{dadosCadastro.telefone}}</span>
+                <span id="number">{{registroForm.value.telefone}}</span>
             </div>
 
             <div class="codes">
-                <p-inputotp size="large" [length]=6/>
+                <p-inputotp size="large" [length]=6 />
             </div>
 
 
@@ -134,7 +135,7 @@
                 </div>
             </div>
 
-           
+
 
             <button class="btn-style">Avançar</button>
 

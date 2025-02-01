@@ -1,11 +1,12 @@
-@use '../../../../public/variables.scss'  as *;;
+@use '../../../../public/variables.scss' as *;
+;
 
 .container-main {
 
 
   .first-section {
     width: 100%;
-    height: 80vh;
+    min-height: 80vh;
     background-color: $primary;
     z-index: -1;
     background-image: url(/img/fundo1.png);
@@ -22,7 +23,7 @@
       height: 80vh;
       top: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.22);
+      background: rgba(0, 0, 0, 0.25);
       z-index: -1;
     }
 
@@ -35,12 +36,12 @@
       font-weight: bold;
       z-index: 2;
 
-      .btn{
+      .btn {
         width: 100%;
         display: flex;
         justify-content: center;
 
-        button{
+        button {
           background-color: $primary;
           border: none;
           border-radius: 6px;
@@ -86,11 +87,12 @@
     .cards {
       display: flex;
       align-items: center;
-      gap: 5rem;
-      justify-content: center;
+      gap: 2rem;
+      justify-content: space-between;
+
 
       .card {
-        width: 250px;
+        width: 300px;
         height: 420px;
         background-color: #222728;
         border-radius: 10px;
@@ -116,7 +118,7 @@
           background-size: cover;
         }
 
-        &.esmeralda{
+        &.esmeralda {
           background: url(/img/esmeralda.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
           background-position: center center;
           background-size: cover;
@@ -143,8 +145,8 @@
 
           .buttons {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
+            justify-content: end;
+            gap: 0.5rem;
             align-items: center;
 
             .detalhes {
@@ -210,7 +212,7 @@
     .descricao-redes {
       width: 100%;
 
-      h1 {
+      h3 {
         color: #FFF;
         text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
         font-size: 40px;
@@ -279,11 +281,11 @@
     .cards {
       display: flex;
       align-items: center;
-      gap: 5rem;
-      justify-content: center;
+      gap: 2rem;
+      justify-content: space-between;
 
       .card {
-        width: 250px;
+        width: 300px;
         height: 420px;
         background-color: #222728;
         border-radius: 10px;
@@ -308,6 +310,7 @@
           background-position: center center;
           background-size: cover;
         }
+
         &.sixteen-dima {
           background: url(/img/diamante4.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
           background-position: center center;
@@ -326,14 +329,15 @@
 
           .buttons {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
+            justify-content: end;
+            gap: 0.5rem;
             align-items: center;
 
             .detalhes {
               padding: 5px 10px;
-              border-radius: 100px;
+              border-radius: 6px;
               border: 1px solid $primary;
+              color: $primary;
               font-size: 12px;
               cursor: pointer;
             }
@@ -343,7 +347,7 @@
               gap: 5px;
               padding: 5px 10px;
               font-size: 12px;
-              border-radius: 100px;
+              border-radius: 6px;
               background: $primary;
               transition: all .3s ease-in-out;
               align-items: center;
@@ -434,7 +438,7 @@ mat-accordion {
 
 /* Estilo para cada painel de expansão */
 mat-expansion-panel {
-  width: 900px;
+  width: 100%;
   border: 2px solid $primary;
   margin-bottom: 5px;
   background-color: transparent;
@@ -466,7 +470,9 @@ mat-expansion-panel {
 }
 
 .margin-site {
+  max-width: 1200px;
   min-width: 800px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

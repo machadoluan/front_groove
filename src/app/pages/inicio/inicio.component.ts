@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../components/login/login.component';
 import { AuthService } from '../../service/auth.service';
@@ -12,19 +12,21 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { FilaComponent } from '../../components/fila/fila.component';
+import { Dialog } from 'primeng/dialog';
 
 
 @Component({
-    selector: 'app-inicio',
-    imports: [
-        CommonModule,
-        CarouselModule,
-        MatExpansionModule,
-        FilaComponent
-    ],
-    templateUrl: './inicio.component.html',
-    styleUrl: './inicio.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-inicio',
+  imports: [
+    CommonModule,
+    CarouselModule,
+    MatExpansionModule,
+    FilaComponent,
+    Dialog,
+  ],
+  templateUrl: './inicio.component.html',
+  styleUrl: './inicio.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InicioComponent implements OnInit {
   readonly panelOpenState = signal(false);
@@ -44,7 +46,10 @@ export class InicioComponent implements OnInit {
   entrar: boolean = true;
   showCarrinho: boolean = false;
   user: any;
-  
+  mostrarFila: boolean = false
+  dialogVisible: boolean = false;
+
+
   vipItem: Item[] = [
     { title: 'Passaporte VIP PRATA', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'prata' },
     { title: 'Passaporte VIP OURO', description: "Seja o destaque na cidade com nosso pacote VIP. Domine o jogo e surpreenda a todos!", quantity: 1, price: 65, class: 'ouro' },
@@ -61,15 +66,18 @@ export class InicioComponent implements OnInit {
 
   carrinho: Item[] = []
 
+  error: string = ''
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
     private auth: AuthService,
-    private carrinhoService: CarrinhoService
+    private carrinhoService: CarrinhoService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('Token')
+    const token = localStorage.getItem('token')
     if (token) {
       this.entrar = false;
     } else {
@@ -77,6 +85,15 @@ export class InicioComponent implements OnInit {
     }
 
     this.user = this.auth.getUserFromToken()
+    console.log(this.user)
+
+    this.route.queryParams.subscribe(params => {
+      if (params['error'] === 'not_in_guild') {
+        this.router.navigate(['/'])
+        this.dialogVisible = true;
+      }
+    });
+
   }
 
 
