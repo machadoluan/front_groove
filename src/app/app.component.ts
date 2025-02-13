@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   title = 'login-discord';
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(public router: Router, private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const token = params['token'];

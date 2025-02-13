@@ -8,10 +8,6 @@ import { RegistroComponent } from './pages/registro/registro.component';
 
 export const routes: Routes = [
   {
-    path: 'auth/callback',
-    component: AuthCallbackComponent
-  },
-  {
     path: '',
     component: InicioComponent
   },

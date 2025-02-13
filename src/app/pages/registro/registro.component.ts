@@ -15,6 +15,8 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputOtp } from 'primeng/inputotp';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro',
@@ -43,10 +45,13 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   user: any;
 
   registroForm: FormGroup;
-
+  temporaryFormData: any;
 
   verifyCode: boolean = false;
   steam: boolean = false;
+  codigoBackend: string = ''
+  codigo: string = '';
+  steamVinculado: boolean = false;
 
 
   countryList = [
@@ -109,7 +114,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     { label: 'Outros', value: 'outros' },
   ];
 
-  constructor(private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService, private route: ActivatedRoute) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -120,31 +125,53 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       telefone: ['', [Validators.required, Validators.pattern(/^\+?\d{1,4}[-.\s]?(\d{1,4}[-.\s]?)?\d{1,14}$/)]],
       indicacao: ['', [Validators.required]],
       checkbox: [false, [Validators.requiredTrue]],
-      discordId: ''
+      discordId: '',
+      license: ''
     });
 
   }
 
   ngOnInit(): void {
+    this.user = this.authService.getUserFromToken();
+    this.selectedCountry = this.countryList.find(c => c.code === 'BR');
+    this.onCountryChange({ value: this.selectedCountry });
 
 
-    this.user = this.authService.getUserFromToken()
-    this.selectedCountry = this.countryList.find(c => c.code === 'BR'); // Garante que inicia com o Brasil
-    this.onCountryChange({ value: this.selectedCountry }); // Atualiza os placeholders e prefixos
+    const dadosSalvos = this.cookieService.get('registroForm');
+
+    if (dadosSalvos) {
+      this.registroForm.patchValue(JSON.parse(dadosSalvos));
+      this.steam = true;
+    }
 
     console.log("País selecionado:", this.selectedCountry);
+    const dados = sessionStorage.getItem('registroForm');
+    if (dados) {
+      console.log(JSON.parse(dados));
+    }
 
+    // Verificar se o token está presente na query string
     this.route.queryParams.subscribe(params => {
       const token = params['tokend'];
-      if (token) {
-        console.log("token",token)
-        this.registroForm.patchValue({ discordId: token });
-      }else{
-        console.error('Nao achei')
-      }
-    })
-  }
+      const steamToken = params['tokenS'];
 
+      if (!token && !steamToken) {
+        // Se não houver token, redirecionar para a página inicial
+        this.router.navigate(['/home']);
+      }
+
+      if (token) {
+        console.log("token", token);
+        this.registroForm.patchValue({ discordId: token });
+      }
+
+      if (steamToken) {
+        this.steam = true;
+        this.steamVinculado = true;
+        this.registroForm.patchValue({ license: steamToken });
+      }
+    });
+  }
 
 
   ngAfterViewInit(): void {
@@ -199,7 +226,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       const idadeReal = mesAnterior ? diffAnos - 1 : (mesmoMes && !mesmoDia ? diffAnos - 1 : diffAnos);
 
       if (idadeReal < idade) {
-        this.showError();
+        this.showError('Você precisa ter pelo menos 18 anos para se registrar');
         return { menorIdade: true };
       }
 
@@ -207,21 +234,62 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     };
   }
 
-  cadastrar() {
-    this.authService.cadastrar(this.registroForm.value).subscribe({
-      next: (response: any) => {
-        if (response.sucess) {
-          localStorage.setItem('token', response.token)
-          this.router.navigate(['/'])
-        }
-      },
-      error: (error) => {
-        console.error('Erro ao cadastrar usuário:', error);
-      }
-    })
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-  showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Você precisa ter pelo menos 18 anos para se registrar' });
+  showSucess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: message })
+  }
+
+  sendCode() {
+    const telefoneCompleto = `${this.phonePrefix}${this.registroForm.value.telefone}`;
+    this.registroForm.patchValue({ telefone: telefoneCompleto })
+
+    this.authService.verifyCode(this.registroForm.value.telefone).subscribe(
+      (res) => {
+        console.log('Resposta do backend:', res.codigo);
+        this.verifyCode = true;
+        this.codigoBackend = res.codigo
+      },
+
+      (error) => {
+        console.error(error)
+      }
+    )
+  }
+
+  verificarCode() {
+    if (this.codigo === this.codigoBackend) {
+      this.verifyCode = false
+      const dadosCadastro = JSON.stringify(this.registroForm.value)
+      this.cookieService.set('registroForm', dadosCadastro, 1, '/')
+      this.steam = true
+    } else {
+      this.showError('Código Invalido!')
+    }
+  }
+
+  vincularSteam() {
+    window.location.href = 'http://localhost:3000/auth/steam';
+  }
+
+  concluirCadastro() {
+    this.authService.cadastrar(this.registroForm.value).subscribe(
+      (response: any) => {
+        if (response.sucess) {
+          this.cookieService.delete('registroForm', '/');
+
+          localStorage.setItem('token', response.token);
+
+          this.showSucess('Conta criada com sucesso!');
+
+          this.router.navigate(['/']);
+        }
+      },
+      (error) => {
+        console.error('Erro ao cadastrar usuário:', error);
+      }
+    );
   }
 }

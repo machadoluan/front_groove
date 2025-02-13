@@ -75,6 +75,11 @@ export class AuthService {
   }
 
   cadastrar(dadosCadastro: any): Observable<any> {
-    return this.http.post(`${this.UrlApi}/auth/cadastro`, dadosCadastro);
+    return this.http.post(`${this.UrlApi}/auth/create`, dadosCadastro);
+  }
+
+
+  verifyCode(telefone: string): Observable<any> {
+    return this.http.post(`${this.UrlApi}/twilio/enviar-codigo`, {telefone})
   }
 }

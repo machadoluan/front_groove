@@ -1,4 +1,5 @@
-@use '../../../../public/variables.scss'  as *;;
+@use '../../../../public/variables.scss' as *;
+;
 
 .container-profile {
   width: 100%;
@@ -21,6 +22,7 @@
           height: 250px;
           border-radius: 50%;
           border: 5px solid $primary;
+          filter: brightness(1.1) contrast(1.1);
         }
       }
 
@@ -96,7 +98,7 @@
               cursor: pointer;
               transition: all 0.3s ease-in-out;
 
-              &.selected {
+              &.active {
                 width: 50px;
                 height: 50px;
                 border: 2px solid $primary;
@@ -261,11 +263,19 @@
             input {
               padding: 5px 10px;
               font-size: 14px;
-              border: 2px solid #79747E;
-              border-radius: 10px;
+              border: 1px solid $primary;
+              border-radius: 5px;
               background-color: transparent;
-              color: #c3ef3c;
+              color: white;
               outline: none;
+
+              &:disabled {
+                cursor: not-allowed;
+                border: none;
+                background-color: rgba(255, 255, 255, 0.11);
+                color: rgba(255, 255, 255, 0.7);
+
+              }
             }
 
 
@@ -279,19 +289,14 @@
 
             button {
               margin-top: 16px;
-              padding: 2px 15px;
+              padding: 7px 15px;
               font-size: 14px;
               border: none;
-              border-radius: 50px;
-              background-color: #c3ef3c;
+              border-radius: 8px;
+              background-color: $primary;
               color: #1a1a1a;
               cursor: pointer;
               transition: background-color 0.3s;
-
-              &:hover {
-                background-color: #a0d532;
-                /* Tom mais escuro ao passar o mouse */
-              }
             }
           }
         }
@@ -341,4 +346,24 @@ tr {
   &:hover {
     background-color: rgba($primary, 0.2) !important;
   }
+}
+
+
+::ng-deep .card{
+  background: transparent !important;
+  border: none;
+}
+::ng-deep .p-tabpanels{
+  background: transparent !important;
+  padding: 0 !important;
+}
+::ng-deep .p-tablist-tab-list{
+  background: transparent !important;
+}
+::ng-deep .p-tab-active{
+  color: white !important;
+  border: white !important;
+}
+::ng-deep .p-tablist-active-bar {
+  background: white !important;
 }

@@ -31,6 +31,14 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+
+            .online{
+                padding: 0.5rem 1rem;
+                background: #222728;
+                border-radius: 5px;
+            }
             img {
                 width: 100px;
                 height: auto;
@@ -73,6 +81,19 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+            .dima {
+                display: flex;
+                gap: .5rem;
+                align-items: center;
+                cursor: pointer;
+      
+                span {
+                  color: $primary;
+                  font-size: 14px;
+                  font-weight: bold;
+                  padding-bottom: 2px;
+                }
+              }
 
             .compra {
                 width: 40px;

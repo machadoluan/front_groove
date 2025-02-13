@@ -6,7 +6,7 @@
 
   .first-section {
     width: 100%;
-    min-height: 80vh;
+    min-height: 90vh;
     background-color: $primary;
     z-index: -1;
     background-image: url(/img/fundo1.png);
@@ -20,34 +20,46 @@
       position: absolute;
       content: '';
       width: 100%;
-      height: 80vh;
+      height: 90vh;
       top: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgb(0, 0, 0);
+      background: linear-gradient(183deg, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.5) 100%);
       z-index: -1;
     }
 
     .content {
+      width: 100%;
+      height: 80vh;
       display: flex;
       flex-direction: column;
-      align-self: baseline;
-      gap: 1rem;
-      font-size: 34px;
-      font-weight: bold;
+      justify-content: end;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 26px;
+      font-weight: 500;
       z-index: 2;
+      padding-bottom: 50px;
+      font-family: "Poppins";
 
-      .btn {
-        width: 100%;
-        display: flex;
-        justify-content: center;
 
-        button {
-          background-color: $primary;
-          border: none;
-          border-radius: 6px;
-          color: $secundary;
-          padding: 0.5rem 2rem;
-        }
+      .break {
+        font-size: 57px;
+        color: $primary;
+        font-weight: 900;
+        font-family: "Poppins";
+
+      }
+
+      a {
+        background-color: $primary;
+        border: none;
+        border-radius: 6px;
+        color: $secundary;
+        padding: 0.4rem 2rem;
+        font-size: 14px;
+        cursor: pointer;
+        margin-top: 40px;
       }
     }
   }

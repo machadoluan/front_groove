@@ -57,6 +57,10 @@
                 gap: 3rem;
             }
 
+            &.welcome{
+                gap: 2rem;
+            }
+
             &.steam {
                 justify-content: space-around;
                 // align-items: start;
@@ -100,6 +104,10 @@
                             i {
                                 font-size: 18px;
                                 color: rgba($color: white, $alpha: 0.5);
+
+                                &.vinculado{
+                                    color: green;
+                                }
                             }
 
                         }
@@ -388,6 +396,12 @@ p-toast {
                         }
 
                         padding: 0 !important;
+                        div{
+                            .vinculado{
+                                color: green !important;
+                            }
+                        }
+                        
                     }
                 }
             }

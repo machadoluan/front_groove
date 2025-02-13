@@ -2,18 +2,14 @@
 
 <div class="container-main">
 
-    <section class="first-section">
-        <div class="margin-site">
-            <div class="content">
-                COMECE A JOGAR <span class="break">NA GROOVE STREET</span>
-               <div class="btn">
-                <button>Conectar</button>
-               </div>
-            </div>
+    <section class="first-section">=
+        <div class="content">
+            COMECE SUA JORNADA NA <span class="break">GROOVE ROLEPLAY</span>
+            <a href="fivem://connect/play.groovegg.com.br">Conectar</a>
         </div>
     </section>
 
-    <section class="Vips" id="vips" *ngIf="!user">
+    <section class="Vips" id="vips" *ngIf="user">
         <div class="margin-site">
             <div class="text">
                 <h1>Adquira seu VIP</h1>
@@ -105,7 +101,7 @@
     </section>
 
     <!-- Diamantes -->
-    <section class="diamantes" id="diamente" *ngIf="!user">
+    <section class="diamantes" id="diamente" *ngIf="user">
         <div class="margin-site">
             <div class="descricao-diamantes">
                 <h1>Compre diamantes</h1>
@@ -138,7 +134,7 @@
                 <p>Encontre respostas rápidas para suas dúvidas mais comuns sobre nosso produto e serviços.</p>
             </div>
             <mat-accordion>
-                <mat-expansion-1 (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
                     <mat-expansion-panel-header>
                         <mat-panel-title>O que devo fazer assim que entrar na nossa cidade [NOME] para uma experiência
                             incrível?</mat-panel-title>
@@ -216,10 +212,12 @@
 
 
 <div class="card flex justify-center">
-    <p-dialog header="Discord" [(visible)]="dialogVisible" [modal]="true" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" [draggable]="false" [resizable]="false">
+    <p-dialog header="Discord" [(visible)]="dialogVisible" [modal]="true"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" [draggable]="false"
+        [resizable]="false">
         <p>
-           Erro ao conectar, vc precisa conectar em nosso discord.
-           <a href="https://discord.gg/mC64GRECwX" target="_blank">Discord</a>
+            Erro ao conectar, vc precisa conectar em nosso discord.
+            <a href="https://discord.gg/mC64GRECwX" target="_blank">Discord</a>
         </p>
     </p-dialog>
 </div>

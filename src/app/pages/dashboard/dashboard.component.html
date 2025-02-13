@@ -23,15 +23,7 @@
                 d="M4.48408 3.21226L12.041 1.33328L11.6656 0.568733C11.3666 0.0827925 10.6923 -0.131021 10.1709 0.0827925L3.44127 3.21875H4.48408V3.21226ZM14.363 1.33328C14.2865 1.33328 14.217 1.39809 14.064 1.39809L12.3469 1.88403L6.87559 3.20578H15.7117L15.4127 2.09782C15.2667 1.68315 14.8913 1.33328 14.363 1.33328ZM16.831 3.91203H1.04281C0.743871 3.91203 0.437985 4.05454 0.222471 4.32667C0.152951 4.39794 0.0764732 4.53403 0.0764732 4.67657C4.24735e-07 4.74136 0 4.81264 0 4.8904V15.9633C0 16.5206 0.521412 17 1.04977 17H16.8379C17.4358 17 17.9641 16.5141 17.9641 15.9633V13.2486H11.603C10.5532 13.2486 9.80242 12.484 9.80242 11.5056V9.34805C9.80242 8.86211 9.95536 8.43451 10.3308 8.16239C10.5532 7.8773 10.9286 7.67645 11.3736 7.67645H17.9641V4.8904C17.9641 4.40445 17.4358 3.91203 16.8379 3.91203H16.831ZM18.7011 8.57703C18.5551 8.51224 18.4021 8.43451 18.3256 8.36324C18.1797 8.36324 18.1032 8.29843 17.9572 8.29843H11.5961C10.9912 8.29843 10.5463 8.7844 10.5463 9.34161V11.4992C10.5463 12.0628 10.9912 12.5423 11.5961 12.5423H17.9572C18.1032 12.5423 18.1797 12.4775 18.3256 12.4775C18.4021 12.4127 18.5551 12.335 18.7011 12.2637C18.8471 12.0564 19 11.849 19 11.4992V9.34161C19 9.063 18.854 8.78436 18.7011 8.57703ZM13.8346 10.5986C13.8346 10.8772 13.5357 11.0845 13.3132 11.0845H12.9448C12.6389 11.0845 12.4234 10.8707 12.4234 10.5986V10.3199C12.4234 10.1061 12.4929 9.9636 12.6458 9.89881C12.7223 9.83402 12.7988 9.76273 12.9517 9.76273H13.3202C13.5496 9.76273 13.8416 10.0413 13.8416 10.3264V10.605L13.8346 10.5986Z"
                 fill="#EF903C" />
             </svg>
-            <span id="money">0</span>
-          </div>
-          <div class="dima">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 19 17" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M14.1353 5.00366H19L14.8164 0H10.4729L14.1353 5.00366ZM8.22824 15.6851L4.78127 5.97659H0L8.22824 15.6851ZM4.86467 5.00366L8.60351 0H4.26701L0 5.00366H4.86467ZM12.947 5.00366L9.5 0.29883L6.05999 5.00366H12.94H12.947ZM5.76811 5.97659L9.50695 16.5746L13.2458 5.97659H5.76811ZM14.2952 5.97659L10.8482 15.6851L19 5.97659H14.2952Z"
-                fill="#EF903C" />
-            </svg>
-            <span id="gema">000.000</span>
+            <span id="money" *ngIf="selectedCharacter">{{formatarDinheiro(selectedCharacter.bank)}}</span>
           </div>
         </div>
       </div>
@@ -39,15 +31,14 @@
 
 
     <section class="tabs">
-      <mat-tab-group animationDuration="200ms">
+      <!-- <mat-tab-group animationDuration="200ms">
         <mat-tab label="Ranking">
           <div class="content">
             <div class="personagem">
               Selecione seu personagem
               <div class="personagem-img">
-                <img src="/img/profile.png" [class.selected]="selectedImage === 0" (click)="selectImage(0)" alt="">
-                <img src="/img/profile.png" [class.selected]="selectedImage === 1" (click)="selectImage(1)" alt="">
-                <img src="/img/profile.png" [class.selected]="selectedImage === 2" (click)="selectImage(2)" alt="">
+
+                <img src="/img/profile.png" *ngFor="let character of characters" [ngClass]="{'active': selectedCharacter === character}" (click)="selectCharacter(character)" alt="">
 
                 <div class="comprar-personagem">
                   <i class="fa-solid fa-plus"></i>
@@ -60,15 +51,15 @@
                 <div class="dados-personagem">
                   <div class="icone">
                     <img src="/img/vip.png" alt="">
-                    <div class="dados">
-                      <span id="name">Luan Machado - #659862</span>
+                    <div class="dados" *ngIf="selectedCharacter">
+                      <span id="name">{{selectedCharacter.name}} {{selectedCharacter.name2}} - #{{selectedCharacter.id}}</span>
                       <span id="vip">PLATINA</span>
                     </div>
                   </div>
 
                   <div class="barra">
                     <div class="barra-progresso">
-                      <div class="progresso" style="width: 52.5%;"></div> <!-- 15.754 / 30.100 -->
+                      <div class="progresso" style="width: 52.5%;"></div>
                     </div>
                     <span>Seus pontos: <span id="pontos">15.754</span></span>
                   </div>
@@ -96,23 +87,24 @@
               <div class="grid-container">
                 <div>
                   <label for="nome">Nome:</label>
-                  <input id="nome" [(ngModel)]="user.nome" type="text" required>
+                  <input [disabled]="!toggleEdit" id="nome" [(ngModel)]="user.nome" type="text" required>
                 </div>
                 <div>
                   <label for="email">E-mail:</label>
-                  <input id="email" [(ngModel)]="user.email" type="email" required>
+                  <input [disabled]="!toggleEdit" id="email" [(ngModel)]="user.email" type="email" required>
                 </div>
                 <div>
                   <label for="whatsapp">WhatsApp:</label>
-                  <input id="whatsapp" [(ngModel)]="user.telefone" type="text" required>
+                  <input [disabled]="!toggleEdit" id="whatsapp" [(ngModel)]="user.telefone" type="text" required>
                 </div>
                 <div>
                   <label for="datanascimento">Data de Nascimento:</label>
-                  <input id="datanascimento" [(ngModel)]="user.dataNascimento" type="string" required>
+                  <input [disabled]="!toggleEdit" id="datanascimento" [(ngModel)]="user.dataNascimento" type="string" required>
                 </div>
               </div>
               <div class="btn-perfil">
-                <button><i class="fas fa-plus" style="color: #000;"></i> Salvar informações </button>
+                <button *ngIf="toggleBtns"><i class="fas fa-plus" style="color: #000;"></i> Salvar informações </button>
+                <button *ngIf="!toggleEdit" (click)="editDados()"><i class="fas fa-pen" style="color: #000;"></i> Editar informações </button>
               </div>
 
             </div>
@@ -179,7 +171,197 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumnsSuporte;"></tr>
           </table>
         </mat-tab>
-      </mat-tab-group>
+      </mat-tab-group> -->
+
+
+      <div class="card">
+        <p-tabs value="0">
+          <p-tablist>
+            <p-tab value="0">Ranking</p-tab>
+            <p-tab value="1">Perfil</p-tab>
+            <p-tab value="2">Histórico de compras</p-tab>
+            <p-tab value="3">Tickets</p-tab>
+          </p-tablist>
+          <p-tabpanels>
+            <p-tabpanel value="0">
+              <div class="content">
+                <div class="personagem">
+                  Selecione seu personagem
+                  <div class="personagem-img">
+
+                    <img src="/img/profile.png" *ngFor="let character of characters"
+                      [ngClass]="{'active': selectedCharacter === character}" (click)="selectCharacter(character)"
+                      alt="">
+
+                    <div class="comprar-personagem">
+                      <i class="fa-solid fa-plus"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="content-raking">
+                  <div class="vip">
+                    <div class="dados-personagem">
+                      <div class="icone">
+                        <img src="/img/vip.png" alt="">
+                        <div class="dados" *ngIf="selectedCharacter">
+                          <span id="name">{{selectedCharacter.name}} {{selectedCharacter.name2}} -
+                            #{{selectedCharacter.id}}</span>
+                          <span id="vip">PLATINA</span>
+                        </div>
+                      </div>
+
+                      <div class="barra">
+                        <div class="barra-progresso">
+                          <div class="progresso" style="width: 52.5%;"></div>
+                        </div>
+                        <span>Seus pontos: <span id="pontos">15.754</span></span>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                  <div class="diamante">
+                    <div class="icone">
+                      <img src="/img/vip.png" alt="">
+                    </div>
+
+                    <div class="dados">
+                      <span>DIAMANTE</span>
+                      <span id="diamante">15.589</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-tabpanel>
+            <p-tabpanel value="1">
+              <div class="content">
+                <div class="dados-perfil">
+                  <div class="grid-container">
+                    <div>
+                      <label for="nome">Nome:</label>
+                      <input [disabled]="!toggleEdit" id="nome" [(ngModel)]="user.nome" type="text" required>
+                    </div>
+                    <div>
+                      <label for="email">E-mail:</label>
+                      <input [disabled]="!toggleEdit" id="email" [(ngModel)]="user.email" type="email" required>
+                    </div>
+                    <div>
+                      <label for="whatsapp">WhatsApp:</label>
+                      <input [disabled]="!toggleEdit" id="whatsapp" [(ngModel)]="user.telefone" type="text" required>
+                    </div>
+                    <div>
+                      <label for="datanascimento">Data de Nascimento:</label>
+                      <input [disabled]="!toggleEdit" id="datanascimento" [(ngModel)]="user.dataNascimento"
+                        type="string" required>
+                    </div>
+                  </div>
+                  <div class="btn-perfil">
+                    <button *ngIf="toggleBtns"><i class="fas fa-plus" style="color: #000;"></i> Salvar informações
+                    </button>
+                    <button *ngIf="!toggleEdit" (click)="editDados()"><i class="fas fa-pen" style="color: #000;"></i>
+                      Editar informações </button>
+                  </div>
+
+                </div>
+
+              </div>
+            </p-tabpanel>
+            <p-tabpanel value="2">
+              <div class="card">
+
+                <p-table #dt1 [value]="dataSourceCompra" [tableStyle]="{ 'min-width': '20rem' }"
+                  [globalFilterFields]="['nome', 'dataCompra', 'produto', 'valor']" selectionMode="single"
+                  [(selection)]="selectedCompra" dataKey="id" [rows]="5" [paginator]="true" stateStorage="session"
+                  stateKey="statedemo-session">
+
+                  <ng-template pTemplate="caption">
+                    <p-iconfield iconPosition="left">
+                      <p-inputicon>
+                        <i class="pi pi-search"></i>
+                      </p-inputicon>
+                      <input pInputText type="text" placeholder="Global Search" (input)="filterGlobal($event, dt1)" />
+
+
+                    </p-iconfield>
+                  </ng-template>
+
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="nome" style="width:25%">Nome</th>
+                      <th pSortableColumn="dataCompra" style="width:25%">Data da Compra</th>
+                      <th pSortableColumn="produto" style="width:25%">Produto</th>
+                      <th pSortableColumn="valor" style="width:25%">Valor</th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-compra>
+                    <tr [pSelectableRow]="compra">
+                      <td>{{ compra.nome }}</td>
+                      <td>{{ compra.dataCompra }}</td>
+                      <td>{{ compra.produto }}</td>
+                      <td>{{ compra.valor | currency:'BRL' }}</td> <!-- Formata para moeda brasileira -->
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="4">Nenhuma compra encontrada.</td>
+                    </tr>
+                  </ng-template>
+
+                </p-table>
+
+              </div>
+            </p-tabpanel>
+            <p-tabpanel value="3">
+              <div class="card">
+                <p-table #dt2 [value]="dataSourceSuporte"
+                  [globalFilterFields]="['nome', 'dataCompra', 'produto', 'valor']" selectionMode="single"
+                  [(selection)]="selectedCompra" dataKey="id" [paginator]="true" stateStorage="session"
+                  stateKey="statedemo-session">
+
+                  <ng-template pTemplate="caption">
+                    <p-iconfield iconPosition="left">
+                      <p-inputicon>
+                        <i class="pi pi-search"></i>
+                      </p-inputicon>
+                      <input pInputText type="text" placeholder="Global Search" />
+                    </p-iconfield>
+                  </ng-template>
+
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="nome" style="width:25%">Nome</th>
+                      <th pSortableColumn="dataCompra" style="width:25%">Data da Compra</th>
+                      <th pSortableColumn="produto" style="width:25%">Produto</th>
+                      <th pSortableColumn="valor" style="width:25%">Valor</th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-compra>
+                    <tr [pSelectableRow]="compra">
+                      <td>{{ compra.nome }}</td>
+                      <td>{{ compra.dataCompra }}</td>
+                      <td>{{ compra.produto }}</td>
+                      <td>{{ compra.valor | currency:'BRL' }}</td> <!-- Formata para moeda brasileira -->
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="4">Nenhuma compra encontrada.</td>
+                    </tr>
+                  </ng-template>
+
+                </p-table>
+
+              </div>
+            </p-tabpanel>
+          </p-tabpanels>
+        </p-tabs>
+      </div>
     </section>
   </main>
 

@@ -13,6 +13,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { FilaComponent } from '../../components/fila/fila.component';
 import { Dialog } from 'primeng/dialog';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -46,8 +47,9 @@ export class InicioComponent implements OnInit {
   entrar: boolean = true;
   showCarrinho: boolean = false;
   user: any;
-  mostrarFila: boolean = false
+  mostrarFila: boolean = false  
   dialogVisible: boolean = false;
+
 
 
   vipItem: Item[] = [
@@ -73,7 +75,7 @@ export class InicioComponent implements OnInit {
     private dialog: MatDialog,
     private auth: AuthService,
     private carrinhoService: CarrinhoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -178,4 +180,6 @@ export class InicioComponent implements OnInit {
   comprarVip() {
 
   }
+
+  
 }
