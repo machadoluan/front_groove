@@ -13,7 +13,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-  private UrlApi = 'http://localhost:3000'
+  private UrlApi = 'https://backend-groove.onrender.com'
   private guilds: { name: string }[] = [];
 
   loginWithDiscord() {

@@ -6,7 +6,7 @@ import { loadStripe, Stripe } from '@stripe/stripe-js'
   providedIn: 'root'
 })
 export class MercadopagoService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://backend-groove.onrender.com';
 
   constructor(
     private http: HttpClient

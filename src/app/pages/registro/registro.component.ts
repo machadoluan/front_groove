@@ -271,7 +271,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   vincularSteam() {
-    window.location.href = 'http://localhost:3000/auth/steam';
+    window.location.href = 'https://backend-groove.onrender.com/auth/steam';
   }
 
   concluirCadastro() {
