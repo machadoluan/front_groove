@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit {
           this.selectedCharacter = this.characters[0];  // Seleciona o primeiro character
         }
       },
-      (err) => {
+      (err: any) => {
         console.error(err)
       }
     )
@@ -130,7 +130,7 @@ export class DashboardComponent implements OnInit {
         this.Account = res[0]
         console.log(this.Account)
       },
-      (err) => {
+      (err: any) => {
         console.error(err)
       }
     )

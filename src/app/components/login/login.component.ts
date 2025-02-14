@@ -1,4 +1,4 @@
-https://backend-groove.onrender.comimport { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import {
   MatDialog,
