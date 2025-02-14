@@ -14,7 +14,6 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
-import { Tag } from 'primeng/tag';
 
 
 @Component({
@@ -32,7 +31,6 @@ import { Tag } from 'primeng/tag';
     InputTextModule,
     IconField,
     InputIcon,
-    Tag
   ],
   animations: [
     trigger('detailExpand', [
@@ -144,28 +142,6 @@ export class DashboardComponent implements OnInit {
 
   sair() {
     this.auth.logout()
-  }
-
-  getSeverity(status: string): "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | undefined {
-    switch (status) {
-      case 'Aguardando':
-        return 'danger';
-
-      case 'qualified':
-        return 'success';
-
-      case 'new':
-        return 'info';
-
-      case 'negotiation':
-        return 'warn';
-
-      case 'renewal':
-        return undefined;
-
-      default:
-        return undefined;
-    }
   }
 
   selectCharacter(character: any) {
