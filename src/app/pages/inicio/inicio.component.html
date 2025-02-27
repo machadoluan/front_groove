@@ -19,8 +19,8 @@
             <div class="cards">
                 <div class="card" [ngClass]="item.class" *ngFor="let item of vipItem">
                     <div class="content">
-                        <span>{{item.title}}</span>
-                        <p>30 dias</p>
+                        <span class="vip_title">{{item.title}}</span>
+                        <p class="vip_title">30 dias</p>
                         <p>{{item.description}}</p>
                         <div class="buttons">
                             <span class="detalhes">Detalhes</span>
@@ -111,8 +111,8 @@
             <div class="cards">
                 <div class="card" *ngFor="let item of dimaItem" [ngClass]="item.class">
                     <div class="content">
-                        <span>{{item.title}}</span>
-                        <p>In-game</p>
+                        <span class="vip_title">{{item.title}}</span>
+                        <p class="vip_title">In-game</p>
                         <p>{{item.description}}</p>
                         <div class="buttons">
                             <span class="detalhes">Detalhes</span>

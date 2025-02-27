@@ -6,7 +6,8 @@
   height: 100%;
 
   main {
-    width: 50%;
+    width: 100%;
+    max-width: 50rem;
     margin: 0 auto;
     padding: 10% 0;
 
@@ -17,12 +18,50 @@
       justify-content: center;
 
       .photo {
+        position: relative;
+
+        .wl {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          position: absolute;
+          bottom: -15px;
+          left: 50%;
+          transform: translate(-50%, 0);
+
+          span {
+            padding: .5rem;
+
+            &.wl-aprovada {
+              background-color: #C3EF3C;
+              border-radius: 5px;
+              color: #1a1a1a;
+              font-weight: bold;
+            }
+
+            &.wl-inativa {
+              background-color: #757575;
+              border-radius: 5px;
+              color: rgba($color: #272727, $alpha: .9);
+              font-weight: bold;
+            }
+          }
+        }
+
         img {
           width: 250px;
           height: 250px;
           border-radius: 50%;
           border: 5px solid $primary;
           filter: brightness(1.1) contrast(1.1);
+
+          &.wl-aprovada {
+            border: 5px solid #C3EF3C;
+          }
+
+          &.wl-inativa {
+            border: 5px solid #757575;
+          }
         }
       }
 
@@ -31,14 +70,6 @@
         align-items: end;
         gap: 0.5rem;
         font-size: 32px;
-
-        #vip {
-          font-size: 12px;
-          padding: 0 5px;
-          background-color: $primary;
-          color: $secundary;
-          font-weight: bold;
-        }
       }
 
       .inform {
@@ -67,6 +98,30 @@
             font-size: 12px;
             font-weight: bold;
           }
+
+          #vip {
+            font-size: 12px;
+            padding: 0 5px;
+            background-color: $primary;
+            color: $secundary;
+            font-weight: bold;
+            border-radius: 3px;
+          }
+
+
+        }
+
+        .cargos-discord {
+          display: flex;
+
+          #cargo {
+            font-size: 12px;
+            padding: 0 5px;
+            background-color: $primary;
+            color: $secundary;
+            font-weight: bold;
+            border-radius: 3px;
+          }
         }
       }
     }
@@ -79,6 +134,71 @@
         margin-top: 1rem;
         border-radius: 10px;
         background-color: rgba(65, 65, 65, 0.6);
+
+        .create_suporte {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 1.5rem;
+          padding: 0 1rem;
+          position: relative;
+
+          .close {
+            position: absolute;
+            top: 0;
+            font-size: 14px;
+            cursor: pointer;
+          }
+
+          .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            gap: .5rem;
+
+            .p-select {
+              width: 33.5% !important;
+              background-color: transparent !important;
+              border: 2px solid $primary !important;
+              color: white !important;
+
+
+            }
+
+            .p-inputtext,
+            .p-textarea {
+              width: 100%;
+              background-color: transparent !important;
+              border: 2px solid $primary !important;
+            }
+
+
+          }
+
+
+          button {
+            padding: .5rem 2rem;
+            background-color: $primary;
+            color: $secundary;
+            border-radius: 6px;
+            border: none;
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+            cursor: pointer;
+
+
+            i {
+              color: $secundary;
+
+            }
+          }
+
+
+        }
+
 
         .personagem {
           font-size: 14px;
@@ -130,6 +250,7 @@
           margin-top: 20px;
           position: relative;
           gap: 1rem;
+
 
           .vip {
             flex: 0.8;
@@ -303,9 +424,44 @@
 
       }
 
-      // Compras
-      /* Estilo geral da tabela */
+      .tickets-mobile {
+        width: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 2rem;
 
+        .ticket {
+          background-color: #1a1a1a;
+          border-radius: 6px;
+          display: grid;
+          grid-template-columns: 1fr auto 1fr; /* Três colunas: início, meio e fim */
+          align-items: center; /* Centraliza verticalmente */
+          padding:  1rem;
+          gap: 1rem; /* Espaçamento entre os elementos */
+        }
+        
+        .name,
+        .personagem,
+        .status {
+          white-space: nowrap; /* Impede a quebra de linha */
+          overflow: hidden; /* Esconde o conteúdo que ultrapassar */
+          text-overflow: ellipsis; /* Adiciona reticências (...) */
+          max-width: 90px;
+          font-size: 12px;
+        }
+        
+        .name {
+          justify-self: start; /* Alinha no início da primeira coluna */
+        }
+        
+        .personagem {
+          justify-self: center; /* Centraliza na segunda coluna */
+        }
+        
+        .status {
+          justify-self: end; /* Alinha no final da terceira coluna */
+        }
+      }
     }
 
 
@@ -349,21 +505,298 @@ tr {
 }
 
 
-::ng-deep .card{
+::ng-deep .card {
   background: transparent !important;
   border: none;
 }
-::ng-deep .p-tabpanels{
+
+::ng-deep .p-tabpanels {
   background: transparent !important;
   padding: 0 !important;
 }
-::ng-deep .p-tablist-tab-list{
+
+::ng-deep .p-tablist-tab-list {
   background: transparent !important;
 }
-::ng-deep .p-tab-active{
+
+::ng-deep .p-tab-active {
   color: white !important;
   border: white !important;
 }
+
 ::ng-deep .p-tablist-active-bar {
   background: white !important;
+}
+
+::ng-deep .p-datatable-thead>tr>th {
+  text-align: center !important;
+  background-color: transparent !important;
+  border: none !important;
+  color: $primary !important;
+}
+
+::ng-deep .p-datatable-tbody>tr>td {
+  text-align: center !important;
+  border: none !important;
+
+  padding: 1rem 0 !important;
+}
+
+::ng-deep .p-datatable-tbody>tr {
+  background-color: transparent !important;
+  border: none !important;
+
+}
+
+::ng-deep .p-datatable-header {
+  background-color: transparent !important;
+  padding-left: 0 !important;
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .new_ticket {
+    padding: .4rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    background-color: $primary;
+    color: $secundary;
+    font-weight: 550;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    i {
+      color: $secundary;
+      font-weight: 550;
+      font-size: 12px;
+    }
+  }
+
+  .p-inputtext {
+    background-color: transparent !important;
+    font-size: 14px !important;
+
+    &:focus {
+      border-color: $primary !important;
+    }
+  }
+}
+
+::ng-deep .p-paginator {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+
+::ng-deep .p-select-label.p-placeholder {
+  color: white !important;
+}
+
+::ng-deep .p-select-option.p-select-option-selected {
+  background-color: rgba($primary, 0.2) !important;
+}
+
+.left {
+  text-align: start !important;
+  padding: 0 !important;
+}
+
+.right {
+  text-align: end !important;
+  padding: 0 1rem !important;
+}
+
+
+
+@media screen and (max-width: 800px) {
+  .profile {
+    display: flex;
+    gap: 4rem !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 0 !important;
+
+    .photo {
+      position: relative;
+
+      .wl {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        span {
+          padding: .5rem;
+
+          &.wl-aprovada {
+            background-color: #C3EF3C;
+            border-radius: 5px;
+            color: #1a1a1a;
+            font-weight: bold;
+          }
+
+          &.wl-inativa {
+            background-color: #757575;
+            border-radius: 5px;
+            color: rgba($color: #272727, $alpha: .9);
+            font-weight: bold;
+          }
+        }
+      }
+
+      img {
+        width: 200px !important;
+        height: 200px !important;
+        border-radius: 50%;
+        border: 5px solid $primary;
+        filter: brightness(1.1) contrast(1.1);
+
+        &.wl-aprovada {
+          border: 5px solid #C3EF3C;
+        }
+
+        &.wl-inativa {
+          border: 5px solid #757575;
+        }
+      }
+    }
+
+    .name {
+      display: flex;
+      align-items: end;
+      gap: 0.5rem;
+      font-size: 32px;
+    }
+
+    .inform {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .description {
+      color: #d1d1d1;
+      font-size: 14px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .dados {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+      align-items: center;
+
+      div {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        span {
+          color: $primary;
+          font-size: 12px;
+          font-weight: bold;
+        }
+
+        #vip {
+          font-size: 12px;
+          padding: 0 5px;
+          background-color: $primary;
+          color: $secundary;
+          font-weight: bold;
+          border-radius: 3px;
+        }
+
+
+      }
+
+      .cargos-discord {
+        display: flex;
+
+        #cargo {
+          font-size: 12px;
+          padding: 0 5px;
+          background-color: $primary;
+          color: $secundary;
+          font-weight: bold;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .table {
+    display: none !important;
+  }
+  .tickets-mobile {
+    display: flex !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .profile {
+    padding-top: 100px !important;
+  }
+
+  .tabs {
+    padding: 0 20px !important;
+
+  }
+
+
+  .dados-perfil {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 5px !important;
+
+
+    .grid-container {
+
+      display: flex !important;
+      flex-direction: column !important;
+      /* Duas colunas de tamanhos iguais */
+      gap: 16px;
+      /* Espaçamento entre os campos */
+
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      input {
+        padding: 5px 10px;
+        font-size: 14px;
+        border: 1px solid $primary;
+        border-radius: 5px;
+        background-color: transparent;
+        color: white;
+        outline: none;
+
+        &:disabled {
+          cursor: not-allowed;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.11);
+          color: rgba(255, 255, 255, 0.7);
+
+        }
+      }
+
+
+
+    }
+  }
 }

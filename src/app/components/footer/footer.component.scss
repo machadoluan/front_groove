@@ -21,3 +21,12 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+
+
+@media screen and (max-width: 830px) {
+    .termos{
+        flex-direction: column;
+        width: 100% !important;
+    }
+}

@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-  private UrlApi = 'https://backend-groove.onrender.com'
+  private UrlApi = 'http://localhost:3000'
   private guilds: { name: string }[] = [];
 
   loginWithDiscord() {
@@ -75,11 +75,28 @@ export class AuthService {
   }
 
   cadastrar(dadosCadastro: any): Observable<any> {
-    return this.http.post(`${this.UrlApi}/auth/create`, dadosCadastro);
+    return this.http.post(`${this.UrlApi}/auth/create`, dadosCadastro)
   }
 
 
   verifyCode(telefone: string): Observable<any> {
-    return this.http.post(`${this.UrlApi}/twilio/enviar-codigo`, {telefone})
+    return this.http.post(`${this.UrlApi}/twilio/enviar-codigo`, { telefone })
+  }
+
+  updateAccount(dadosUpdate: any): Observable<any> {
+    return this.http.put(`${this.UrlApi}/auth/update`, dadosUpdate)
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocorreu um erro desconhecido!';
+    if (error.error instanceof ErrorEvent) {
+      // Erro do lado do cliente
+      errorMessage = `Erro: ${error.error.message}`;
+    } else {
+      // Erro do lado do servidor
+      errorMessage = `Código do erro: ${error.status}\nMensagem: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
   }
 }

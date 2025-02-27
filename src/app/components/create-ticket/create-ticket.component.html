@@ -1,0 +1,24 @@
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Criar ticket">
+    <div class="create_suporte">
+        <div class="form-group" *ngIf="characters">
+            <label for="personagem">Personagem</label>
+            <p-select [options]="formattedCharacters" id="personagem" name="personagem" [ngModel]="selectedCharacter"
+                optionLabel="displayName" placeholder="Selecione um personagem" class="w-full md:w-56"
+                (onChange)="selectCharacter($event.value)" />
+        </div>
+        <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <input type="text" pInputText />
+        </div>
+        <div class="form-group">
+            <label for="obs">Observações</label>
+            <textarea rows="5" cols="30" pTextarea autoResize="none"></textarea>
+        </div>
+
+        <button>
+            <i class="fa-solid fa-paper-plane"></i>
+            Enviar ticket
+        </button>
+
+    </div>
+</p-dialog>

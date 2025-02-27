@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use '../public/variables' as *;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "primeicons/primeicons.css";
 
 * {
   margin: 0;
@@ -13,7 +14,9 @@
 
 
 }
-
+:root{
+  --p-highlight-background: #EF903C !important;
+}
 /* scrollbar */
 body::-webkit-scrollbar {
   width: 5px;
@@ -39,12 +42,43 @@ body {
 }
 
 
-ngx-material-intl-tel-input .mat-input-element {
-  width: 400px;
-  padding: 5px 10px;
-  background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.38);
-  outline: none;
-  font-size: 12px;
-  border-radius: 5px;
+
+
+// CONFIGURAÇÕES EXTRAS.
+.d-flex {
+  display: flex !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+/* Fade In */
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Fade Out */
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }

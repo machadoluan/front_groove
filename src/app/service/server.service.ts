@@ -10,7 +10,7 @@ export class ServerService {
     private http: HttpClient
   ) { }
 
-  private UrlApi = 'https://backend-groove.onrender.com'
+  private UrlApi = 'http://localhost:3000'
 
 
   getCharacters(discordId: string) {

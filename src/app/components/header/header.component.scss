@@ -1,27 +1,113 @@
-@use '../../../../public/variables.scss'  as *;;
+@use '../../../../public/variables.scss' as *;
+;
 
 .container-header {
+    position: relative;
 
     header {
         display: flex;
         position: fixed;
         justify-content: space-between;
-        gap: 10rem;
         align-items: center;
         padding: 1.5rem 0;
         transition: all 0.5 ease-in-out;
         background-color: rgba(34, 39, 40, 0.7);
-        z-index: 9999;
+        z-index: 999;
         width: 100%;
+        top: -1px;
 
-        .margin-site{
+        .margin-site {
             display: flex;
             max-width: 1200px;
-            min-width: 800px;
+            min-width: 300px;
             width: 100%;
             justify-content: space-between;
             align-items: center;
             margin: 0 auto;
+            position: relative;
+
+
+            .profile-dropdown {
+                position: absolute;
+                right: 0;
+                top: 140%;
+                width: 260px;
+                background-color: $secundary;
+                padding: 20px 10px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+
+
+                .profile-menu {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    .menu {
+                        width: 100%;
+                        font-size: 14px;
+                        padding: 10px 20px;
+                        display: flex;
+                        gap: 1rem;
+                        align-items: center;
+                        cursor: pointer;
+                        font-weight: 200;
+                        transition: all 200ms ease-in-out;
+
+                        &:hover {
+                            border-radius: 8px;
+                            background-color: rgba($color: #1A1B1D, $alpha: 0.6);
+                        }
+
+                        i {
+                            width: 10px;
+                            display: grid;
+                            place-content: center center;
+                        }
+
+                        &.settings {
+                            border: none;
+                        }
+
+
+                        &.logout {
+                            border: none;
+                            border-top: 2px solid rgba($color: #d1d1d1, $alpha: 0.3);
+                            padding: 20px 20px 0px;
+                            background-color: transparent;
+                            border-radius: 0;
+                        }
+
+                        &.invite {
+                            border-radius: 8px;
+                            color: $secundary;
+                            font-weight: 700;
+                            background: rgb(255, 212, 0);
+                            background: linear-gradient(260deg, rgba(255, 212, 0, 1) 0%, rgba(255, 102, 0, 1) 100%);
+
+                            i {
+                                color: $secundary;
+                            }
+                        }
+
+
+                        &.active {
+                            background-color: $secundary;
+                            border-radius: 8px;
+                            font-weight: 500;
+
+                        }
+                    }
+                }
+
+            }
         }
 
 
@@ -31,17 +117,25 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
+            display: block;
 
-            .online{
+            .online {
                 padding: 0.5rem 1rem;
                 background: #222728;
                 border-radius: 5px;
             }
+
             img {
-                width: 100px;
+                width: 150px;
                 height: auto;
+            }
+
+            @media (max-width: 480px) {
+                img {
+                    width: 100px;
+                    height: auto;
+                }
+     
             }
         }
 
@@ -81,19 +175,20 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+
             .dima {
                 display: flex;
                 gap: .5rem;
                 align-items: center;
                 cursor: pointer;
-      
+
                 span {
-                  color: $primary;
-                  font-size: 14px;
-                  font-weight: bold;
-                  padding-bottom: 2px;
+                    color: $primary;
+                    font-size: 14px;
+                    font-weight: bold;
+                    padding-bottom: 2px;
                 }
-              }
+            }
 
             .compra {
                 width: 40px;
@@ -130,6 +225,7 @@
             }
 
             .conta {
+                cursor: pointer;
                 position: relative;
 
                 img {
@@ -169,10 +265,16 @@
             }
         }
     }
+
+
 }
 
 @media screen and (max-width: 650px) {
     .container-header {
+
+        .margin-site{
+            padding: 0 20px;
+        }
 
         header {
             justify-content: space-around;
@@ -191,8 +293,8 @@
                 }
 
                 .login {
+                    display: none ;
                     background-color: $primary;
-                    display: flex;
                     align-items: center;
                     justify-content: center;
                     padding: 5px 15px;
@@ -222,3 +324,4 @@
 .d-none {
     display: none;
 }
+

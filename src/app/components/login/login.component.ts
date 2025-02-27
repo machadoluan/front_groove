@@ -22,6 +22,6 @@ export class LoginComponent {
   ) { }
 
   loginWithDiscord() {
-    window.location.href = 'https://backend-groove.onrender.com/auth/discord';
+    window.location.href = 'http://localhost:3000/auth/discord';
   }
 }

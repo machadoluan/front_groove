@@ -3,7 +3,6 @@
 
 .container-main {
 
-
   .first-section {
     width: 100%;
     min-height: 90vh;
@@ -97,20 +96,27 @@
     }
 
     .cards {
-      display: flex;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      /* Cria colunas responsivas */
       gap: 2rem;
-      justify-content: space-between;
-
+      /* Espaçamento entre os cards */
+      justify-content: center;
+      /* Centraliza os cards */
+      padding: 1rem;
+      /* Adiciona um padding para não colar nas bordas */
 
       .card {
-        width: 300px;
+        width: 100%;
+        /* Ocupa 100% da largura da coluna */
         height: 420px;
         background-color: #222728;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        justify-content: end;
+        justify-content: flex-end;
+        overflow: hidden;
+        /* Garante que o conteúdo não ultrapasse o card */
 
         &.prata {
           background: url(/img/prata.png);
@@ -285,25 +291,33 @@
       }
 
       p {
-        width: 900px;
+        width: 100%;
         font-weight: 200;
       }
     }
 
     .cards {
-      display: flex;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      /* Cria colunas responsivas */
       gap: 2rem;
-      justify-content: space-between;
+      /* Espaçamento entre os cards */
+      justify-content: center;
+      /* Centraliza os cards */
+      padding: 1rem;
+      /* Adiciona um padding para não colar nas bordas */
 
       .card {
-        width: 300px;
+        width: 100%;
+        /* Ocupa 100% da largura da coluna */
         height: 420px;
         background-color: #222728;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        justify-content: end;
+        justify-content: flex-end;
+        overflow: hidden;
+        /* Garante que o conteúdo não ultrapasse o card */
 
         &.onek-dima {
           background: url(/img/diamente1.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
@@ -400,6 +414,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 50px 0;
+    // margin-top: 50px;
     background-image: url(/img/redes.png);
     background-position: center center;
     background-size: cover;
@@ -417,12 +433,13 @@
       p {
         font-size: 14px;
         font-weight: 400;
-        width: 900px;
+        width: 100%;
       }
     }
 
     .perguntas {
-      width: 900px;
+      width: 90%;
+      max-width: 900px;
       // padding-top: 20px;
       display: flex;
       flex-direction: column;
@@ -483,12 +500,578 @@ mat-expansion-panel {
 
 .margin-site {
   max-width: 1200px;
-  min-width: 800px;
+  min-width: 300px;
+  /* Reduzi o min-width para melhorar a responsividade em dispositivos móveis */
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 4rem;
   padding: 80px 0;
+}
 
+@media (max-width: 1200px) {
+  .margin-site {
+    width: 100%;
+    padding: 60px 20px;
+    /* Reduz o padding para tablets */
+    gap: 3rem;
+    /* Reduz o gap entre os elementos */
+  }
+}
+
+/* Media query para tablets */
+@media (max-width: 800px) {
+  mat-expansion-panel {
+    width: 90%;
+    border: 2px solid $primary;
+    background-color: transparent;
+    margin: 5px auto;
+  }
+
+  .Vips {
+    width: 100%;
+    background: #222728;
+    // height: 100vh;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+
+      h1 {
+        color: #FFF;
+        text-align: start;
+        text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+      }
+
+      p {
+        text-align: center;
+        font-weight: 200;
+      }
+
+    }
+  }
+
+  .descricao-perguntas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      color: #FFF;
+      text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+      font-size: 40px;
+      font-style: normal;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      width: 90% !important;
+    }
+  }
+
+  .diamantes {
+
+
+    .descricao-diamantes {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      // padding-top: 60px;
+
+      h1 {
+        color: #FFF;
+        text-align: start;
+        text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+      }
+
+      p {
+        width: 90% !important;
+        font-weight: 200;
+        text-align: center;
+      }
+    }
+  }
+
+  .redes {
+
+    .descricao-redes {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h3 {
+        color: #FFF;
+        text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 900;
+      }
+
+      p {
+        font-size: 12px !important;
+        font-weight: 400;
+        text-align: center;
+      }
+    }
+
+    .icon-redes {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+
+      svg {
+        width: 50px !important;
+        transition: transform 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .margin-site {
+    padding: 60px 0;
+    /* Reduz o padding para tablets */
+    gap: 3rem;
+    /* Reduz o gap entre os elementos */
+  }
+}
+
+@media (max-width: 680px) {
+  .redes {
+
+    .descricao-redes {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h3 {
+        color: #FFF;
+        text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+        font-size: 6vw !important;
+        font-style: normal;
+        font-weight: 900;
+      }
+
+      p {
+        font-size: 12px !important;
+        font-weight: 400;
+        text-align: center;
+        width: 90% !important;
+      }
+    }
+
+    .icon-redes {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px !important;
+
+      svg {
+        width: 40px !important;
+        transition: transform 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 24px !important;
+    font-weight: 500;
+    z-index: 2;
+    padding-bottom: 50px;
+    font-family: "Poppins";
+
+
+    .break {
+      font-size: 40px !important;
+      color: $primary;
+      font-weight: 900;
+      font-family: "Poppins";
+
+    }
+
+    a {
+      background-color: $primary;
+      border: none;
+      border-radius: 6px;
+      color: $secundary;
+      padding: 0.4rem 2rem;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 40px;
+    }
+  }
+}
+
+
+
+
+/* Media query para dispositivos móveis */
+@media (max-width: 480px) {
+  .margin-site {
+    padding: 40px 0;
+    /* Reduz ainda mais o padding para dispositivos móveis */
+    gap: 2rem;
+    /* Reduz o gap entre os elementos */
+
+
+  }
+
+
+  .Vips {
+    width: 100%;
+    background: #222728;
+    // height: 100vh;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+
+      h1 {
+        color: #FFF;
+        text-align: start;
+        text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+        font-size: 36px !important;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+      }
+
+      p {
+        text-align: center;
+        font-weight: 200;
+        font-size: 12px !important;
+        width: 90%;
+      }
+
+    }
+
+    .card {
+      width: 100%;
+      /* Ocupa 100% da largura da coluna */
+      height: 420px;
+      background-color: #222728;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      /* Garante que o conteúdo não ultrapasse o card */
+    }
+
+    .content {
+      display: flex;
+      border-radius: 10px;
+      flex-direction: column;
+      justify-content: end;
+      height: 250px;
+      padding: 0 20px 15px;
+      box-shadow: 3px 29px 30px -11px rgba(0, 0, 0, 0.75);
+      background: linear-gradient(180deg, rgba(42, 42, 42, 0.00) -2.25%, rgba(23, 24, 25, 0.71) 17.41%, #0D0F0F 100%);
+
+      .vip_title {
+        font-size: 18px !important;
+      }
+
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* Limita a 3 linhas */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around !important;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+
+      .detalhes {
+        width: 100%;
+        height: 35px !important;
+        padding: 0;
+        border-radius: 6px;
+        border: 1px solid $primary;
+        color: $primary;
+        font-size: 12px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .comprar {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        height: 35px !important;
+        padding: 0;
+        font-size: 12px;
+        border-radius: 6px;
+        background: $primary;
+        transition: all .3s ease-in-out;
+        align-items: center;
+        color: $secundary;
+        cursor: pointer;
+        justify-content: center;
+
+        i {
+          color: $secundary;
+        }
+      }
+    }
+  }
+
+  .descricao-perguntas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      color: #FFF;
+      text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+      font-size: 36px !important;
+      font-style: normal;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    p {
+      text-align: center;
+      font-size: 12px !important;
+      font-weight: 400;
+      width: 90% !important;
+    }
+
+    
+  }
+
+
+  .diamantes {
+
+
+    .descricao-diamantes {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      // padding-top: 60px;
+
+      h1 {
+        color: #FFF;
+        text-align: start;
+        text-shadow: 2px 4px 7px rgba(0, 0, 0, 0.50);
+        font-size: 36px !important;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+      }
+
+      p {
+        width: 90% !important;
+        font-weight: 200;
+        font-size: 12px !important;
+        text-align: center;
+      }
+    }
+    .content {
+      display: flex;
+      border-radius: 10px;
+      flex-direction: column;
+      justify-content: end;
+      height: 250px;
+      padding: 0 20px 15px;
+      box-shadow: 3px 29px 30px -11px rgba(0, 0, 0, 0.75);
+      background: linear-gradient(180deg, rgba(42, 42, 42, 0.00) -2.25%, rgba(23, 24, 25, 0.71) 17.41%, #0D0F0F 100%);
+
+      .vip_title {
+        font-size: 18px !important;
+      }
+
+      p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        /* Limita a 3 linhas */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around !important;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+
+      .detalhes {
+        width: 100%;
+        height: 35px !important;
+        padding: 0;
+        border-radius: 6px;
+        border: 1px solid $primary;
+        color: $primary;
+        font-size: 12px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .comprar {
+        width: 100%;
+        display: flex;
+        gap: 5px;
+        height: 35px !important;
+        padding: 0;
+        font-size: 12px;
+        border-radius: 6px;
+        background: $primary;
+        transition: all .3s ease-in-out;
+        align-items: center;
+        color: $secundary;
+        cursor: pointer;
+        justify-content: center;
+
+        i {
+          color: $secundary;
+        }
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 18px !important;
+    font-weight: 500;
+    z-index: 2;
+    padding-bottom: 50px;
+    font-family: "Poppins";
+
+
+    .break {
+      font-size: 36px !important;
+      color: $primary;
+      font-weight: 900;
+      font-family: "Poppins";
+
+    }
+
+    a {
+      background-color: $primary;
+      border: none;
+      border-radius: 6px;
+      color: $secundary;
+      padding: 0.4rem 2rem;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 40px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 368px) {
+  .content {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 16px !important;
+    font-weight: 500;
+    z-index: 2;
+    padding-bottom: 50px;
+    font-family: "Poppins";
+
+
+    .break {
+      font-size: 30px !important;
+      color: $primary;
+      font-weight: 900;
+      font-family: "Poppins";
+
+    }
+
+    a {
+      background-color: $primary;
+      border: none;
+      border-radius: 6px;
+      color: $secundary;
+      padding: 0.4rem 2rem;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 40px;
+    }
+  }
 }

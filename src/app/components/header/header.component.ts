@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { HttpClient } from '@angular/common/http';
 import { ServerService } from '../../service/server.service';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -23,6 +24,9 @@ export class HeaderComponent implements OnInit {
   isScroll = false;
   players: number = 0;
   account: any;
+  profileDropdonw: boolean = false
+  animationClass: string = '';
+
 
 
   constructor(
@@ -30,8 +34,15 @@ export class HeaderComponent implements OnInit {
     private auth: AuthService,
     private carrinhoService: CarrinhoService,
     private http: HttpClient,
-    private serverService: ServerService
-  ) { }
+    private serverService: ServerService,
+    private router: Router
+  ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.closeDropdown();
+      }
+    });
+   }
 
   ngOnInit(): void {
 
@@ -87,5 +98,38 @@ export class HeaderComponent implements OnInit {
     await this.http.get('https://servers-frontend.fivem.net/api/servers/single/l69px7').subscribe((res: any) => {
       this.players = res.Data.clients
     })
+  }
+
+  toggleDropdown() {
+    if (this.profileDropdonw) {
+      this.animationClass = 'fade-out';
+      setTimeout(() => {
+        this.profileDropdonw = !this.profileDropdonw;
+        this.animationClass = 'fade-in';
+      }, 200); // Tempo da animação em ms
+    } else {
+      this.animationClass = 'fade-out';
+      setTimeout(() => {
+        this.profileDropdonw = !this.profileDropdonw;
+        this.animationClass = 'fade-in';
+      }, 200);
+    }
+  }
+
+  closeDropdown() {
+    this.animationClass = 'fade-out';
+    setTimeout(() => {
+      this.profileDropdonw = false;
+      this.animationClass = 'fade-in';
+    }, 200);
+  }
+
+  // Fecha o dropdown ao clicar fora
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    const dropdownElement = document.querySelector('.profile-dropdown');
+    if (this.profileDropdonw && dropdownElement && !dropdownElement.contains(event.target as Node)) {
+      this.closeDropdown();
+    }
   }
 }

@@ -30,6 +30,7 @@
     "ngx-mask": "^18.0.3",
     "ngx-material-intl-tel-input": "^19.2.0",
     "ngx-toastr": "^19.0.0",
+    "primeicons": "^7.0.0",
     "primeng": "^19.0.0-rc.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -10,10 +10,18 @@ import { historicoCompra, historicoSuporte } from '../../types/models.type';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServerService } from '../../service/server.service';
 import { TabsModule } from 'primeng/tabs';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
+import { DiscordService } from '../../service/discord.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ToastrService } from '../../service/toastr.service';
+import { SelectModule } from 'primeng/select';
+import { TextareaModule } from 'primeng/textarea';
+import { CreateTicketComponent } from '../../components/create-ticket/create-ticket.component';
+
 
 
 @Component({
@@ -23,14 +31,18 @@ import { InputIcon } from 'primeng/inputicon';
     MatTabsModule,
     MatTableModule,
     MatIconModule,
+    InputIcon,
+    IconField,
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
     TabsModule,
     TableModule,
     InputTextModule,
-    IconField,
-    InputIcon,
+    ToastModule,
+    SelectModule,
+    TextareaModule,
+    CreateTicketComponent
   ],
   animations: [
     trigger('detailExpand', [
@@ -40,58 +52,29 @@ import { InputIcon } from 'primeng/inputicon';
     ]),
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
+  providers: []
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild(CreateTicketComponent, { static: true }) dialogCreateTicket!: CreateTicketComponent;
 
 
-  // Dados Historico de compras
-  dataSourceCompra: historicoCompra[] = [
-    { nome: 'João Silva', dataCompra: '2023-10-01', produto: 'Notebook', valor: 2500 },
-    { nome: 'Maria Oliveira', dataCompra: '2023-09-28', produto: 'Smartphone', valor: 1200 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 },
-    { nome: 'Carlos Souza', dataCompra: '2023-09-25', produto: 'Tablet', valor: 800 }
-  ];
-
-  selectedCompra: any; // Para armazenar a compra selecionada
+  @ViewChild('dt1', { static: true }) dt1!: Table
 
 
   // Dados historico suporte
   dataSourceSuporte: historicoSuporte[] = [
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
     { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' }
   ]
+  selectedSuporte: any; // Para armazenar a compra selecionada
 
   user: any;
   avatar: string = '';
@@ -100,11 +83,18 @@ export class DashboardComponent implements OnInit {
   toggleBtns: boolean = false;
   characters: any[] = [];
   selectedCharacter: any = null
-  Account: any
+  account: any;
+  selectedTab: number = 0;
+  cargosDiscord: any[] = []
+  dadosUpdate: any;
+  formattedCharacters: any;
 
   constructor(
     private auth: AuthService,
-    private serverService: ServerService
+    private serverService: ServerService,
+    private discordService: DiscordService,
+    private authService: AuthService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -116,6 +106,14 @@ export class DashboardComponent implements OnInit {
         this.characters = res
         console.log(this.characters)
 
+
+        this.formattedCharacters = this.characters.map(c => ({
+          ...c,
+          displayName: `${c.id} - ${c.name} ${c.name2}`
+        }))
+
+        console.log("Fomater", this.formattedCharacters)
+
         if (this.characters.length > 0) {
           this.selectedCharacter = this.characters[0];  // Seleciona o primeiro character
         }
@@ -125,15 +123,39 @@ export class DashboardComponent implements OnInit {
       }
     )
 
+
     this.serverService.getAccount(this.user.discordId).subscribe(
       (res: any) => {
-        this.Account = res[0]
-        console.log(this.Account)
+        this.account = res[0]
+        console.log(this.account)
       },
       (err: any) => {
         console.error(err)
       }
     )
+
+    this.user.avatar = this.getAvatar(this.user.discordId, this.user.avatar)
+    console.log(this.user.avatar)
+
+    this.discordService.getUserRoles(this.user.discordId).subscribe(
+      (res: any) => {
+        this.cargosDiscord = res.roles.filter((role: any) => role !== '@everyone');
+
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
+
+
+    this.dadosUpdate = {
+      discordId: this.user.discordId,
+      nome: this.user.nome,
+      email: this.user.email,
+      telefone: this.user.telefone,
+      dataNascimento: this.user.dataNascimento
+    }
+
   }
 
   getAvatar(userId: string, avatar: string) {
@@ -160,7 +182,7 @@ export class DashboardComponent implements OnInit {
   }
 
   formatarDinheiro(valor: number): string {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return valor.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   }
 
   editDados() {
@@ -175,4 +197,55 @@ export class DashboardComponent implements OnInit {
   }
 
 
+
+  onTabChange(event: number) {
+    this.selectedTab = event;
+    console.log(this.selectedTab)
+  }
+
+  getImageSource(): string {
+    if (this.selectedTab === 0) {
+      return this.user.avatar;
+    } else {
+      return this.selectedCharacter ? this.selectedCharacter.profilePhoto : '';
+    }
+  }
+
+  getName(): string {
+    if (this.selectedTab === 0) {
+      return this.user.username
+    } else {
+      return `${this.selectedCharacter.name} ${this.selectedCharacter.name2} - ID ${this.selectedCharacter.id}`
+    }
+  }
+
+
+  applyFilterGlobal(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dt1.filterGlobal(filterValue, 'contains');
+  }
+
+  salvarInform() {
+    console.log('Antes', this.user)
+    console.log('Depois', this.dadosUpdate)
+    this.authService.updateAccount(this.dadosUpdate).subscribe({
+      next: (res) => {
+        if (res.sucess) {
+          this.toastrService.showSucess('Informações alteradas');
+          localStorage.setItem('token', res.token);
+          this.toggleBtns = false
+          this.toggleEdit = false
+        }
+      },
+      error: (err) => {
+        this.toastrService.showError("Não foi possivel salvar informações, tente novamente mais tarde");
+        console.error(err)
+      }
+    })
+
+  }
+
+  createTicket() {
+    this.dialogCreateTicket.showDialog()
+  }
 }

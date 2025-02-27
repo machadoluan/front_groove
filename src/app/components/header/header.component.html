@@ -9,8 +9,8 @@
             </div>
             <nav>
                 <li><a href="#">INICIO</a></li>
-                <li><a href="#vips">VIP</a></li>
-                <li><a href="#diamente">DIAMANTE</a></li>
+                <li *ngIf="user"><a href="#vips">VIP</a></li>
+                <li *ngIf="user"><a href="#diamente">DIAMANTE</a></li>
                 <li><a href="#perguntas">COMO CONECTAR</a></li>
                 <li><a href="#">LOJA</a></li>
             </nav>
@@ -23,58 +23,38 @@
                     </svg>
                     <span id="gema" *ngIf="account">{{account.gems}}</span>
                 </div>
-                <div class="login" (click)="login()" [ngClass]="{'d-flex': entrar, 'd-none': !entrar}">
+                <div class="login" (click)="login()" *ngIf="!user">
                     Fazer login
                 </div>
-                <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user">
-                    <a href="/dashboard"><img [src]="getAvatar(user.discordId, user.avatar)" alt=""></a>
+                <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
+                    (click)=" toggleDropdown() ">
+                    <img [src]="getAvatar(user.discordId, user.avatar)" alt="">
+                </div>
+            </div>
+
+            <div class="profile-dropdown" *ngIf="profileDropdonw"
+                [ngClass]="[animationClass, profileDropdonw ? 'd-flex' : 'd-none']">
+                <div class="profile-menu">
+                    <div class="menu" routerLink="/dashboard">
+                        <i class="fa fa-user"></i>
+                        Meu perfil
+                    </div>
+                    <div class="menu settings">
+                        <i class="fa fa-gear"></i>
+                        Configurações
+                    </div>
+                    <div class="menu invite">
+                        <i class="fa-solid fa-gift"></i>
+                        Indique um amigo!
+                    </div>
+                    <div class="menu logout">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </div>
+
                 </div>
             </div>
         </div>
 
     </header>
-
-    <div class="mobile">
-        <div class="nav-icons">
-            <li>
-                <a href="/">
-                    <i class="fa-solid fa-house"></i>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            <li>
-                <a href="#vip">
-                    <i class="fa-solid fa-ticket"></i>
-                    <span>VIP</span>
-                </a>
-            </li>
-            <li>
-                <a href="#diamante">
-                    <i class="fa-solid fa-diamond"></i>
-                    <span>Diamante</span>
-                </a>
-            </li>
-            <li>
-                <a href="#como-conectar">
-                    <i class="fa-solid fa-question"></i>
-                    <span>Ajuda</span>
-                </a>
-            </li>
-            <li>
-                <a href="#carrinho">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Carrinho</span>
-                </a>
-            </li>
-        </div>
-
-       
-
-        <div class="dados">
-            <div class="login">
-                <i class="fa-solid fa-user"></i>
-                Login
-            </div>
-        </div>
-    </div>
 </div>

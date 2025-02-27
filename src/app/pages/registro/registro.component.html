@@ -24,7 +24,7 @@
 
                 <div class="form-group">
                     <label for="dataNascimento">Data de nascimento</label>
-                    <p-datepicker #dataNascimento id="dataNascimento" formControlName="dataNascimento"
+                    <p-datepicker mask="00/00/0000" #dataNascimento id="dataNascimento" formControlName="dataNascimento"
                         class="custom-datepicker" placeholder="00/00/0000" />
 
                     <i class="fa-solid fa-check-circle" *ngIf="registroForm.get('dataNascimento')?.valid"></i>

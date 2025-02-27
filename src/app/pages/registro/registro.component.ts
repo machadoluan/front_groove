@@ -16,7 +16,8 @@ import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputOtp } from 'primeng/inputotp';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @Component({
   selector: 'app-registro',
@@ -32,7 +33,8 @@ import { HttpClient } from '@angular/common/http';
     DatePicker,
     ToastModule,
     FormsModule,
-    InputOtp
+    InputOtp,
+    InputMaskModule
   ],
   providers: [provideNgxMask(), provideNativeDateAdapter(), MessageService],
   templateUrl: './registro.component.html',
@@ -271,12 +273,13 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   vincularSteam() {
-    window.location.href = 'https://backend-groove.onrender.com/auth/steam';
+    window.location.href = 'http://localhost:3000/auth/steam';
   }
 
   concluirCadastro() {
-    this.authService.cadastrar(this.registroForm.value).subscribe(
-      (response: any) => {
+    console.log(this.registroForm.value)
+    this.authService.cadastrar(this.registroForm.value).subscribe({
+      next: (response: any) => {
         if (response.sucess) {
           this.cookieService.delete('registroForm', '/');
 
@@ -287,9 +290,13 @@ export class RegistroComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/']);
         }
       },
-      (error) => {
-        console.error('Erro ao cadastrar usuário:', error);
+      error: (error: HttpErrorResponse) => {
+        // Captura a mensagem do erro vindo do backend
+        const errorMessage = error.error?.message || 'Ocorreu um erro desconhecido!';
+        console.error(errorMessage);
+        this.showError(errorMessage)
       }
+    }
     );
   }
 }
