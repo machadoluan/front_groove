@@ -1,0 +1,58 @@
+<div class="container-allowlist">
+
+    <div class="content">
+        <div class="logo">
+            <img src="/img/logo.png" alt="logo">
+        </div>
+
+        <div class="foto">
+            <img src="/img/imgCadastro-1.png" alt="foto">
+        </div>
+
+        <section *ngIf="!quiz">
+            <div class="content_inicio">
+                <div class="textos">
+                    <h1>Faça a Allowlist</h1>
+                    <span>Clique em iniciar e responda o questionário para conquistar sua Allowlist da cidade.</span>
+                    <span>Responda a<strong> 15 perguntas</strong>, você precisa acertar pelo menos <strong>12
+                            perguntas.</strong></span>
+                    <span>Boa sorte e nos vemos na <strong>Groove!</strong></span>
+                </div>
+                <button class="btn-style">Iniciar</button>
+            </div>
+        </section>
+
+
+        <section class="quiz" *ngIf="!quizFinished">
+            <div class="quiz_content">
+                <div class="textos">
+                    <h1>Questão {{ currentQuestionIndex + 1 }}</h1>
+                    <span>{{ questions[currentQuestionIndex].question }}</span>
+                </div>
+
+                <div class="alternativas">
+                    <div class="p-quiz" *ngFor="let option of questions[currentQuestionIndex].options; let i = index">
+                        <input type="radio" name="option{{ currentQuestionIndex }}" id="option{{ i }}" [value]="option"
+                            (change)="selectAnswer(option)" [checked]="selectedAnswer === option">
+                        <label for="option{{ i }}" class="ml-2">{{ option }}</label>
+                    </div>
+                </div>
+
+                <div class="btn">
+                    <button class="btn-style" (click)="nextQuestion()">Avançar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz" *ngIf="quizFinished">
+            <div class="quiz_content">
+                <h2>Quiz Finalizado!</h2>
+                <p>Sua pontuação: {{ score }} de {{ questions.length }}</p>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<app-allow-aprovad *ngIf="allowAprovad" (close)="concluir()"></app-allow-aprovad>
+<app-allow-reprovad *ngIf="allowReprovad" (close)="concluir()"></app-allow-reprovad>

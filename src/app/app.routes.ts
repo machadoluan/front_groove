@@ -5,6 +5,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { AllowlistComponent } from './pages/allowlist/allowlist.component';
+import { allowlistGuard } from './allowlist.guard';
 
 export const routes: Routes = [
   {
@@ -23,6 +25,11 @@ export const routes: Routes = [
   {
     path: 'cadastro',
     component: RegistroComponent
+  },
+  {
+    path: 'allowlist',
+    component: AllowlistComponent,
+    canActivate: [allowlistGuard]
   },
   {
     path: '**',

@@ -16,7 +16,12 @@ export class ServerService {
   getCharacters(discordId: string) {
     return this.http.get(`${this.UrlApi}/account/${discordId}/characters`)
   }
+
   getAccount(discordId: string) {
     return this.http.get(`${this.UrlApi}/account/${discordId}/account`)
+  }
+
+  releaseAllowList(discordId: string) {
+    return this.http.post(`${this.UrlApi}/account/releaseAllowList/${discordId}`, {})
   }
 }

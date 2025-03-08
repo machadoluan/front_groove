@@ -18,7 +18,7 @@
 
         .margin-site {
             display: flex;
-            max-width: 1200px;
+            max-width: 1300px;
             min-width: 300px;
             width: 100%;
             justify-content: space-between;
@@ -135,7 +135,7 @@
                     width: 100px;
                     height: auto;
                 }
-     
+
             }
         }
 
@@ -175,6 +175,24 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+
+            .icon-mobile {
+                width: 30px;
+                height: 30px;
+                display: none;
+                place-content: center;
+                border: 1px solid $primary;
+                border-radius: 6px;
+
+                i {
+                    font-size: 16px;
+                    color: $primary;
+
+                    &.fa-xmark{
+                        font-size: 18px;
+                    }
+                }
+            }
 
             .dima {
                 display: flex;
@@ -239,29 +257,79 @@
     }
 
     .mobile {
-        display: none;
-        box-shadow: 0px -10px 26px 4px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+        top: 80px;
+        height: calc(100vh - 80px);
+        background-color: #222728;
+        display: flex !important;
+        padding: 0 1rem;
+        flex-direction: column;
+        justify-content: space-between;
 
-
-        .nav-icons {
-            position: fixed;
-            bottom: 0;
+        nav {
             width: 100%;
-            background-color: rgba(26, 26, 26, 0.89);
             display: flex;
-            justify-content: space-around;
-            padding: 15px 0;
+            flex-direction: column;
 
-            a {
+            li {
+                padding: .9rem 1rem;
+                width: 100%;
                 display: flex;
-                flex-direction: column;
+                justify-content: space-between;
                 align-items: center;
-                gap: 0.5rem;
-                text-decoration: none;
 
-                span {
-                    font-size: 12px;
+                i {
+                    font-size: 10px;
                 }
+
+                a {
+
+                    i {
+                        width: 15px;
+                        font-size: 14px;
+                    }
+
+                    display: flex;
+                    gap: 1rem;
+                    align-items: center;
+                }
+            }
+
+
+        }
+
+        .login {
+            background-color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 45px;
+            gap: 0.5rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            color: rgba(26, 26, 26, 0.89);
+            font-size: 16px;
+
+            i {
+                color: rgba(26, 26, 26, 0.89);
+                cursor: pointer;
+            }
+        }
+
+        .icons-redes {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+
+            padding-bottom: 1rem;
+            svg {
+                width: 30px;
+                height: 30px;
             }
         }
     }
@@ -269,12 +337,18 @@
 
 }
 
-@media screen and (max-width: 650px) {
-    .container-header {
+@media (max-width: 1300px) {
+    .margin-site {
+        width: 100%;
+        padding: 0 20px;
+        /* Reduz o padding para tablets */
+        gap: 3rem;
+        /* Reduz o gap entre os elementos */
+    }
+}
 
-        .margin-site{
-            padding: 0 20px;
-        }
+@media screen and (max-width: 764px) {
+    .container-header {
 
         header {
             justify-content: space-around;
@@ -293,7 +367,7 @@
                 }
 
                 .login {
-                    display: none ;
+                    display: none;
                     background-color: $primary;
                     align-items: center;
                     justify-content: center;
@@ -317,6 +391,52 @@
     }
 }
 
+@media screen and (max-width: 650px) {
+    .container-header {
+
+        header {
+            justify-content: space-around;
+
+            nav {
+                display: none;
+            }
+
+
+            .dados {
+                display: flex;
+                gap: 1rem;
+
+                .compra {
+                    display: none;
+                }
+
+
+
+                .login {
+                    display: none;
+                    background-color: $primary;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 5px 15px;
+                    gap: 0.5rem;
+                    border-radius: 100px;
+                    cursor: pointer;
+                    color: rgba(26, 26, 26, 0.89);
+
+                    i {
+                        color: rgba(26, 26, 26, 0.89);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .icon-mobile {
+            display: grid !important;
+        }
+    }
+}
+
 .d-flex {
     display: block;
 }
@@ -324,4 +444,3 @@
 .d-none {
     display: none;
 }
-

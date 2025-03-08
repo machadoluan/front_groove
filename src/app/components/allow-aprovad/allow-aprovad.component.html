@@ -1,0 +1,35 @@
+<div class="background"></div>
+
+<div class="container-newAccount popup" [@fadeInOut]>
+    <header>
+        <div class="logo">
+            <img src="/img/logo.png" alt="">
+        </div>
+        <svg width="30" height="30" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg"
+            (click)="closeModal()">
+            <path
+                d="M27.5003 49.1667C15.5566 49.1667 5.83366 39.4437 5.83366 27.5C5.83366 15.5562 15.5566 5.83332 27.5003 5.83332C39.4441 5.83332 49.167 15.5562 49.167 27.5C49.167 39.4437 39.4441 49.1667 27.5003 49.1667ZM27.5003 0.416656C12.5232 0.416656 0.416992 12.5229 0.416992 27.5C0.416992 42.4771 12.5232 54.5833 27.5003 54.5833C42.4774 54.5833 54.5837 42.4771 54.5837 27.5C54.5837 12.5229 42.4774 0.416656 27.5003 0.416656ZM34.5149 16.6667L27.5003 23.6812L20.4857 16.6667L16.667 20.4854L23.6816 27.5L16.667 34.5146L20.4857 38.3333L27.5003 31.3187L34.5149 38.3333L38.3337 34.5146L31.3191 27.5L38.3337 20.4854L34.5149 16.6667Z"
+                fill="white" />
+        </svg>
+    </header>
+
+    <div class="content-newAccount">
+        <div class="inform">
+            <div class="content-inform">
+
+                <h1 id="title">Muito obrigado por <br> apoiar nosso servidor!</h1>
+
+                <p>
+                    Somos muito gratos por seu apoio ao nosso servidor, estamos projetando com todo carinho para que
+                    você possa ter um roleplay digno.
+                    <br> <br>
+                    Acompanhe nossas redes sociais e nosso site para recebre as atualizações sobre nossa city!</p>
+
+
+                <div class="btn">
+                    <button (click)="concluir()">Concluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

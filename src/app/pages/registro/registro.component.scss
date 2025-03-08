@@ -156,6 +156,7 @@
                     margin-bottom: 10px;
                     justify-content: center;
                     position: relative;
+                    gap: .2rem;
 
 
                     label {
@@ -180,6 +181,7 @@
                     .p-datepicker {
                         .p-inputtext {
                             width: 400px !important;
+                            padding: .6rem !important;
                         }
                     }
 
@@ -187,7 +189,7 @@
                     .p-select {
 
                         width: 400px;
-                        padding: 5px 10px;
+                        padding: .6rem;
                         background-color: transparent;
                         border: 2px solid rgba(255, 255, 255, 0.38);
                         outline: none;
@@ -195,7 +197,7 @@
                         border-radius: 5px;
 
                         &.p-select {
-                            padding: 0;
+                            padding: 0 !important;
                             margin: 0;
                             font-size: 12px;
                         }
@@ -241,6 +243,7 @@
                 font-weight: 600;
                 color: $secundary;
                 margin-top: 20px;
+                cursor: pointer;
 
                 &:disabled {
                     background-color: rgba($color: $primary, $alpha: 0.5);
@@ -288,10 +291,10 @@
         width: 400px;
         border: 2px solid rgba(255, 255, 255, 0.38);
         outline: none;
+        padding: .6rem !important;
         font-size: 12px;
         border-radius: 5px;
         background-color: transparent;
-        padding: 5px 1rem;
 
         &:enabled:focus {
             border: 2px solid rgba(255, 255, 255, 0.38);
@@ -620,3 +623,7 @@ p-toast {
 
 
 }
+
+// ::ng-deep .p-select-label{
+//     padding: .4rem .6rem !important;
+// }

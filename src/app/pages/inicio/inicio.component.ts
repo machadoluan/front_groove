@@ -1,20 +1,16 @@
-import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../../components/login/login.component';
 import { AuthService } from '../../service/auth.service';
 import { CarouselModule } from 'primeng/carousel';
 import { Item } from '../../types/models.type';
-import { findIndex } from 'rxjs';
-import { HeaderComponent } from '../../components/header/header.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { FooterComponent } from '../../components/footer/footer.component';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { FilaComponent } from '../../components/fila/fila.component';
 import { Dialog } from 'primeng/dialog';
-import { HttpClient } from '@angular/common/http';
-
+import { ServerService } from '../../service/server.service';
+import { MessageComponent } from "../../components/message/message.component";
 
 @Component({
   selector: 'app-inicio',
@@ -24,6 +20,8 @@ import { HttpClient } from '@angular/common/http';
     MatExpansionModule,
     FilaComponent,
     Dialog,
+    MessageComponent,
+    RouterLink,
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
@@ -47,8 +45,11 @@ export class InicioComponent implements OnInit {
   entrar: boolean = true;
   showCarrinho: boolean = false;
   user: any;
-  mostrarFila: boolean = false  
+  mostrarFila: boolean = true
   dialogVisible: boolean = false;
+  account: any;
+  criouConta: boolean = false
+
 
 
 
@@ -72,22 +73,43 @@ export class InicioComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dialog: MatDialog,
     private auth: AuthService,
     private carrinhoService: CarrinhoService,
     private route: ActivatedRoute,
+    private serverService: ServerService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
+
+    const fila = localStorage.getItem('fila')
+
+    if (fila) {
+      this.mostrarFila = false
+    } else {
+      this.mostrarFila = true
+    }
+
+
+    // New Cadastro
+
+    const newCadastro = sessionStorage.getItem('newRegister')
+
+    if (newCadastro) {
+      this.criouConta = true
+    } else {
+      this.criouConta = false
+    }
+
     const token = localStorage.getItem('token')
     if (token) {
       this.entrar = false;
+      this.user = this.auth.getUserFromToken()
+
     } else {
       this.entrar = true;
     }
 
-    this.user = this.auth.getUserFromToken()
-    console.log(this.user)
 
     this.route.queryParams.subscribe(params => {
       if (params['error'] === 'not_in_guild') {
@@ -96,6 +118,18 @@ export class InicioComponent implements OnInit {
       }
     });
 
+    if (this.user && this.user.discordId) {
+      this.serverService.getAccount(this.user.discordId).subscribe(
+        (res: any) => {
+          this.account = res.length ? res[0] : null;
+          console.log(this.account)
+          this.cdr.detectChanges();
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      )
+    }
   }
 
 
@@ -103,10 +137,6 @@ export class InicioComponent implements OnInit {
     return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
   }
 
-
-  login() {
-    this.dialog.open(LoginComponent)
-  }
 
   dropdown() {
     this.iconDrop = !this.iconDrop
@@ -177,9 +207,12 @@ export class InicioComponent implements OnInit {
     this.carrinho = this.carrinho.filter(cartItem => cartItem.title !== item.title)
   }
 
-  comprarVip() {
-
+  fecharFila() {
+    this.mostrarFila = false;
+    localStorage.setItem('fila', 'false')
   }
-
-  
+  newCadastro() {
+    this.criouConta = false;
+    sessionStorage.removeItem('newRegister');
+  }
 }

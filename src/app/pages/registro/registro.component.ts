@@ -34,7 +34,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     ToastModule,
     FormsModule,
     InputOtp,
-    InputMaskModule
+    InputMaskModule,
   ],
   providers: [provideNgxMask(), provideNativeDateAdapter(), MessageService],
   templateUrl: './registro.component.html',
@@ -82,7 +82,6 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   selectedCountry: any;
   phonePrefix: string = '+55';  // Prefixo do telefone
   phonePlaceholder: string = '(000) 000-0000';  // Placeholder padrão
-
 
   phonePlaceholders: { [key: string]: string } = {
     'BR': '(00) 9 9999-9999',
@@ -285,7 +284,8 @@ export class RegistroComponent implements OnInit, AfterViewInit {
 
           localStorage.setItem('token', response.token);
 
-          this.showSucess('Conta criada com sucesso!');
+          sessionStorage.setItem('newRegister', response.token);
+
 
           this.router.navigate(['/']);
         }

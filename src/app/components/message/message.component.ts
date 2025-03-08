@@ -1,12 +1,14 @@
+
+
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-fila',
+  selector: 'app-message',
   imports: [CommonModule],
-  templateUrl: './fila.component.html',
-  styleUrl: './fila.component.scss',
+  templateUrl: './message.component.html',
+  styleUrl: './message.component.scss', 
   animations: [
     trigger('fadeInOut', [
       state('void', style({
@@ -22,7 +24,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
     ])
   ]
 })
-export class FilaComponent {
+export class MessageComponent {
   @Output() close = new EventEmitter<void>();
 
 
@@ -30,8 +32,8 @@ export class FilaComponent {
     this.close.emit()
   }
 
+  concluir() {
+    this.close.emit()
 
-  entrar() {
-    window.location.href = 'http://localhost:3000/auth/discord';
   }
 }

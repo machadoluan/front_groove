@@ -1,12 +1,11 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-fila',
-  imports: [CommonModule],
-  templateUrl: './fila.component.html',
-  styleUrl: './fila.component.scss',
+  selector: 'app-allow-aprovad',
+  imports: [],
+  templateUrl: './allow-aprovad.component.html',
+  styleUrl: './allow-aprovad.component.scss',
   animations: [
     trigger('fadeInOut', [
       state('void', style({
@@ -22,7 +21,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
     ])
   ]
 })
-export class FilaComponent {
+export class AllowAprovadComponent {
   @Output() close = new EventEmitter<void>();
 
 
@@ -30,8 +29,8 @@ export class FilaComponent {
     this.close.emit()
   }
 
+  concluir() {
+    this.close.emit()
 
-  entrar() {
-    window.location.href = 'http://localhost:3000/auth/discord';
   }
 }

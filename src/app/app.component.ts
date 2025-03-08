@@ -3,12 +3,14 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { PrimeNG } from 'primeng/config';
+
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+  selector: 'app-root',
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   title = 'login-discord';
@@ -17,14 +19,21 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const token = params['token'];
-      if(token) {
+      if (token) {
         localStorage.setItem('token', token)
         this.router.navigate(['/'])
       }
     })
+
   }
 
   isRegistrationRoute(): boolean {
-    return this.router.url === '/cadastro'; // ajuste o path conforme sua rota
+    const urls = [
+      '/cadastro',
+      '/allowlist'
+    ];
+
+    return urls.some(url => this.router.url.startsWith(url));
   }
+
 }

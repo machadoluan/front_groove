@@ -69,9 +69,11 @@ export class AuthService {
     return null;
   }
 
+
   logout() {
     localStorage.removeItem('token')
     this.router.navigate(['']);
+    window.location.reload()
   }
 
   cadastrar(dadosCadastro: any): Observable<any> {

@@ -7,11 +7,14 @@ import { CarrinhoService } from '../../service/carrinho.service';
 import { HttpClient } from '@angular/common/http';
 import { ServerService } from '../../service/server.service';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ConfirmDialog],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -26,6 +29,7 @@ export class HeaderComponent implements OnInit {
   account: any;
   profileDropdonw: boolean = false
   animationClass: string = '';
+  menuMobile: boolean = false
 
 
 
@@ -35,14 +39,15 @@ export class HeaderComponent implements OnInit {
     private carrinhoService: CarrinhoService,
     private http: HttpClient,
     private serverService: ServerService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.closeDropdown();
       }
     });
-   }
+  }
 
   ngOnInit(): void {
 
@@ -60,17 +65,18 @@ export class HeaderComponent implements OnInit {
 
     this.carrinho = this.carrinhoService.getCarrinho()
     console.log('Carrinho: ', this.carrinho)
-    this.getPlayers()
 
-    this.serverService.getAccount(this.user.discordId).subscribe({
-      next: (res: any) => {
-        this.account = res[0]
-      },
-      error(err) {
-        console.error(err)
-        
-      },
-    })
+    if (this.user) {
+      this.serverService.getAccount(this.user.discordId).subscribe({
+        next: (res: any) => {
+          this.account = res[0]
+        },
+        error(err) {
+          console.error(err)
+
+        },
+      })
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -78,27 +84,24 @@ export class HeaderComponent implements OnInit {
     // Pega a posição de scroll atual
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-    // Se a posição for maior que 0, adiciona a classe, senão remove
-    if (scrollPosition > 1) {
+
+    if (this.menuMobile) {
       this.isScroll = true;
     } else {
-      this.isScroll = false;
+      if (scrollPosition > 1) {
+        this.isScroll = true;
+      } else {
+        this.isScroll = false;
+      }
     }
+
   }
 
-  login() {
-    this.dialog.open(LoginComponent)
-  }
 
   getAvatar(userId: string, avatar: string) {
     return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
   }
 
-  async getPlayers() {
-    await this.http.get('https://servers-frontend.fivem.net/api/servers/single/l69px7').subscribe((res: any) => {
-      this.players = res.Data.clients
-    })
-  }
 
   toggleDropdown() {
     if (this.profileDropdonw) {
@@ -116,6 +119,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  openMenuMobile() {
+    this.menuMobile = !this.menuMobile;
+    this.isScroll = !this.isScroll;
+  }
+
   closeDropdown() {
     this.animationClass = 'fade-out';
     setTimeout(() => {
@@ -131,5 +139,31 @@ export class HeaderComponent implements OnInit {
     if (this.profileDropdonw && dropdownElement && !dropdownElement.contains(event.target as Node)) {
       this.closeDropdown();
     }
+  }
+
+  loginWithDiscord() {
+    window.location.href = 'http://localhost:3000/auth/discord';
+  }
+
+  confirm1(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Você deseja realemte sair?',
+      header: 'Confirmation',
+      closable: true,
+      closeOnEscape: true,
+      icon: 'pi pi-sign-out',
+      rejectButtonProps: {
+        label: 'Cancelar',
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: 'Sair',
+      },
+      accept: () => {
+        this.auth.logout();
+      },
+    });
   }
 }
