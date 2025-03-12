@@ -19,6 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { InputMaskModule } from 'primeng/inputmask';
 import { environment } from '../../../environments/environment';
+import { FormatPhonePipe } from '../../format-phone-pipe.pipe';
 
 @Component({
   selector: 'app-registro',
@@ -36,6 +37,7 @@ import { environment } from '../../../environments/environment';
     FormsModule,
     InputOtp,
     InputMaskModule,
+    FormatPhonePipe
   ],
   providers: [provideNgxMask(), provideNativeDateAdapter(), MessageService],
   templateUrl: './registro.component.html',
@@ -116,7 +118,19 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     { label: 'Outros', value: 'outros' },
   ];
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private cdRef: ChangeDetectorRef, private fb: FormBuilder, private toastr: ToastrService, private authService: AuthService, private router: Router, private messageService: MessageService, private route: ActivatedRoute) {
+
+
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private cdRef: ChangeDetectorRef,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private router: Router,
+    private messageService: MessageService,
+    private route: ActivatedRoute
+  ) {
     this.registroForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(5)]],
       dataNascimento: ['', [
@@ -132,6 +146,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     });
 
   }
+
 
   ngOnInit(): void {
     this.user = this.authService.getUserFromToken();
@@ -159,32 +174,45 @@ export class RegistroComponent implements OnInit, AfterViewInit {
 
       if (!token && !steamToken) {
         // Se não houver token, redirecionar para a página inicial
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
 
       if (token) {
-        console.log("token", token);
-        this.registroForm.patchValue({ discordId: token });
+        const tokenPayload = token.split('.')[1];
+        const decodedPayload = JSON.parse(atob(tokenPayload));
+        this.registroForm.patchValue({ discordId: decodedPayload.discordId });
       }
 
       if (steamToken) {
+        const tokenPayload = steamToken.split('.')[1];
+        const decodedPayload = JSON.parse(atob(tokenPayload));
         this.steam = true;
         this.steamVinculado = true;
-        this.registroForm.patchValue({ license: steamToken });
+        this.registroForm.patchValue({ license: decodedPayload.steamHex });
       }
     });
   }
 
 
   ngAfterViewInit(): void {
-    const input = this.datePicker.nativeElement.querySelector('.p-inputtext');
-    if (input) {
+    const dateInput = document.getElementById('dataNascimentoInput') as HTMLInputElement;
+
+    if (dateInput) {
+      dateInput.addEventListener('input', (e) => {
+        let value = dateInput.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+        if (value.length > 2) value = value.replace(/^(\d{2})(\d)/, '$1/$2');
+        if (value.length > 5) value = value.replace(/(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
+
+        dateInput.value = value.substring(0, 10);
+      });
+
       const formControl = this.registroForm.get('dataNascimento');
       formControl?.statusChanges.subscribe(status => {
         if (status === 'VALID') {
-          input.classList.add('check');
+          dateInput.classList.add('check');
         } else {
-          input.classList.remove('check')
+          dateInput.classList.remove('check')
         }
       })
     }
@@ -244,9 +272,16 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     this.messageService.add({ severity: 'success', summary: 'Sucesso!', detail: message })
   }
 
+
+
+
+
+
   sendCode() {
     const telefoneCompleto = `${this.phonePrefix}${this.registroForm.value.telefone}`;
     this.registroForm.patchValue({ telefone: telefoneCompleto })
+
+    console.log(this.registroForm.value)
 
     this.authService.verifyCode(this.registroForm.value.telefone).subscribe(
       (res) => {
@@ -273,7 +308,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   vincularSteam() {
-    window.location.href = `${environment.apiUrl}/auth/steam`;
+    window.open(`${environment.apiUrl}/auth/steam`, '_blank', 'noopener,noreferrer');
   }
 
   concluirCadastro() {
@@ -299,5 +334,16 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       }
     }
     );
+  }
+
+  changeNumber() {
+    const dateInput = document.getElementById('dataNascimentoInput') as HTMLInputElement | null;
+    if (dateInput && this.registroForm.get('dataNascimento')?.valid) {
+      dateInput.classList.add('check');
+    }
+
+
+    this.verifyCode = false
+    this.registroForm.get('telefone')?.reset();
   }
 }

@@ -89,6 +89,7 @@ export class DashboardComponent implements OnInit {
   cargosDiscord: any[] = []
   dadosUpdate: any;
   formattedCharacters: any;
+  ocultarDados: boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -189,6 +190,7 @@ export class DashboardComponent implements OnInit {
   editDados() {
     this.toggleEdit = true;
     this.toggleBtns = true;
+    this.ocultarDados = true;
   }
 
 
@@ -205,10 +207,14 @@ export class DashboardComponent implements OnInit {
   }
 
   getImageSource(): string {
+
+    const defaultAvatar = 'img/profile_default.jpg';
+
+
     if (this.selectedTab === 0) {
       return this.user.avatar;
     } else {
-      return this.selectedCharacter ? this.selectedCharacter.profilePhoto : '';
+      return this.selectedCharacter?.profilePhoto || defaultAvatar;
     }
   }
 
@@ -236,6 +242,8 @@ export class DashboardComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this.toggleBtns = false
           this.toggleEdit = false
+          this.ocultarDados = false;
+
         }
       },
       error: (err) => {
@@ -248,5 +256,9 @@ export class DashboardComponent implements OnInit {
 
   createTicket() {
     this.dialogCreateTicket.showDialog()
+  }
+
+  toggleDados() {
+    this.ocultarDados = !this.ocultarDados
   }
 }

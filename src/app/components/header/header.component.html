@@ -21,7 +21,10 @@
                             d="M14.1353 5.00366H19L14.8164 0H10.4729L14.1353 5.00366ZM8.22824 15.6851L4.78127 5.97659H0L8.22824 15.6851ZM4.86467 5.00366L8.60351 0H4.26701L0 5.00366H4.86467ZM12.947 5.00366L9.5 0.29883L6.05999 5.00366H12.94H12.947ZM5.76811 5.97659L9.50695 16.5746L13.2458 5.97659H5.76811ZM14.2952 5.97659L10.8482 15.6851L19 5.97659H14.2952Z"
                             fill="#EF903C" />
                     </svg>
-                    <span id="gema" *ngIf="account">{{account.gems}}</span>
+                    <span id="gema" *ngIf="account">{{ account.gems | number:'1.0-0' }}
+
+                    
+                    </span>
                 </div>
                 <div class="login" (click)="loginWithDiscord()" *ngIf="!user">
                     <i class="fa-brands fa-discord"></i>
@@ -157,4 +160,4 @@
     </div>
 </div>
 
-<p-confirmdialog />
+<p-confirmdialog  styleClass="dialog2" [draggable]="false"/>

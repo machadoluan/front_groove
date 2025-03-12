@@ -90,12 +90,12 @@
 
         div {
           display: flex;
-          gap: 1rem;
+          gap: .5rem;
           align-items: center;
 
           span {
             color: $primary;
-            font-size: 12px;
+            font-size: 16px;
             font-weight: bold;
           }
 
@@ -359,6 +359,11 @@
 
         // Perfil
 
+        .ocultar {
+          float: right;
+          cursor: pointer;
+        }
+
         .dados-perfil {
           max-width: 600px;
           margin: 0 auto;
@@ -434,32 +439,41 @@
           background-color: #1a1a1a;
           border-radius: 6px;
           display: grid;
-          grid-template-columns: 1fr auto 1fr; /* Três colunas: início, meio e fim */
-          align-items: center; /* Centraliza verticalmente */
-          padding:  1rem;
-          gap: 1rem; /* Espaçamento entre os elementos */
+          grid-template-columns: 1fr auto 1fr;
+          /* Três colunas: início, meio e fim */
+          align-items: center;
+          /* Centraliza verticalmente */
+          padding: 1rem;
+          gap: 1rem;
+          /* Espaçamento entre os elementos */
         }
-        
+
         .name,
         .personagem,
         .status {
-          white-space: nowrap; /* Impede a quebra de linha */
-          overflow: hidden; /* Esconde o conteúdo que ultrapassar */
-          text-overflow: ellipsis; /* Adiciona reticências (...) */
+          white-space: nowrap;
+          /* Impede a quebra de linha */
+          overflow: hidden;
+          /* Esconde o conteúdo que ultrapassar */
+          text-overflow: ellipsis;
+          /* Adiciona reticências (...) */
           max-width: 90px;
           font-size: 12px;
         }
-        
+
         .name {
-          justify-self: start; /* Alinha no início da primeira coluna */
+          justify-self: start;
+          /* Alinha no início da primeira coluna */
         }
-        
+
         .personagem {
-          justify-self: center; /* Centraliza na segunda coluna */
+          justify-self: center;
+          /* Centraliza na segunda coluna */
         }
-        
+
         .status {
-          justify-self: end; /* Alinha no final da terceira coluna */
+          justify-self: end;
+          /* Alinha no final da terceira coluna */
         }
       }
     }
@@ -734,14 +748,17 @@ tr {
     }
   }
 }
+
 @media screen and (max-width: 600px) {
   .table {
     display: none !important;
   }
+
   .tickets-mobile {
     display: flex !important;
   }
 }
+
 @media screen and (max-width: 500px) {
   .profile {
     padding-top: 100px !important;

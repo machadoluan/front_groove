@@ -58,6 +58,9 @@
                 flex-direction: column;
                 justify-content: space-around;
                 align-items: center;
+                gap: 150px;
+                height: 100%;
+                padding-left: 70px;
 
                 .textos {
                     display: flex;
@@ -94,28 +97,24 @@
             }
 
 
-            .btn {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
 
-                .btn-style {
-                    background-color: $primary;
-                    border: none;
-                    border-radius: 6px;
-                    padding: 10px 50px;
-                    font-size: 12px;
-                    font-weight: 600;
-                    color: $secundary;
-                    margin-top: 20px;
-                    cursor: pointer;
 
-                    &:disabled {
-                        background-color: rgba($color: $primary, $alpha: 0.5);
-                    }
+            .btn-style {
+                background-color: $primary;
+                border: none;
+                border-radius: 6px;
+                padding: 10px 50px;
+                font-size: 12px;
+                font-weight: 600;
+                color: $secundary;
+                margin-top: 20px;
+                cursor: pointer;
+
+                &:disabled {
+                    background-color: rgba($color: $primary, $alpha: 0.5);
                 }
             }
+
         }
     }
 }
@@ -158,6 +157,9 @@
 }
 
 @media screen and (max-width: 520px) {
+    .content_inicio {
+        padding-left: 1.5rem !important;
+    }
 
     .container-allowlist {
         .content {

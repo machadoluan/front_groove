@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
 
     const token = localStorage.getItem('token');
 

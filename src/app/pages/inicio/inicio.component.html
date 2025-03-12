@@ -11,15 +11,15 @@
                 Entrar na lista de espera</a>
 
             @if(account){
-                @if(account.whitelist === 1){
-                    <a href="fivem://connect/play.groovegg.com.br">
-                        JOGUE AGORA
-                    </a>
-                } @else if(account.whitelist === 0){
-                    <a routerLink="/allowlist">
-                        Fazer Allowlist
-                    </a>
-                }
+            @if(account.whitelist === 1){
+            <a href="fivem://connect/play.groovegg.com.br">
+                JOGUE AGORA
+            </a>
+            } @else if(account.whitelist === 0){
+            <a routerLink="/allowlist">
+                Fazer Allowlist
+            </a>
+            }
             }
 
 
@@ -231,11 +231,13 @@
 
 <div class="card flex justify-center">
     <p-dialog header="Discord" [(visible)]="dialogVisible" [modal]="true"
-        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '30vw' }" [draggable]="false"
-        [resizable]="false">
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [style]="{ width: '25vw' }" [draggable]="false"
+        [resizable]="false" styleClass="dialog1">
         <p>
-            Erro ao conectar, vc precisa conectar em nosso discord.
-            <a href="https://discord.gg/mC64GRECwX" target="_blank">Discord</a>
+            Você precisa conectar em nosso discord.
         </p>
+        <a href="https://discord.gg/mC64GRECwX" target="_blank">
+            <i class="fa-brands fa-discord"></i>
+            Discord</a>
     </p-dialog>
 </div>

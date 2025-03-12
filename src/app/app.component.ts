@@ -4,11 +4,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { PrimeNG } from 'primeng/config';
+import { ToastModule } from 'primeng/toast';
+
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule, ToastModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -21,7 +23,9 @@ export class AppComponent implements OnInit {
       const token = params['token'];
       if (token) {
         localStorage.setItem('token', token)
-        this.router.navigate(['/'])
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
       }
     })
 

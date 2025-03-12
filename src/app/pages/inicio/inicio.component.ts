@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../service/auth.service';
 import { CarouselModule } from 'primeng/carousel';
 import { Item } from '../../types/models.type';
@@ -28,7 +27,7 @@ import { environment } from '../../../environments/environment';
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit  {
   readonly panelOpenState = signal(false);
 
   @ViewChild('backgroundVideo') backgroundVideo!: ElementRef;
@@ -81,8 +80,10 @@ export class InicioComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+ 
 
+
+  ngOnInit(): void {
     const fila = localStorage.getItem('fila')
 
     if (fila) {

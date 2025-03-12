@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -16,6 +16,8 @@ export class AuthService {
 
   private UrlApi = environment.apiUrl
   private guilds: { name: string }[] = [];
+  private authStatus = new BehaviorSubject<boolean>(this.isAuthenticado());
+  authStatus$ = this.authStatus.asObservable();
 
   loginWithDiscord() {
     window.location.href = `${this.UrlApi}/auth/discord`

@@ -5,6 +5,7 @@ import { AllowReprovadComponent } from "../../components/allow-reprovad/allow-re
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { ServerService } from '../../service/server.service';
+import { ToastrService } from '../../service/toastr.service';
 
 @Component({
   selector: 'app-allowlist',
@@ -241,6 +242,7 @@ export class AllowlistComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private serverService: ServerService,
+    private toastrService: ToastrService
   ) {
     this.selectRandomQuestions();
   }
@@ -284,7 +286,7 @@ export class AllowlistComponent implements OnInit {
         }
       }
     } else {
-      alert("Por favor, selecione uma resposta antes de avançar.");
+      this.toastrService.showError("Por favor, selecione uma resposta antes de avançar.")
     }
   }
 
@@ -299,7 +301,7 @@ export class AllowlistComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
-  avancar(){
+  avancar() {
     this.quiz = true
   }
 }

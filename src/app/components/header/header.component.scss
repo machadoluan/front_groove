@@ -264,7 +264,7 @@
         height: calc(100vh - 80px);
         background-color: #222728;
         display: flex !important;
-        padding: 0 1rem;
+        padding: 0 1rem 2rem 1rem;
         flex-direction: column;
         justify-content: space-between;
 
@@ -285,6 +285,7 @@
                 }
 
                 a {
+                    color: white;
 
                     i {
                         width: 15px;
