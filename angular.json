@@ -59,6 +59,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractLicenses": true 
             }
           },
           "defaultConfiguration": "production"
@@ -71,11 +83,14 @@
             },
             "development": {
               "buildTarget": "login-discord:build:development"
+            },
+            "staging": {
+              "buildTarget": "login-discord:build:staging"
             }
           },
           "defaultConfiguration": "development"
         },
-        "extract-i18n": {
+        "extract-i18n": { 
           "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {

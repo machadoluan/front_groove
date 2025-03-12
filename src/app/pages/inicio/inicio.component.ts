@@ -216,7 +216,7 @@ export class InicioComponent implements OnInit {
     sessionStorage.removeItem('newRegister');
   }
 
-  entrarlink(): string{
-    return `${environment.apiUrl}/auth/discord`
+  entrarlink() {
+    window.location.href = `${environment.apiUrl}/auth/discord`;
   }
 }
