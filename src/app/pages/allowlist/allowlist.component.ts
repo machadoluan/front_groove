@@ -19,7 +19,7 @@ import { ServerService } from '../../service/server.service';
 export class AllowlistComponent implements OnInit {
 
 
-  quiz: boolean = true
+  quiz: boolean = false
 
   allowReprovad = false;
   allowAprovad = false
@@ -299,4 +299,7 @@ export class AllowlistComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
+  avancar(){
+    this.quiz = true
+  }
 }

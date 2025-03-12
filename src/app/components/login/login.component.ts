@@ -6,6 +6,7 @@ import {
   MatDialogContent,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -22,6 +23,6 @@ export class LoginComponent {
   ) { }
 
   loginWithDiscord() {
-    window.location.href = 'http://localhost:3000/auth/discord';
+    window.location.href = `${environment.apiUrl}/auth/discord`;
   }
 }

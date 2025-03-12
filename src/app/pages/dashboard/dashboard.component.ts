@@ -72,7 +72,8 @@ export class DashboardComponent implements OnInit {
     { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
     { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
     { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' }
+    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", personagem: "Buddy poke", status: 'Concluido' }
   ]
   selectedSuporte: any; // Para armazenar a compra selecionada
 

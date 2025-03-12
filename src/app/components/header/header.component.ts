@@ -9,6 +9,7 @@ import { ServerService } from '../../service/server.service';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -142,7 +143,7 @@ export class HeaderComponent implements OnInit {
   }
 
   loginWithDiscord() {
-    window.location.href = 'http://localhost:3000/auth/discord';
+    window.location.href = `${environment.apiUrl}/auth/discord`;
   }
 
   confirm1(event: Event) {

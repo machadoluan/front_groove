@@ -18,6 +18,7 @@ import { InputOtp } from 'primeng/inputotp';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { InputMaskModule } from 'primeng/inputmask';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-registro',
@@ -272,7 +273,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   vincularSteam() {
-    window.location.href = 'http://localhost:3000/auth/steam';
+    window.location.href = `${environment.apiUrl}/auth/steam`;
   }
 
   concluirCadastro() {

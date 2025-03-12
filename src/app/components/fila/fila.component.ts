@@ -1,6 +1,7 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-fila',
@@ -32,6 +33,6 @@ export class FilaComponent {
 
 
   entrar() {
-    window.location.href = 'http://localhost:3000/auth/discord';
+    window.location.href = `${environment.apiUrl}/auth/discord`;
   }
 }

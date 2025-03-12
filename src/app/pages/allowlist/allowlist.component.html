@@ -18,12 +18,12 @@
                             perguntas.</strong></span>
                     <span>Boa sorte e nos vemos na <strong>Groove!</strong></span>
                 </div>
-                <button class="btn-style">Iniciar</button>
+                <button class="btn-style" (click)="avancar()">Iniciar</button>
             </div>
         </section>
 
 
-        <section class="quiz" *ngIf="!quizFinished">
+        <section class="quiz" *ngIf="quiz">
             <div class="quiz_content">
                 <div class="textos">
                     <h1>Questão {{ currentQuestionIndex + 1 }}</h1>

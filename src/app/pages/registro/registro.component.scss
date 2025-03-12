@@ -247,6 +247,7 @@
 
                 &:disabled {
                     background-color: rgba($color: $primary, $alpha: 0.5);
+                    font-weight: normal;
                 }
             }
         }

@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
     private router: Router
   ) { }
 
-  private UrlApi = 'http://localhost:3000'
+  private UrlApi = environment.apiUrl
   private guilds: { name: string }[] = [];
 
   loginWithDiscord() {

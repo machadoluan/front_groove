@@ -11,6 +11,7 @@ import { FilaComponent } from '../../components/fila/fila.component';
 import { Dialog } from 'primeng/dialog';
 import { ServerService } from '../../service/server.service';
 import { MessageComponent } from "../../components/message/message.component";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-inicio',
@@ -105,7 +106,6 @@ export class InicioComponent implements OnInit {
     if (token) {
       this.entrar = false;
       this.user = this.auth.getUserFromToken()
-
     } else {
       this.entrar = true;
     }
@@ -214,5 +214,9 @@ export class InicioComponent implements OnInit {
   newCadastro() {
     this.criouConta = false;
     sessionStorage.removeItem('newRegister');
+  }
+
+  entrarlink(): string{
+    return `${environment.apiUrl}/auth/discord`
   }
 }
