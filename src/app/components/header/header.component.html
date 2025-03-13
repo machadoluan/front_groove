@@ -23,7 +23,7 @@
                     </svg>
                     <span id="gema" *ngIf="account">{{ account.gems | number:'1.0-0' }}
 
-                    
+
                     </span>
                 </div>
                 <div class="login" (click)="loginWithDiscord()" *ngIf="!user">
@@ -160,4 +160,4 @@
     </div>
 </div>
 
-<p-confirmdialog  styleClass="dialog2" [draggable]="false"/>
+<p-confirmdialog styleClass="dialog2" [draggable]="false" />
