@@ -13,6 +13,6 @@ export class DiscordService {
 
 
   getUserRoles(userId: string): Observable<{ roles: any }> {
-    return this.http.get<{ roles: string[] }>(`${this.apiUrl}/Groove Street/${userId}`);
+    return this.http.get<{ roles: string[] }>(`${this.apiUrl}/Groove Roleplay/${userId}`);
   }
 }

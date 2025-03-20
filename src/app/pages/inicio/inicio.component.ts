@@ -84,7 +84,7 @@ export class InicioComponent implements OnInit  {
 
 
   ngOnInit(): void {
-    const fila = this.user
+    const fila = localStorage.getItem('token')
 
     if (fila) {
       this.mostrarFila = false
