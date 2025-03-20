@@ -37,7 +37,6 @@ import { FormatPhonePipe } from '../../format-phone-pipe.pipe';
     FormsModule,
     InputOtp,
     InputMaskModule,
-    FormatPhonePipe
   ],
   providers: [provideNgxMask(), provideNativeDateAdapter(), MessageService],
   templateUrl: './registro.component.html',
@@ -276,25 +275,41 @@ export class RegistroComponent implements OnInit, AfterViewInit {
 
 
 
+  // SMS
+  // sendCode() {
+  //   const telefoneCompleto = `${this.phonePrefix}${this.registroForm.value.telefone}`;
+  //   this.registroForm.patchValue({ telefone: telefoneCompleto })
 
-  sendCode() {
-    const telefoneCompleto = `${this.phonePrefix}${this.registroForm.value.telefone}`;
-    this.registroForm.patchValue({ telefone: telefoneCompleto })
+  //   console.log(this.registroForm.value)
 
-    console.log(this.registroForm.value)
+  //   this.authService.verifyCode(this.registroForm.value.telefone).subscribe(
+  //     (res) => {
+  //       console.log('Resposta do backend:', res.codigo);
+  //       this.verifyCode = true;
+  //       this.codigoBackend = res.codigo
+  //     },
 
-    this.authService.verifyCode(this.registroForm.value.telefone).subscribe(
+  //     (error) => {
+  //       console.error(error)
+  //     }
+  //   )
+  // }
+
+    sendCode() {
+    this.authService.verifyCode(this.registroForm.value.email, this.registroForm.value.nome).subscribe(
       (res) => {
         console.log('Resposta do backend:', res.codigo);
         this.verifyCode = true;
         this.codigoBackend = res.codigo
       },
 
-      (error) => {
+      (error) => {  
         console.error(error)
       }
     )
   }
+
+  
 
   verificarCode() {
     if (this.codigo === this.codigoBackend) {
@@ -308,7 +323,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   vincularSteam() {
-    window.open(`${environment.apiUrl}/auth/steam`, '_blank', 'noopener,noreferrer');
+    window.location.href = `${environment.apiUrl}/auth/steam`;
   }
 
   concluirCadastro() {
@@ -337,13 +352,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   }
 
   changeNumber() {
-    const dateInput = document.getElementById('dataNascimentoInput') as HTMLInputElement | null;
-    if (dateInput && this.registroForm.get('dataNascimento')?.valid) {
-      dateInput.classList.add('check');
-    }
-
-
     this.verifyCode = false
-    this.registroForm.get('telefone')?.reset();
+    this.registroForm.get('email')?.reset();
   }
 }

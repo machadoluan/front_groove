@@ -118,6 +118,11 @@ export class InicioComponent implements OnInit  {
         this.dialogVisible = true;
       }
     });
+    this.route.queryParams.subscribe(params => {
+      if (params['error'] === 'access_denied') {
+        this.router.navigate(['/'])
+      }
+    });
 
     if (this.user && this.user.discordId) {
       this.serverService.getAccount(this.user.discordId).subscribe(

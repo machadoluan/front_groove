@@ -84,8 +84,8 @@ export class AuthService {
   }
 
 
-  verifyCode(telefone: string): Observable<any> {
-    return this.http.post(`${this.UrlApi}/twilio/enviar-codigo`, { telefone })
+  verifyCode(email: string, name: string): Observable<any> {
+    return this.http.post(`${this.UrlApi}/email-send`, { email, name})
   }
 
   updateAccount(dadosUpdate: any): Observable<any> {

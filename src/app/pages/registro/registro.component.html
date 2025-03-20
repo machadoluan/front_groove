@@ -103,10 +103,13 @@
 
         <section class="verify-code" *ngIf="verifyCode">
             <div class="titles">
-                Verificar SMS
+                Verificar Email
+                <span>Enviamos um código de 6 dígitos para o seu Email: </span>
+                <span id="number" (click)="changeNumber()">{{registroForm.value.email}}</span>
+                <!-- Verificar SMS
                 <span>Enviamos um código de 6 dígitos para o seu celular: </span>
                 <span id="number" (click)="changeNumber()">{{registroForm.value.telefone |
-                    formatPhone:selectedCountry.code}}</span>
+                    formatPhone:selectedCountry.code}}</span> -->
             </div>
 
             <div class="codes">
