@@ -5,7 +5,6 @@
     width: 100%;
     height: 100%;
     background-color: rgba($color: #1A1A1A, $alpha: 0.8);
-
     position: fixed;
     top: 0;
     left: 0;
@@ -85,10 +84,11 @@
             flex-direction: column;
 
             .content-inform {
-                padding: 0 5rem;
+                height: 100%;
+                padding: 1rem 5rem;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: space-between;
 
                 #title {
                     text-transform: uppercase;
@@ -96,6 +96,7 @@
                     font-size: 40px;
                     line-height: 60px;
                     width: 80%;
+                    
                 }
 
                 p {
@@ -104,7 +105,6 @@
                 }
 
                 div {
-                    margin-top: 2rem;
                     display: flex;
                     flex-direction: column;
 
@@ -145,6 +145,7 @@
                         background-color: $primary;
                         border: none;
                         border-radius: 6px;
+                        height: 40px;
                         font-size: 14px;
                         font-weight: 600;
                         cursor: pointer;
@@ -163,7 +164,7 @@
 
             .inform {
                 .content-inform {
-                    padding: 0 2rem;
+                    padding: 1rem 2rem;
 
                     #title {
                         font-size: 32px;
@@ -199,6 +200,17 @@
     }
 }
 @media (max-width: 768px) {
+    header{
+        padding: 0 1rem !important;
+        .logo{
+            flex-grow: 1 !important;
+            display: flex;
+            justify-content: center;
+            img{
+                width: 100px !important;
+            }
+        }
+    }
     .container-fila {
         .content-fila {
             flex-direction: column;
@@ -209,7 +221,7 @@
 
             .inform {
                 .content-inform {
-                    padding: 0 2rem;
+                    padding: 1rem 2rem;
 
                     #title {
                         font-size: 32px;
@@ -246,11 +258,11 @@
 }
 
 @media (max-width: 480px) {
+   
     .container-fila {
         .content-fila {
             .inform {
                 .content-inform {
-                    padding: 0 1rem;
 
                     #title {
                         font-size: 24px;
@@ -268,7 +280,7 @@
 
                         .vantagens {
                             li {
-                                font-size: 10px;
+                                font-size: 12px;
                             }
                         }
                     }
@@ -276,7 +288,85 @@
                     .btn {
                         button {
                             padding: 6px 30px;
-                            font-size: 10px;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 350px) {
+   
+    .container-fila {
+        .content-fila {
+            .inform {
+                .content-inform {
+
+                    #title {
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                    }
+
+                    div {
+                        span {
+                            font-size: 12px;
+                        }
+
+                        .vantagens {
+                            li {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+
+                    .btn {
+                        button {
+                            padding: 6px 30px;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:315px) {
+   
+    .container-fila {
+        .content-fila {
+            .inform {
+                .content-inform {
+
+                    #title {
+                        font-size: 18px;
+                        line-height: 30px;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                    }
+
+                    div {
+                        span {
+                            font-size: 12px;
+                        }
+
+                        .vantagens {
+                            li {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+
+                    .btn {
+                        button {
+                            padding: 6px 30px;
+                            font-size: 12px;
                         }
                     }
                 }
