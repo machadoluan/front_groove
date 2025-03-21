@@ -56,6 +56,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   codigoBackend: string = ''
   codigo: string = '';
   steamVinculado: boolean = false;
+  sendingCode: boolean = false;
 
 
   countryList = [
@@ -295,21 +296,24 @@ export class RegistroComponent implements OnInit, AfterViewInit {
   //   )
   // }
 
-    sendCode() {
-    this.authService.verifyCode(this.registroForm.value.email, this.registroForm.value.nome).subscribe(
-      (res) => {
-        console.log('Resposta do backend:', res.codigo);
+  sendCode() {
+    this.sendingCode = true
+    this.authService.verifyCode(this.registroForm.value.email, this.registroForm.value.nome).subscribe({
+      next: (res) => {
         this.verifyCode = true;
         this.codigoBackend = res.codigo
       },
-
-      (error) => {  
+      error: (error) => {
         console.error(error)
+        this.sendingCode = false
+      },
+      complete: () => {
+        this.sendingCode = false
       }
-    )
+    })
   }
 
-  
+
 
   verificarCode() {
     if (this.codigo === this.codigoBackend) {

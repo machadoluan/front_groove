@@ -184,6 +184,7 @@
                         .p-inputtext {
                             width: 400px !important;
                             padding: .6rem !important;
+                            color: white !important;
                         }
                     }
 
@@ -197,7 +198,6 @@
                         outline: none;
                         font-size: 12px;
                         border-radius: 5px;
-
                         &.p-select {
                             padding: 0 !important;
                             margin: 0;
@@ -263,6 +263,7 @@
         height: 40px !important;
         background-color: transparent !important;
         font-size: 12px;
+        color: white !important;
 
 
         &:enabled:focus {
@@ -299,7 +300,11 @@
         font-size: 12px;
         border-radius: 5px;
         background-color: transparent;
+        color: white !important;
 
+        &::placeholder{
+            color: #75756b ;
+        }
         &:enabled:focus {
             border: 2px solid rgba(255, 255, 255, 0.38);
         }
@@ -430,6 +435,7 @@ p-toast {
             border-radius: 5px;
             background-color: transparent;
             padding: 5px 1rem;
+            color: white !important;
 
             &:enabled:focus {
                 border: 2px solid rgba(255, 255, 255, 0.38);
@@ -494,6 +500,7 @@ p-toast {
             border-radius: 5px;
             background-color: transparent;
             padding: 5px 1rem;
+            color: white !important;
 
             &:enabled:focus {
                 border: 2px solid rgba(255, 255, 255, 0.38);
@@ -609,6 +616,16 @@ p-toast {
             border-radius: 5px;
             background-color: transparent;
             padding: 5px 1rem;
+            color: white !important;
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+              box-shadow: 0 0 0 100px #fff inset; // Mantém fundo branco
+              -webkit-text-fill-color: #495057; // Mantém a cor do texto padrão
+              transition: background-color 5000s ease-in-out 0s; // Esconde a mudança de cor
+            }
 
             &:enabled:focus {
                 border: 2px solid rgba(255, 255, 255, 0.38);
@@ -634,3 +651,21 @@ p-toast {
 // ::ng-deep .p-select-label{
 //     padding: .4rem .6rem !important;
 // }
+
+::ng-deep .p-placeholder {
+    color: #75756B !important;
+}
+
+::ng-deep .p-select-overlay, .p-datepicker-panel{
+    background-color: $secundary !important;
+}
+
+::ng-deep .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus{
+    background-color: rgba($color: $primary, $alpha: 0.5);
+}
+::ng-deep .p-select-label.p-placeholder{
+    color: #75756B !important;
+}
+::ng-deep .p-select-label{
+    color: white !important;
+}
