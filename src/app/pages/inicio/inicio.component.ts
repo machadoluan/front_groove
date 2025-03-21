@@ -11,6 +11,7 @@ import { Dialog } from 'primeng/dialog';
 import { ServerService } from '../../service/server.service';
 import { MessageComponent } from "../../components/message/message.component";
 import { environment } from '../../../environments/environment';
+import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-inicio',
@@ -22,12 +23,13 @@ import { environment } from '../../../environments/environment';
     Dialog,
     MessageComponent,
     RouterLink,
+    PanelModule
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InicioComponent implements OnInit  {
+export class InicioComponent implements OnInit {
   readonly panelOpenState = signal(false);
 
   @ViewChild('backgroundVideo') backgroundVideo!: ElementRef;
@@ -67,6 +69,15 @@ export class InicioComponent implements OnInit  {
     { title: '16.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'sixteen-dima' }
   ];
 
+  questions = [
+    { title: '1. O que devo fazer assim que entrar na Groove Roleplay para uma experiência incrível?', content: 'Assim que entrar na cidade, aproveite para explorar os pontos turísticos restaurados, como a Grove Street, a Ponte de San Fierro. Faça conexões com outros cidadãos, descubra os locais movimentados e defina o seu caminho: você prefere a vida honesta, como policial, mecânico ou médico, ou quer seguir pelas ruas do crime? Sua escolha inicial determinará sua trajetória nos primeiros 30 dias' },
+    { title: '2. Como posso me envolver na comunidade da cidade e participar de eventos e atividades?', content: 'A melhor forma de se conectar é frequentando os locais mais movimentados, como a Grove Street, hospitais e oficinas mecânicas. Além disso, fique atento aos anúncios da cidade sobre corridas, torneios de luta e desafios ilegais ou policiais. A comunidade é viva e sempre há algo acontecendo, basta estar no lugar certo e na hora certa.' },
+    { title: '3. Qual é a melhor maneira de ganhar dinheiro e construir uma carreira dentro da cidade?', content: 'Tudo depende do caminho que você escolheu! Se seguiu o lado legal, há trabalhos como mecânico, médico ou policial. Se preferiu o lado ilegal, o lucro pode vir de assaltos, contrabando e até mesmo da dominação de territórios. Independente da escolha, planeje bem seus passos e crie alianças, pois cada decisão pode abrir (ou fechar) portas no futuro.' },
+    { title: '4. O que devo fazer se encontrar problemas técnicos ou precisar de suporte enquanto estiver na cidade?', content: 'Se enfrentar problemas técnicos ou precisar de suporte, a melhor opção é acessar nosso site oficial e abrir um ticket de atendimento na opção “Suporte”. Nossa equipe de suporte está sempre pronta para ajudar com questões de conexão, regras do servidor e outros problemas que possam surgir.' },
+    { title: '5. Existe alguma vantagem em explorar a cidade ao invés de apenas seguir missões?', content: 'Sim! Explorar a cidade pode revelar segredos, itens raros e até mesmo oportunidades inesperadas. Alguns pontos turísticos escondem histórias, enquanto becos e vielas podem ser a chave para encontrar contatos importantes no submundo do crime. Quem explora, sempre tem vantagem.' },
+    { title: '6. Como funcionam as mudanças de caminho após os primeiros 30 dias na cidade?', content: 'A cada 30 dias, você poderá decidir se quer continuar no mesmo estilo de vida ou mudar completamente. Para isso, será necessário passar por um processo de transição: um policial que quer virar criminoso, por exemplo, pode precisar fingir sua morte ou ser expulso da corporação. Já um criminoso que quer se tornar policial pode ter que provar seu valor para conseguir uma nova chance. Essa transição torna o roleplay mais realista e desafiador. Cada estilo trás benefícios diferentes, continuar o mesmo estilo pode aumentar sua sorte no caminho que já estava traçando. :)' }
+  ];
+
   carrinho: Item[] = []
 
   error: string = ''
@@ -80,7 +91,7 @@ export class InicioComponent implements OnInit  {
     private cdr: ChangeDetectorRef
   ) { }
 
- 
+
 
 
   ngOnInit(): void {

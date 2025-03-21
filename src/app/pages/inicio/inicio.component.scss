@@ -724,7 +724,7 @@ mat-expansion-panel {
         font-weight: 400;
         text-align: center;
         width: 93% !important;
-        }
+      }
     }
 
     .icon-redes {
@@ -1105,5 +1105,32 @@ mat-expansion-panel {
       cursor: pointer;
       margin-top: 40px;
     }
+  }
+}
+
+.panels{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+::ng-deep .p-panel {
+  background-color: $primary !important;
+  border:3px solid  $primary !important;
+
+  .p-panel-content {
+    background-color: #1D1D1C !important;
+    padding: 1rem !important;
+  }
+
+  .p-button-text.p-button-secondary:not(:disabled):hover{
+    background-color: transparent !important;
+  }
+
+  .p-panel-title{
+    color: #1D1D1C !important;
+  }
+  @media (max-width: 800px) {
+    width: 90% !important;
+    margin: 0 auto;
   }
 }
