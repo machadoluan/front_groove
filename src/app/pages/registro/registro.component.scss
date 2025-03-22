@@ -65,7 +65,7 @@
                 justify-content: space-around;
                 // align-items: start;
 
-                
+
 
 
                 .content-steam {
@@ -198,6 +198,7 @@
                         outline: none;
                         font-size: 12px;
                         border-radius: 5px;
+
                         &.p-select {
                             padding: 0 !important;
                             margin: 0;
@@ -236,7 +237,7 @@
                 }
             }
 
-            
+
             .btn-style {
                 background-color: $primary;
                 border: none;
@@ -247,6 +248,10 @@
                 color: $secundary;
                 margin-top: 20px;
                 cursor: pointer;
+
+                &:hover {
+                    background-color: #FBB87D;
+                }
 
                 &:disabled {
                     background-color: rgba($color: $primary, $alpha: 0.5);
@@ -302,9 +307,10 @@
         background-color: transparent;
         color: white !important;
 
-        &::placeholder{
-            color: #75756b ;
+        &::placeholder {
+            color: #75756b;
         }
+
         &:enabled:focus {
             border: 2px solid rgba(255, 255, 255, 0.38);
         }
@@ -622,9 +628,9 @@ p-toast {
             &:-webkit-autofill:hover,
             &:-webkit-autofill:focus,
             &:-webkit-autofill:active {
-              box-shadow: 0 0 0 100px #fff inset; // Mantém fundo branco
-              -webkit-text-fill-color: #495057; // Mantém a cor do texto padrão
-              transition: background-color 5000s ease-in-out 0s; // Esconde a mudança de cor
+                box-shadow: 0 0 0 100px #fff inset; // Mantém fundo branco
+                -webkit-text-fill-color: #495057; // Mantém a cor do texto padrão
+                transition: background-color 5000s ease-in-out 0s; // Esconde a mudança de cor
             }
 
             &:enabled:focus {
@@ -656,16 +662,19 @@ p-toast {
     color: #75756B !important;
 }
 
-::ng-deep .p-select-overlay, .p-datepicker-panel{
+::ng-deep .p-select-overlay,
+.p-datepicker-panel {
     background-color: $secundary !important;
 }
 
-::ng-deep .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus{
+::ng-deep .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus {
     background-color: rgba($color: $primary, $alpha: 0.5);
 }
-::ng-deep .p-select-label.p-placeholder{
+
+::ng-deep .p-select-label.p-placeholder {
     color: #75756B !important;
 }
-::ng-deep .p-select-label{
+
+::ng-deep .p-select-label {
     color: white !important;
 }

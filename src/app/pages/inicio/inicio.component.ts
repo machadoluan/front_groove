@@ -50,7 +50,8 @@ export class InicioComponent implements OnInit {
   mostrarFila: boolean = true
   dialogVisible: boolean = false;
   account: any;
-  criouConta: boolean = false
+  criouConta: boolean = false;
+  errorJogue: boolean = false;
 
 
 
@@ -96,9 +97,10 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
     const fila = localStorage.getItem('token')
+    // this.dialogVisible = true;
 
     if (fila) {
-      this.mostrarFila = false
+      this.mostrarFila = false;
     } else {
       this.mostrarFila = true
     }
@@ -126,6 +128,7 @@ export class InicioComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['error'] === 'not_in_guild') {
         this.router.navigate(['/'])
+        this.mostrarFila = false;
         this.dialogVisible = true;
       }
     });
@@ -139,7 +142,6 @@ export class InicioComponent implements OnInit {
       this.serverService.getAccount(this.user.discordId).subscribe(
         (res: any) => {
           this.account = res.length ? res[0] : null;
-          console.log(this.account)
           this.cdr.detectChanges();
         },
         (err: any) => {
@@ -236,4 +238,5 @@ export class InicioComponent implements OnInit {
   entrarlink() {
     window.location.href = `${environment.apiUrl}/auth/discord`;
   }
+
 }

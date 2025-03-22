@@ -359,4 +359,9 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     this.verifyCode = false
     this.registroForm.get('email')?.reset();
   }
+
+  validateNumericInput(event: any): void {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, ''); // Remove tudo que não for número
+  }
 }

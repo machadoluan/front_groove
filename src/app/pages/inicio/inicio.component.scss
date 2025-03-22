@@ -65,6 +65,15 @@
         cursor: pointer;
         margin-top: 40px;
         font-weight: bold;
+        transition: all 100ms ease-in-out;
+
+        &:hover {
+          background-color: #FBB87D;
+        }
+
+        &:active {
+          background-color: #AB6B32;
+        }
 
         i {
           color: $secundary;
@@ -484,22 +493,40 @@ mat-expansion-panel {
 
 }
 
-::ng-deep .dialog1 .p-dialog-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+::ng-deep .dialog1 {
+  z-index: 9999999 !important;
 
-  a {
-    padding: 6px 20px;
-    border-radius: 5px;
-    background-color: $primary;
-    color: $secundary;
-    font-weight: bold;
+  .p-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 
-    i {
+    .redes {
+      display: flex;
+      align-items: center;
+    }
+
+    .rede-icon {
+      background-color: transparent;
+
+    }
+
+    a {
+      padding: 6px 20px;
+      border-radius: 5px;
+      background-color: $primary;
       color: $secundary;
+      font-weight: bold;
 
+      &:hover {
+        background-color: #FBB87D;
+      }
+
+      i {
+        color: $secundary;
+
+      }
     }
   }
 }
@@ -1108,27 +1135,34 @@ mat-expansion-panel {
   }
 }
 
-.panels{
+.panels {
   display: flex;
   flex-direction: column;
   gap: .5rem;
 }
+
 ::ng-deep .p-panel {
   background-color: $primary !important;
-  border:3px solid  $primary !important;
+  border: 3px solid $primary !important;
 
   .p-panel-content {
     background-color: #1D1D1C !important;
     padding: 1rem !important;
   }
 
-  .p-button-text.p-button-secondary:not(:disabled):hover{
+  .p-button-text.p-button-secondary {
+    color: #1D1D1C !important;
+  }
+
+  .p-button-text.p-button-secondary:not(:disabled):hover {
     background-color: transparent !important;
   }
 
-  .p-panel-title{
+  .p-panel-title {
     color: #1D1D1C !important;
+    font-weight: 500;
   }
+
   @media (max-width: 800px) {
     width: 90% !important;
     margin: 0 auto;

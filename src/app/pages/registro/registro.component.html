@@ -115,7 +115,13 @@
             </div>
 
             <div class="codes">
-                <p-inputotp size="large" [length]=6 [(ngModel)]="codigo" />
+                <p-inputotp 
+                size="large" 
+                [length]="6" 
+                [(ngModel)]="codigo" 
+                (onInput)="validateNumericInput($event)"
+              />
+              
             </div>
 
 

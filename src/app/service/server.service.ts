@@ -23,6 +23,6 @@ export class ServerService {
   }
 
   releaseAllowList(discordId: string) {
-    return this.http.post(`${this.UrlApi}/account/releaseAllowList/${discordId}`, {})
+    return this.http.post<{token: string}>(`${this.UrlApi}/account/releaseAllowList/${discordId}`, {})
   }
 }
