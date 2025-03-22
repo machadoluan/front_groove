@@ -19,20 +19,26 @@ export const allowlistGuard: CanActivateFn = (route, state) => {
 
   // Verifica se o usuário está na lista de permissões
   return new Promise<boolean>((resolve) => {
-    serverService.getAccount(user.discordId).subscribe(
-      (res: any) => {
-        if (res[0].whitelist === 1) {
-          router.navigate(['/']);
-          resolve(false);
-        } else if (res[0].whitelist === 0) {
-          resolve(true);
-        }
-      },
-      (err: any) => {
-        console.error(err);
-        router.navigate(['/error']); // Redireciona para uma página de erro em caso de falha
-        resolve(false);
-      }
-    );
+    if(user.allowList === null){
+      resolve(true);
+    } else {
+      router.navigate(['/']);
+      resolve(false);
+    }
+    // serverService.getAccount(user.discordId).subscribe(
+    //   (res: any) => {
+    //     if (res[0].whitelist === 1) {
+    //       router.navigate(['/']);
+    //       resolve(false);
+    //     } else if (res[0].whitelist === 0) {
+    //       resolve(true);
+    //     }
+    //   },
+    //   (err: any) => {
+    //     console.error(err);
+    //     router.navigate(['/error']); // Redireciona para uma página de erro em caso de falha
+    //     resolve(false);
+    //   }
+    // );
   });
 };
