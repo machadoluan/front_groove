@@ -22,8 +22,28 @@
             </div>
         </section>
 
+        
 
         <section class="quiz" *ngIf="quiz">
+
+            <div class="header_quiz">
+                <div class="progress-container">
+                    <span class="progress-value">00:{{ value }}</span>
+                    <p-progressbar 
+                        [value]="(value * 100) / 60" 
+                        showValue="false"
+                        [style]="{ height: '6px', width: '100%' }">
+                    </p-progressbar>
+                </div>
+                
+                
+                
+
+                <div class="question_atual">
+                    {{ currentQuestionIndex + 1 }} / <span>15</span>
+                </div>
+            </div>
+
             <div class="quiz_content">
                 <div class="textos">
                     <h1>Questão {{ currentQuestionIndex + 1 }}</h1>
@@ -34,6 +54,7 @@
                     <div class="p-quiz" *ngFor="let option of questions[currentQuestionIndex].options; let i = index">
                         <input type="radio" name="option{{ currentQuestionIndex }}" id="option{{ i }}" [value]="option"
                             (change)="selectAnswer(option)" [checked]="selectedAnswer === option">
+                            
                         <label for="option{{ i }}" class="ml-2">{{ option }}</label>
                     </div>
                 </div>

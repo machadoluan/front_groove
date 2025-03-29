@@ -78,6 +78,12 @@
                 align-items: center;
                 gap: 1rem;
 
+                span{
+                    font-size: 16px;
+                    color: $primary;
+                    font-weight: bold
+                }
+
                 #title {
                     text-transform: uppercase;
                     font-weight: bold;

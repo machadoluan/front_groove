@@ -64,16 +64,16 @@ export class DashboardComponent implements OnInit {
 
   // Dados historico suporte
   dataSourceSuporte: historicoSuporte[] = [
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", personagem: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", personagem: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", personagem: "Buddy poke", status: 'Concluido' }
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", motivo: "john wick", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", motivo: "john wick", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", motivo: "john wick", status: 'Aguardando' },
+    { nome: "Teste", dataSuporte: "Teste", motivo: "Buddy poke", status: 'Concluido' }
   ]
   selectedSuporte: any; // Para armazenar a compra selecionada
 
@@ -89,7 +89,14 @@ export class DashboardComponent implements OnInit {
   cargosDiscord: any[] = []
   dadosUpdate: any;
   formattedCharacters: any;
-  ocultarDados: boolean = true;
+
+  dadosOcultos = {
+    nome: true,
+    email: true,
+    telefone: true,
+    dataNascimento: true
+  };
+
   allowList: boolean | null = null;
 
   constructor(
@@ -199,10 +206,6 @@ export class DashboardComponent implements OnInit {
     return valor.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   }
 
-  editDados() {
-    this.toggleEdit = true;
-    this.toggleBtns = true;
-  }
 
 
   filterGlobal(event: Event, dt1: any) {
@@ -222,7 +225,7 @@ export class DashboardComponent implements OnInit {
     const defaultAvatar = 'img/profile_default.jpg';
 
 
-    if (this.selectedTab === 0) {
+    if (this.selectedTab === 0 || this.selectedTab === 1 ) {
       return this.user.avatar;
     } else {
       return this.selectedCharacter?.profilePhoto || defaultAvatar;
@@ -231,9 +234,12 @@ export class DashboardComponent implements OnInit {
 
   getName(): string {
     if (this.selectedTab === 0) {
-      return this.user.username
+      return this.user.username;
+    } else if (this.selectCharacter.length < 0) {
+      return `${this.selectedCharacter.name} ${this.selectedCharacter.name2}`;
     } else {
-      return `${this.selectedCharacter.name} ${this.selectedCharacter.name2} - ID ${this.selectedCharacter.id}`
+      return this.user.username;
+
     }
   }
 
@@ -267,7 +273,14 @@ export class DashboardComponent implements OnInit {
     this.dialogCreateTicket.showDialog()
   }
 
-  toggleDados() {
-
+  toggleDados(campo: 'nome' | 'email' | 'telefone' | 'dataNascimento') {
+    this.dadosOcultos[campo] = !this.dadosOcultos[campo];
   }
+
+  editDados() {
+    this.toggleEdit = !this.toggleEdit;
+    this.toggleBtns = !this.toggleBtns;
+  }
+
+
 }

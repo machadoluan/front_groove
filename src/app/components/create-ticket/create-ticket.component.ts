@@ -32,6 +32,13 @@ export class CreateTicketComponent {
   user: any;
   display: boolean = false;
 
+  categorias = [
+    { name: '[🐛] Bugs', emoji: '🐛' },
+    { name: '[🛠️] Suporte geral', emoji: '🛠️' },
+    { name: '[🚨] Denuncia', emoji: '🚨' },
+    { name: '[💡] Sugestões', emoji: '💡' },
+  ];
+  selectedCategoria: any;
 
 
   ngOnInit(): void {

@@ -5,14 +5,18 @@ import { AllowReprovadComponent } from "../../components/allow-reprovad/allow-re
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { ServerService } from '../../service/server.service';
+import { ProgressBar } from 'primeng/progressbar';
 import { ToastrService } from '../../service/toastr.service';
+
+import { RadioButton } from 'primeng/radiobutton';
 
 @Component({
   selector: 'app-allowlist',
   imports: [
     CommonModule,
     AllowAprovadComponent,
-    AllowReprovadComponent
+    AllowReprovadComponent,
+    ProgressBar
   ],
   templateUrl: './allowlist.component.html',
   styleUrl: './allowlist.component.scss'
@@ -20,10 +24,10 @@ import { ToastrService } from '../../service/toastr.service';
 export class AllowlistComponent implements OnInit {
 
 
-  quiz: boolean = false
-
+  quiz: boolean = true
+  value: any;
   allowReprovad = false;
-  allowAprovad = false
+  allowAprovad = true;
 
   allQuestions = [
     {
@@ -174,12 +178,22 @@ export class AllowlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.auth.getUserFromToken()
+
+
   }
 
   // Seleciona 15 questões aleatórias
   selectRandomQuestions() {
+    this.time()
     const shuffled = this.allQuestions.sort(() => 0.5 - Math.random());
     this.questions = shuffled.slice(0, 15);
+
+    this.questions.forEach(question => {
+      // Embaralha as respostas (opções) da pergunta
+      question.options = question.options.sort(() => 0.5 - Math.random());
+    });
+
+    
     this.userAnswers = new Array(this.questions.length).fill(null); // Inicializa o array de respostas
   }
 
@@ -191,28 +205,27 @@ export class AllowlistComponent implements OnInit {
 
   // Avança para a próxima questão ou finaliza o quiz
   nextQuestion() {
-    if (this.selectedAnswer !== null) {
-      if (this.currentQuestionIndex < this.questions.length - 1) {
-        this.currentQuestionIndex++;
-        this.selectedAnswer = this.userAnswers[this.currentQuestionIndex]; // Carrega a resposta já selecionada (se houver)
-      } else {
-        if (this.score < 12) {
-          this.allowReprovad = true
-        } else {
-          this.allowAprovad = true
-          this.serverService.releaseAllowList(this.user.discordId).subscribe(
-            (res) => {
-              console.log(res)
-            },
-            (err) => {
-              console.error(err)
-            }
-          )
-        }
-      }
+    this.time()
+
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+      this.selectedAnswer = this.userAnswers[this.currentQuestionIndex]; // Carrega a resposta já selecionada (se houver)
     } else {
-      this.toastrService.showError("Por favor, selecione uma resposta antes de avançar.")
+      if (this.score < 12) {
+        this.allowReprovad = true
+      } else {
+        this.allowAprovad = true
+        this.serverService.releaseAllowList(this.user.discordId).subscribe(
+          (res) => {
+            console.log(res)
+          },
+          (err) => {
+            console.error(err)
+          }
+        )
+      }
     }
+
   }
 
   // Calcula a pontuação
@@ -229,4 +242,19 @@ export class AllowlistComponent implements OnInit {
   avancar() {
     this.quiz = true
   }
+
+  time() {
+    this.value = 60
+    // let timeLeft = 60; // Tempo em segundos
+    // const timer = setInterval(() => {
+    //   if (timeLeft > 0) {
+    //     timeLeft--;
+    //     this.value = timeLeft; // Atualiza o valor do cronômetro
+    //   } else {
+    //     clearInterval(timer);
+    //     this.nextQuestion()
+    //   }
+    // }, 1000);
+  }
+  
 }

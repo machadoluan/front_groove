@@ -14,7 +14,19 @@
         gap: 1.5rem;
         padding: 0 1rem;
         position: relative;
+        .dados{
+            width: 100%;
+            display: flex;
+            gap: 1rem;
 
+            .p-select {
+                width: 100% !important;
+                background-color: transparent !important;
+                border: 2px solid $primary !important;
+                color: white !important;
+            }
+
+        }
         .form-group {
             display: flex;
             flex-direction: column;
@@ -22,21 +34,24 @@
             width: 100%;
             gap: .5rem;
 
-            .p-select {
-                width: 33.5% !important;
-                background-color: transparent !important;
-                border: 2px solid $primary !important;
-                color: white !important;
-
-
-            }
+            // .p-select {
+            //     width: 33.5% !important;
+            //     background-color: transparent !important;
+            //     border: 2px solid $primary !important;
+            //     color: white !important;
+            // }
 
             .p-inputtext,
             .p-textarea {
                 font-size: 14px;
                 width: 100%;
+
                 background-color: transparent !important;
                 border: 2px solid $primary !important;
+            }
+
+            .p-textarea {
+                height: auto !important;
             }
 
 
@@ -67,4 +82,9 @@
 
 ::ng-deep .p-dialog-header {
     padding: 1.5rem 2rem !important;
+}
+
+::ng-deep .p-select-overlay,
+.p-datepicker-panel {
+    background-color: rgba($color: #292929, $alpha: 1.0) !important;
 }

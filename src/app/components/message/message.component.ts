@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-message',
   imports: [CommonModule, RouterLink],
   templateUrl: './message.component.html',
-  styleUrl: './message.component.scss', 
+  styleUrl: './message.component.scss',
   animations: [
     trigger('fadeInOut', [
       state('void', style({
@@ -31,10 +31,12 @@ export class MessageComponent {
 
   closeModal() {
     this.close.emit()
+    sessionStorage.removeItem('newRegister');
+
   }
 
   concluir() {
+    sessionStorage.removeItem('newRegister');
     this.close.emit()
-
   }
 }

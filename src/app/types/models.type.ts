@@ -16,6 +16,6 @@ export type historicoCompra = {
 export type historicoSuporte = {
   nome: string,
   dataSuporte: string,
-  personagem: string,
+  motivo: string,
   status: string
 }

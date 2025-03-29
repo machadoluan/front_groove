@@ -53,6 +53,7 @@
             flex: 2;
             display: flex;
 
+
             .content_inicio {
                 display: flex;
                 flex-direction: column;
@@ -75,13 +76,58 @@
                 }
             }
 
+            &.quiz {
+                flex-direction: column;
+                gap: 3rem;
+
+                .header_quiz {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 2rem;
+
+                    .progress-container {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        /* Espaço entre o número e a barra */
+                        width: 90%;
+                    }
+
+                    .progress-value {
+                        font-weight: bold;
+                        white-space: nowrap;
+                        /* Impede quebra de linha */
+                    }
+
+                    p-progressbar {
+                        flex: 1;
+                        /* Faz a barra ocupar o espaço restante */
+                        min-width: 100px;
+                        /* Evita que a barra desapareça */
+                    }
+
+                    .question_atual {
+                        font-size: 16px;
+
+                        span {
+                            font-weight: bold;
+                            color: $primary;
+                        }
+                    }
+
+
+                }
+            }
+
+
+
             .quiz_content {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
                 align-items: flex-start;
                 gap: 5rem;
-                padding: 0 5rem;
+                padding: 0 2rem;
                 width: 100%;
 
                 .alternativas {
@@ -89,9 +135,13 @@
                     flex-direction: column;
                     gap: .5rem;
 
+
+
                     .p-quiz {
                         display: flex;
                         gap: .5rem;
+
+
                     }
                 }
             }
@@ -317,4 +367,56 @@
 
 
 
+}
+
+
+::ng-deep .p-progressbar-value {
+    background: $primary !important;
+
+}
+
+input[type="radio"] {
+    display: none; /* Esconde o radio button original */
+}
+
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 25px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"]:checked + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 3px solid $primary;
+    background-color: #fff; /* Cor para o estado não selecionado */
+
+}
+
+input[type="radio"]:checked + label::after {
+    content: ""; /* Marca o radio button quando selecionado */
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    font-size: 12px;
+    color: white;
+}
+
+input[type="radio"]:not(:checked) + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #fff; /* Cor para o estado não selecionado */
 }

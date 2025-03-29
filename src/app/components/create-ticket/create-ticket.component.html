@@ -1,21 +1,36 @@
 <p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Criar ticket">
     <div class="create_suporte">
-        <div class="form-group" *ngIf="characters">
-            <label for="personagem">Personagem</label>
-            <p-select [options]="formattedCharacters" id="personagem" name="personagem" [ngModel]="selectedCharacter"
-                optionLabel="displayName" placeholder="Selecione um personagem" class="w-full md:w-56"
-                (onChange)="selectCharacter($event.value)" />
+        <div class="dados">
+            <div class="form-group" *ngIf="characters.length < 0">
+                <label for="personagem">Personagem</label>
+                <p-select [options]="formattedCharacters" id="personagem" name="personagem"
+                    [(ngModel)]="selectedCharacter" optionLabel="displayName" placeholder="Selecione um personagem"
+                    class="w-full md:w-56" (onChange)="selectCharacter($event.value)" />
+            </div>
+            <div class="form-group">
+                <label for="personagem">Selecione o motivo</label>
+                <p-select [options]="categorias" id="personagem" name="name" [(ngModel)]="selectedCategoria"
+                    optionLabel="name" placeholder="Motivo" class="w-full md:w-56" />
+            </div>
         </div>
         <div class="form-group">
             <label for="assunto">Assunto</label>
-            <input type="text" pInputText placeholder="Deixe um assunto"/>
+            <input type="text" pInputText placeholder="Deixe um assunto" />
+        </div>
+        <div class="form-group" *ngIf="selectedCategoria?.name === '[🚨] Denuncia'">
+            <label for="assunto">Id do denunciado*</label>
+            <input type="text" pInputText placeholder="Id" />
+        </div>
+        <div class="form-group" *ngIf="selectedCategoria?.name === '[🚨] Denuncia'">
+            <label for="assunto">Link do clipe</label>
+            <input type="text" pInputText placeholder="Url" />
         </div>
         <div class="form-group">
             <label for="obs">Observações</label>
             <textarea rows="5" cols="30" pTextarea autoResize="none" placeholder="Deixe sua mensagem"></textarea>
         </div>
 
-        <button>
+        <button class="btn-style-global">
             <i class="fa-solid fa-paper-plane"></i>
             Enviar ticket
         </button>
