@@ -266,6 +266,10 @@
 
 
                 <div class="tickets-mobile">
+                  <div class="new_ticket btn-style-global" (click)="createTicket()">
+                    <i class="pi pi-plus"></i>
+                    Novo Ticket
+                  </div>
                   <div class="ticket" *ngFor="let ticket of dataSourceSuporte">
                     <span class="name">{{ticket.nome}}</span>
                     <span class="personagem">{{ticket.motivo}}</span>

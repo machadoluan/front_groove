@@ -448,6 +448,26 @@
         flex-direction: column;
         gap: 2rem;
 
+        .new_ticket {
+          padding: .4rem 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: .5rem;
+          background-color: $primary;
+          color: $secundary;
+          font-weight: 550;
+          font-size: 12px;
+          border-radius: 5px;
+          cursor: pointer;
+      
+          i {
+            color: $secundary;
+            font-weight: 550;
+            font-size: 12px;
+          }
+        }
+
         .ticket {
           background-color: #1a1a1a;
           border-radius: 6px;
@@ -799,7 +819,6 @@ tr {
 
       div {
         display: flex;
-        flex-direction: column;
       }
 
       label {
