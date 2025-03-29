@@ -138,14 +138,14 @@
                 <div class="btn-steam">
                     <img src="/img/steam.png" alt="steam">
                     <div>
-                        <button class="btn-style" (click)="vincularSteam()"
+                        <button class="btn-style btn-style-global" (click)="vincularSteam()"
                             [disabled]="steamVinculado">Vincular</button>
                         <i class="fa-solid fa-check-circle" [ngClass]="{'vinculado': steamVinculado}"></i>
                     </div>
                 </div>
             </div>
 
-            <button class="btn-style" (click)="concluirCadastro()">Concluir</button>
+            <button class="btn-style btn-style-global" (click)="concluirCadastro()">Concluir</button>
         </section>
     </div>
 </div>

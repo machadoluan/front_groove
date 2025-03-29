@@ -24,10 +24,10 @@ import { RadioButton } from 'primeng/radiobutton';
 export class AllowlistComponent implements OnInit {
 
 
-  quiz: boolean = true
+  quiz: boolean = false
   value: any;
   allowReprovad = false;
-  allowAprovad = true;
+  allowAprovad = false;
 
   allQuestions = [
     {
@@ -245,16 +245,16 @@ export class AllowlistComponent implements OnInit {
 
   time() {
     this.value = 60
-    // let timeLeft = 60; // Tempo em segundos
-    // const timer = setInterval(() => {
-    //   if (timeLeft > 0) {
-    //     timeLeft--;
-    //     this.value = timeLeft; // Atualiza o valor do cronômetro
-    //   } else {
-    //     clearInterval(timer);
-    //     this.nextQuestion()
-    //   }
-    // }, 1000);
+    let timeLeft = 60; // Tempo em segundos
+    const timer = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        this.value = timeLeft; // Atualiza o valor do cronômetro
+      } else {
+        clearInterval(timer);
+        this.nextQuestion()
+      }
+    }, 1000);
   }
   
 }
