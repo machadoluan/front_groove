@@ -203,9 +203,6 @@ export class AllowlistComponent implements OnInit {
           this.serverService.releaseAllowList(this.user.discordId).subscribe(
             (res) => {
               console.log(res)
-              if (res.token) {
-                localStorage.setItem('token', res.token);
-              }
             },
             (err) => {
               console.error(err)

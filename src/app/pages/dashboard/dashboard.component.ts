@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit {
   dadosUpdate: any;
   formattedCharacters: any;
   ocultarDados: boolean = true;
+  allowList: boolean | null = null;
 
   constructor(
     private auth: AuthService,
@@ -157,6 +158,17 @@ export class DashboardComponent implements OnInit {
       telefone: this.user.telefone,
       dataNascimento: this.user.dataNascimento
     }
+
+
+    // VerifyAllowList
+    this.serverService.verifyAllowList(this.user.license).subscribe({
+      next: (res: any) => {
+        this.allowList = res
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
 
   }
 
@@ -254,8 +266,8 @@ export class DashboardComponent implements OnInit {
   createTicket() {
     this.dialogCreateTicket.showDialog()
   }
-  
-  toggleDados(){
-    
+
+  toggleDados() {
+
   }
 }

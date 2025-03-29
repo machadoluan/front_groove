@@ -7,19 +7,19 @@
         <div class="content">
             COMECE SUA JORNADA NA <span class="break">GROOVE ROLEPLAY</span>
 
-            <a (click)="entrarlink()" *ngIf="!user">
+            <a (click)="entrarlink()" *ngIf="!user" class="btn-style-global">
                 Entrar na lista de espera</a>
 
             <div class="teste" *ngIf="user">
-                @if(user.allowList === true){
-                <a (click)="errorJogue = true">
+
+                <a (click)="errorJogue = true" class="btn-style-global" *ngIf="allowList">
                     JOGUE AGORA
                 </a>
-                } @else if(user.allowList === null) {
-                <a routerLink="/allowlist">
+
+                <a routerLink="/allowlist" class="btn-style-global" *ngIf="!allowList">
                     Fazer Allowlist
                 </a>
-                }
+
             </div>
 
 
@@ -44,7 +44,7 @@
                         <p>{{item.description}}</p>
                         <div class="buttons">
                             <span class="detalhes">Detalhes</span>
-                            <span class="comprar" (click)="addCart(item)">
+                            <span class="comprar btn-style-global" (click)="addCart(item)">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 R$ {{item.price}},00
                             </span>
@@ -136,7 +136,7 @@
                         <p>{{item.description}}</p>
                         <div class="buttons">
                             <span class="detalhes">Detalhes</span>
-                            <span class="comprar">
+                            <span class="comprar btn-style-global">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 R$ {{item.price}},00
                             </span>

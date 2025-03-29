@@ -65,15 +65,8 @@
         cursor: pointer;
         margin-top: 40px;
         font-weight: bold;
-        transition: all 100ms ease-in-out;
 
-        &:hover {
-          background-color: #FBB87D;
-        }
-
-        &:active {
-          background-color: #AB6B32;
-        }
+      
 
         i {
           color: $secundary;
@@ -202,7 +195,8 @@
               font-size: 12px;
               border-radius: 6px;
               background: $primary;
-              transition: all .3s ease-in-out;
+              transition: all 100ms ease-in-out;
+
               align-items: center;
               color: $secundary;
               cursor: pointer;
@@ -394,7 +388,7 @@
               font-size: 12px;
               border-radius: 6px;
               background: $primary;
-              transition: all .3s ease-in-out;
+
               align-items: center;
               color: $secundary;
               cursor: pointer;
@@ -927,7 +921,6 @@ mat-expansion-panel {
         font-size: 12px;
         border-radius: 6px;
         background: $primary;
-        transition: all .3s ease-in-out;
         align-items: center;
         color: $secundary;
         cursor: pointer;

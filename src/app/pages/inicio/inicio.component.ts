@@ -52,9 +52,7 @@ export class InicioComponent implements OnInit {
   account: any;
   criouConta: boolean = false;
   errorJogue: boolean = false;
-
-
-
+  allowList: boolean | null = null; // Para diferenciar quando ainda não carregou
 
   vipItem: Item[] = [
     { title: 'Passaporte VIP PRATA', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'prata' },
@@ -149,6 +147,19 @@ export class InicioComponent implements OnInit {
         }
       )
     }
+    // VerifyAllowList
+    this.serverService.verifyAllowList(this.user.license).subscribe({
+      next: (res: any) => {
+        console.log("Valor recebido do backend:", res);
+        this.allowList = res;
+        console.log("allowList atualizado para:", this.allowList);
+        this.cdr.detectChanges(); // Força o Angular a atualizar a UI
+      },
+      error: (err) => {
+        console.error("Erro ao buscar AllowList:", err);
+      }
+    });
+
   }
 
 
