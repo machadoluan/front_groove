@@ -13,9 +13,11 @@
   color: white;
 
 }
-:root{
+
+:root {
   --p-highlight-background: #EF903C !important;
 }
+
 /* scrollbar */
 body::-webkit-scrollbar {
   width: 5px;
@@ -79,5 +81,18 @@ body {
 
   to {
     opacity: 0;
+  }
+}
+
+
+.btn-style-global {
+  transition: all 100ms ease-in-out !important;
+
+  &:hover {
+    background-color: #FBB87D !important;
+  }
+
+  &:active {
+    background-color: #AB6B32 !important;
   }
 }
