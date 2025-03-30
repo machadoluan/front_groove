@@ -20,6 +20,7 @@
                 </div>
                 <button class="btn-style btn-style-global" (click)="avancar()">Iniciar</button>
             </div>
+            <span></span>
         </section>
 
 
@@ -45,7 +46,8 @@
             <div class="quiz_content">
                 <div class="textos noselect">
                     <h1>Questão {{ currentQuestionIndex + 1 }}</h1>
-                    <span >{{ questions[currentQuestionIndex].question }}</span>
+                    <span [innerHTML]="fragmentarTexto(questions[currentQuestionIndex].question)"></span>
+
                 </div>
 
                 <div class="alternativas">
@@ -53,7 +55,7 @@
                         <input type="radio" name="option{{ currentQuestionIndex }}" id="option{{ i }}" [value]="option"
                             (change)="selectAnswer(option)" [checked]="selectedAnswer === option">
 
-                        <label  for="option{{ i }}" class="ml-2">{{ option }}</label>
+                        <label  for="option{{ i }}" class="ml-2" [innerHTML]="fragmentarTexto(option)">{{ option }}</label>
                     </div>
                 </div>
 

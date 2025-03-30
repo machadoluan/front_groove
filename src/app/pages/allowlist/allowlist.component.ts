@@ -7,7 +7,7 @@ import { AuthService } from '../../service/auth.service';
 import { ServerService } from '../../service/server.service';
 import { ProgressBar } from 'primeng/progressbar';
 import { ToastrService } from '../../service/toastr.service';
-
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RadioButton } from 'primeng/radiobutton';
 
 @Component({
@@ -172,7 +172,8 @@ export class AllowlistComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private serverService: ServerService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private sanitizer: DomSanitizer
   ) {
     this.selectRandomQuestions();
   }
@@ -270,4 +271,15 @@ export class AllowlistComponent implements OnInit {
   }
 
 
+  fragmentarTexto(texto: string): SafeHtml {
+    const spans = texto.split('').map(char => {
+      // Se for espaço, troca por &nbsp; para garantir espaçamento
+      const displayChar = char === ' ' ? '&nbsp;' : char;
+      return `<span>${displayChar}</span>`;
+    }).join('');
+  
+    return this.sanitizer.bypassSecurityTrustHtml(spans);
+  }
+  
+  
 }
