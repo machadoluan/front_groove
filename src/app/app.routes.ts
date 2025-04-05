@@ -29,7 +29,7 @@ export const routes: Routes = [
   {
     path: 'allowlist',
     component: AllowlistComponent,
-    // canActivate: [allowlistGuard]
+    canActivate: [allowlistGuard]
   },
   {
     path: '**',
