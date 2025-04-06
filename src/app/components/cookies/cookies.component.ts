@@ -10,11 +10,11 @@ import { CommonModule } from '@angular/common';
   animations: [
     trigger('slideUp', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(60px)' }),
+        style({ opacity: 0, transform: 'translateY(120px)' }),
         animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(60px)' })),
+        animate('300ms ease-in', style({ opacity: 0, transform: 'translateY(20px)' })),
       ]),
     ]),
   ],
