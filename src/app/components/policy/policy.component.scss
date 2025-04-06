@@ -19,13 +19,34 @@ main {
     }
 }
 
+.privacy-content {
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 
-.privacy-content h2 {
-    margin-top: 20px;
-    margin-bottom: 10px;
+    p {
+        margin-bottom: 15px;
+    }
 }
 
-.privacy-content p {
-    margin-bottom: 15px;
+/* Responsividade */
+@media (max-width: 768px) {
+    main {
+        padding: 0 2rem;
+    }
+
+    .privacy-content {
+        padding: 0 2rem;
+    }
 }
 
+@media (max-width: 480px) {
+    main {
+        padding: 0 1rem;
+    }
+
+    .privacy-content {
+        padding: 0 0.5rem;
+    }
+}
