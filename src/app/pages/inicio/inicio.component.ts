@@ -24,8 +24,7 @@ import { TermsComponent } from "../../components/terms/terms.component";
     Dialog,
     MessageComponent,
     RouterLink,
-    PanelModule,
-    TermsComponent
+    PanelModule
 ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
