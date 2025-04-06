@@ -13,6 +13,13 @@
     z-index: 1000000;
     border-radius: 8px;
 
+    @media (max-width: 430px) {
+
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+
     h2,
     p {
         color: #000;
