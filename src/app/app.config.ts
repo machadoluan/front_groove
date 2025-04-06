@@ -23,7 +23,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimationsAsync(),
     provideToastr(),
-    provideAnimationsAsync(),
     provideAnimations(),
     provideNgxMask(),
     { provide: LOCALE_ID, useValue: 'pt-BR' },

@@ -1,0 +1,30 @@
+/* Conteúdo principal */
+main {
+    max-width: 1300px;
+    min-width: 300px;
+    width: 100%;
+    margin: 8rem auto;
+    display: flex;
+    flex-direction: column;
+
+    ul {
+        padding-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        li {
+            list-style: disc;
+        }
+    }
+}
+
+.terms-content h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+.terms-content p {
+    margin-bottom: 15px;
+}

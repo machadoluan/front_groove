@@ -12,6 +12,7 @@ import { ServerService } from '../../service/server.service';
 import { MessageComponent } from "../../components/message/message.component";
 import { environment } from '../../../environments/environment';
 import { PanelModule } from 'primeng/panel';
+import { TermsComponent } from "../../components/terms/terms.component";
 
 @Component({
   selector: 'app-inicio',
@@ -23,8 +24,9 @@ import { PanelModule } from 'primeng/panel';
     Dialog,
     MessageComponent,
     RouterLink,
-    PanelModule
-  ],
+    PanelModule,
+    TermsComponent
+],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

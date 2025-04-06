@@ -1,0 +1,54 @@
+@use '../../../../public/variables.scss' as *;
+
+
+.cookies {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 0;
+    width: 350px;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    z-index: 1000;
+    border-radius: 8px;
+
+    h2,
+    p {
+        color: #000;
+    }
+
+    a {
+        color: $primary;
+        text-decoration: underline;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+
+
+
+    button {
+        width: 100%;
+        padding: .5rem;
+        border-radius: 5px;
+        border: none;
+        background-color: $primary;
+        color: $secundary;
+        font-weight: 600;
+
+        &:nth-child(2) {
+            background-color: transparent;
+            border: 2px solid $primary;
+            color: $secundary;
+        }
+    }
+
+    .btns {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+
+    }
+}

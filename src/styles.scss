@@ -87,6 +87,7 @@ body {
 
 .btn-style-global {
   transition: all 100ms ease-in-out !important;
+  cursor: pointer;
 
   &:hover {
     background-color: #FBB87D !important;
@@ -99,7 +100,10 @@ body {
 
 .noselect {
   user-select: none;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none;    /* Firefox */
-  -ms-user-select: none;     /* IE10+/Edge */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
 }

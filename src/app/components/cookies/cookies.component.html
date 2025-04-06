@@ -1,0 +1,16 @@
+<div class="cookies" *ngIf="showPopup" [@slideUp]>
+  <h2>Cookies</h2>
+  <p>
+    Este site utiliza cookies para garantir que você tenha a melhor experiência
+    em nosso site.
+  </p>
+  <p>
+    Ao usar este site, você concorda com o uso de cookies conforme descrito em nossa <br>
+    <a href="/politica-de-cookies">Política de Cookies</a>.
+  </p>
+
+  <div class="btns">
+    <button class="btn-style-global" (click)="acceptCookies()">Aceitar</button>
+    <button class="btn-style-global" (click)="declineCookies()">Rejeitar</button>
+  </div>
+</div>

@@ -5,12 +5,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { PrimeNG } from 'primeng/config';
 import { ToastModule } from 'primeng/toast';
+import { CookiesComponent } from "./components/cookies/cookies.component";
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule, ToastModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule, ToastModule, CookiesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
