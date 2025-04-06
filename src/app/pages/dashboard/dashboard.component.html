@@ -238,7 +238,7 @@
 
                     <ng-template pTemplate="header">
                       <tr>
-                        <th pSortableColumn="nome" style="width:25%" class="left">Nome</th>
+                        <th pSortableColumn="nome" style="width:25%" class="left">Assunto</th>
                         <th pSortableColumn="dataSuporte" style="width:25%">Data do ticket</th>
                         <th pSortableColumn="personagem" style="width:25%">Motivo</th>
                         <th pSortableColumn="status" style="width:25%" class="right">Status</th>
@@ -246,9 +246,9 @@
                     </ng-template>
 
                     <ng-template pTemplate="body" let-ticket>
-                      <tr>
-                        <td class="left" style="width:25%">{{ ticket.nome }}</td>
-                        <td>{{ ticket.dataSuporte }}</td>
+                      <tr (click)="openTicket(ticket.id)">
+                        <td class="left" style="width:25%">{{ ticket.subject }}</td>
+                        <td>{{ticket.createdAt | date:'shortTime' }}</td>
                         <td>{{ ticket.motivo }}</td>
                         <td class="right">{{ ticket.status }}</td>
                       </tr>
@@ -289,3 +289,4 @@
 
 
 <app-create-ticket></app-create-ticket>
+<app-ticket></app-ticket>

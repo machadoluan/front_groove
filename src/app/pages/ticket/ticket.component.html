@@ -1,0 +1,59 @@
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false"
+  [header]="'Ticket #' + ticket.id">
+  <div class="create_suporte">
+    <div class="dados">
+      <div class="form-group">
+        <label for="personagem">Motivo selecionado</label>
+        <p-select id="personagem" name="name" [optionLabel]="ticket.subject" placeholder="Motivo"
+          class="w-full md:w-56" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="assunto">Assunto</label>
+      <input type="text" pInputText placeholder="Deixe um assunto" [(ngModel)]="ticket.subject" disabled="true" />
+    </div>
+    <div class="form-group" *ngIf="ticket.subject=== '[🚨] Denuncia'">
+      <label for="assunto">Id do denunciado*</label>
+      <input type="text" pInputText placeholder="Id" />
+    </div>
+    <div class="form-group" *ngIf="ticket.subject === '[🚨] Denuncia'">
+      <label for="assunto">Link do clipe</label>
+      <input type="text" pInputText placeholder="Url" />
+    </div>
+    <div class="form-group">
+      <label for="obs">Observações</label>
+      <span for="obs" class="msg-hearder"> {{ ticket.messages[0].sender === 'USER' ? 'Eu' : 'Staff' }},
+        {{ ticket.messages[0].createdAt | date:'dd/MM HH:mm' }}</span>
+      <textarea id="obs" rows="1" pTextarea   appAutoResize="{{ ticket.messages[0].message }}" placeholder="Deixe sua mensagem"
+        [(ngModel)]="ticket.messages[0].message" disabled="true"></textarea>
+    </div>
+    <div class="form-group" *ngFor="let msg of ticket.messages.slice(1)">
+      <label for="obs" class="msg-hearder">
+        {{ msg.sender === 'USER' ? 'Eu' : 'Staff' }},
+        {{ msg.createdAt | date:'dd/MM HH:mm' }}
+      </label>
+      <textarea
+        id="obs"
+        rows="1"
+        pTextarea
+        readonly
+        [appAutoResize]="msg.message"
+        placeholder="Deixe sua mensagem"
+        [(ngModel)]="msg.message"
+        disabled="true">
+      </textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="resposta">Responder</label>
+      <textarea id="resposta" rows="1" pTextarea   placeholder="Deixe sua mensagem"
+       ></textarea>
+    </div>
+
+    <button class="btn-style-global">
+      <i class="fa-solid fa-paper-plane"></i>
+      Enviar ticket
+    </button>
+
+  </div>
+</p-dialog>

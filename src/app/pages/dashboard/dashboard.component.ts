@@ -21,6 +21,9 @@ import { ToastrService } from '../../service/toastr.service';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { CreateTicketComponent } from '../../components/create-ticket/create-ticket.component';
+import { TicketService } from '../../service/ticket.service';
+import { Router } from '@angular/router';
+import { TicketComponent } from '../ticket/ticket.component';
 
 
 
@@ -42,7 +45,8 @@ import { CreateTicketComponent } from '../../components/create-ticket/create-tic
     ToastModule,
     SelectModule,
     TextareaModule,
-    CreateTicketComponent
+    CreateTicketComponent,
+    TicketComponent
   ],
   animations: [
     trigger('detailExpand', [
@@ -57,24 +61,14 @@ import { CreateTicketComponent } from '../../components/create-ticket/create-tic
 })
 export class DashboardComponent implements OnInit {
   @ViewChild(CreateTicketComponent, { static: true }) dialogCreateTicket!: CreateTicketComponent;
+  @ViewChild(TicketComponent, { static: true }) ticketComponent!: TicketComponent;
 
 
   @ViewChild('dt1', { static: true }) dt1!: Table
 
 
   // Dados historico suporte
-  dataSourceSuporte: historicoSuporte[] = [
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Carro desaparecido", dataSuporte: "15/05/2024", motivo: "Biriba Verde", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", motivo: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", motivo: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", motivo: "john wick", status: 'Aguardando' },
-    { nome: "Teste", dataSuporte: "Teste", motivo: "Buddy poke", status: 'Concluido' }
-  ]
+  dataSourceSuporte: historicoSuporte[] = []
   selectedSuporte: any; // Para armazenar a compra selecionada
 
   user: any;
@@ -104,12 +98,15 @@ export class DashboardComponent implements OnInit {
     private serverService: ServerService,
     private discordService: DiscordService,
     private authService: AuthService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private ticketService: TicketService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.user = this.auth.getUserFromToken()
     this.user.dataNascimento = this.formData(this.user.dataNascimento)
+    this.getTicket()
 
     this.serverService.getCharacters(this.user.discordId).subscribe(
       (res: any) => {
@@ -179,6 +176,16 @@ export class DashboardComponent implements OnInit {
 
   }
 
+
+  getTicket() {
+    this.ticketService.getTicketsUser(this.user.id).subscribe({
+      next: (res: any) => {
+        this.dataSourceSuporte = res
+        console.log(this.dataSourceSuporte)
+      }
+    })
+  }
+
   getAvatar(userId: string, avatar: string) {
     return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
   }
@@ -208,6 +215,12 @@ export class DashboardComponent implements OnInit {
 
 
 
+  openTicket(ticketId: number) {
+    this.ticketComponent.display = true
+    this.ticketComponent.loadTickets(ticketId)
+  }
+
+
   filterGlobal(event: Event, dt1: any) {
     const inputValue = (event.target as HTMLInputElement).value;
     dt1.filterGlobal(inputValue, 'contains');
@@ -225,7 +238,7 @@ export class DashboardComponent implements OnInit {
     const defaultAvatar = 'img/profile_default.jpg';
 
 
-    if (this.selectedTab === 0 || this.selectedTab === 1 ) {
+    if (this.selectedTab === 0 || this.selectedTab === 1) {
       return this.user.avatar;
     } else {
       return this.selectedCharacter?.profilePhoto || defaultAvatar;

@@ -10,6 +10,7 @@ import { allowlistGuard } from './allowlist.guard';
 import { TermsComponent } from './components/terms/terms.component';
 import { PolicyComponent } from './components/policy/policy.component';
 import { PolicyCookiesComponent } from './components/policy-cookies/policy-cookies.component';
+import { TicketComponent } from './pages/ticket/ticket.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
     path: 'politica-de-cookies',
     component: PolicyCookiesComponent
 
+  },
+  {
+    path: 'ticket/:id',
+    component: TicketComponent
   },
   {
     path: 'dashboard',

@@ -1,0 +1,136 @@
+@use '../../../../public/variables.scss' as *;
+
+
+::ng-deep .p-dialog {
+    background-color: rgba($color: #292929, $alpha: 1.0) !important;
+
+    width: 50vw;
+
+    @media (max-width: 1200px) {
+        width: 50% !important;
+    }
+
+    @media (max-width: 992px) {
+        width: 60% !important;
+    }
+
+    @media (max-width: 768px) {
+        width: 70% !important;
+    }
+
+    @media (max-width: 576px) {
+        width: 90% !important;
+        padding: 0 !important;
+    }
+
+    .create_suporte {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1.5rem;
+        padding: 0 1rem;
+        position: relative;
+
+
+
+        .dados {
+            width: 100%;
+            display: flex;
+            gap: 1rem;
+
+            .p-select {
+                width: 40% !important;
+                background-color: transparent !important;
+                border: 2px solid $primary !important;
+                color: white !important;
+            }
+
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            gap: .1rem;
+
+            // .p-select {
+            //     width: 33.5% !important;
+            //     background-color: transparent !important;
+            //     border: 2px solid $primary !important;
+            //     color: white !important;
+            // }
+
+            .p-inputtext,
+            .p-textarea {
+                padding: 0.5rem .75rem !important;
+                font-size: 14px;
+                width: 100%;
+                outline: none !important;
+                background-color: rgba($color: $primary, $alpha: .1) !important;
+                border: 2px solid rgba($color: $primary, $alpha: 0.5) !important;
+                border-radius: 6px !important;
+
+                &#resposta {
+                    background-color: transparent !important;
+                    border: 2px solid rgba($color: $primary, $alpha: 1) !important;
+                }
+
+                &:disabled {
+                    color: white !important;
+                }
+            }
+
+            .msg-hearder {
+                color: #d3d3d3;
+                padding-left: 10px;
+            }
+
+            .p-textarea {
+                // height: auto !important;
+            }
+
+
+        }
+
+
+        button {
+            padding: .5rem 2rem;
+            background-color: $primary;
+            color: $secundary;
+            border-radius: 6px;
+            border: none;
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+            cursor: pointer;
+            justify-content: center;
+
+
+            i {
+                color: $secundary;
+
+            }
+        }
+
+        @media (max-width: 576px) {
+            padding: 0 !important;
+
+            button {
+                width: 100%;
+            }
+        }
+
+
+    }
+}
+
+::ng-deep .p-dialog-header {
+    padding: 1.5rem 2rem !important;
+}
+
+::ng-deep .p-select-overlay,
+.p-datepicker-panel {
+    background-color: rgba($color: #292929, $alpha: 1.0) !important;
+}
