@@ -10,6 +10,7 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { environment } from '../../../environments/environment';
+import { LogService } from '../../service/log.service';
 
 
 @Component({
@@ -41,7 +42,9 @@ export class HeaderComponent implements OnInit {
     private http: HttpClient,
     private serverService: ServerService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private log: LogService
+
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -51,7 +54,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
 
     const token = localStorage.getItem('token');
 
@@ -100,6 +103,8 @@ export class HeaderComponent implements OnInit {
   }
 
 
+
+
   getAvatar(userId: string, avatar: string) {
     return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
   }
@@ -144,7 +149,9 @@ export class HeaderComponent implements OnInit {
   }
 
   loginWithDiscord() {
+    this.log.log('clique_discord').subscribe()
     window.location.href = `${environment.apiUrl}/auth/discord`;
+
   }
 
   confirm1(event: Event) {

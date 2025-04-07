@@ -96,6 +96,10 @@ body {
   &:active {
     background-color: #AB6B32 !important;
   }
+
+  &:disabled {
+    background-color: rgba($color: $primary, $alpha: 0.5) !important;
+  }
 }
 
 .noselect {

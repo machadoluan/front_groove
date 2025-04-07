@@ -9,6 +9,7 @@ import { ProgressBar } from 'primeng/progressbar';
 import { ToastrService } from '../../service/toastr.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RadioButton } from 'primeng/radiobutton';
+import { LogService } from '../../service/log.service';
 
 @Component({
   selector: 'app-allowlist',
@@ -173,7 +174,8 @@ export class AllowlistComponent implements OnInit {
     private auth: AuthService,
     private serverService: ServerService,
     private toastrService: ToastrService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private log: LogService
   ) {
     this.selectRandomQuestions();
   }
@@ -282,4 +284,8 @@ export class AllowlistComponent implements OnInit {
   }
   
   
+  cancelAllowlist(){
+    this.log.log('cancelar_allowlist').subscribe()
+    this.router.navigate(['/'])
+  }
 }

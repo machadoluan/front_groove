@@ -1,7 +1,7 @@
 @use '../../../../public/variables.scss' as *;
 
 
-::ng-deep .p-dialog {
+::ng-deep .ticket-dialog {
     background-color: rgba($color: #292929, $alpha: 1.0) !important;
 
     width: 50vw;
@@ -32,52 +32,57 @@
         padding: 0 1rem;
         position: relative;
 
-
-
-        .dados {
+        form {
             width: 100%;
-            display: flex;
-            gap: 1rem;
-
-            .p-select {
-                width: 100% !important;
-                background-color: transparent !important;
-                border: 2px solid $primary !important;
-                color: white !important;
-            }
-
-        }
-
-        .form-group {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            gap: .5rem;
+            gap: 1rem;
 
-            // .p-select {
-            //     width: 33.5% !important;
-            //     background-color: transparent !important;
-            //     border: 2px solid $primary !important;
-            //     color: white !important;
-            // }
-
-            .p-inputtext,
-            .p-textarea {
-                font-size: 14px;
+            .dados {
                 width: 100%;
+                display: flex;
+                gap: 1rem;
 
-                background-color: transparent !important;
-                border: 2px solid $primary !important;
+                .p-select {
+                    width: 100% !important;
+                    background-color: transparent !important;
+                    border: 2px solid $primary !important;
+                    color: white !important;
+                }
+
             }
 
-            .p-textarea {
-                height: auto !important;
-            }
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: .5rem;
 
+                // .p-select {
+                //     width: 33.5% !important;
+                //     background-color: transparent !important;
+                //     border: 2px solid $primary !important;
+                //     color: white !important;
+                // }
+
+                .p-inputtext,
+                .p-textarea {
+                    font-size: 14px;
+                    width: 100%;
+
+                    background-color: transparent !important;
+                    border: 2px solid $primary !important;
+                }
+
+                .p-textarea {
+                    height: auto !important;
+                }
+
+
+            }
 
         }
-
 
         button {
             padding: .5rem 2rem;
@@ -91,6 +96,7 @@
             cursor: pointer;
             justify-content: center;
 
+           
 
             i {
                 color: $secundary;

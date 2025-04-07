@@ -13,6 +13,7 @@ import { MessageComponent } from "../../components/message/message.component";
 import { environment } from '../../../environments/environment';
 import { PanelModule } from 'primeng/panel';
 import { TermsComponent } from "../../components/terms/terms.component";
+import { LogService } from '../../service/log.service';
 
 @Component({
   selector: 'app-inicio',
@@ -25,7 +26,7 @@ import { TermsComponent } from "../../components/terms/terms.component";
     MessageComponent,
     RouterLink,
     PanelModule
-],
+  ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -88,7 +89,8 @@ export class InicioComponent implements OnInit {
     private carrinhoService: CarrinhoService,
     private route: ActivatedRoute,
     private serverService: ServerService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private log: LogService
   ) { }
 
 
@@ -103,6 +105,8 @@ export class InicioComponent implements OnInit {
     } else {
       this.mostrarFila = true
     }
+
+
 
 
     // New Cadastro
@@ -248,7 +252,12 @@ export class InicioComponent implements OnInit {
   }
 
   entrarlink() {
+    this.log.log('clique_lista_espera').subscribe()
+
     window.location.href = `${environment.apiUrl}/auth/discord`;
   }
 
+  fazerAllowlist() {
+    this.log.log('fazer_allowlist').subscribe()
+  }
 }

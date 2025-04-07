@@ -295,5 +295,15 @@ export class DashboardComponent implements OnInit {
     this.toggleBtns = !this.toggleBtns;
   }
 
+  atualizarListaTickets() {
+    this.ticketService.getTicketsUser(this.user.id).subscribe(
+      (tickets) => {
+        this.dataSourceSuporte = tickets as historicoSuporte[];
+      },
+      (error) => {
+        console.error('Erro ao atualizar tickets', error);
+      }
+    );
+  }
 
 }

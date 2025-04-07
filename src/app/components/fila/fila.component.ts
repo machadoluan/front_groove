@@ -2,6 +2,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { LogService } from '../../service/log.service';
 
 @Component({
   selector: 'app-fila',
@@ -26,13 +27,17 @@ import { environment } from '../../../environments/environment';
 export class FilaComponent {
   @Output() close = new EventEmitter<void>();
 
+  constructor(private log: LogService) { }
 
   closeModal() {
     this.close.emit()
+    this.log.log('clique_fechar_lista').subscribe()
+
   }
 
 
   entrar() {
+    this.log.log('clique_lista_espera').subscribe()
     window.location.href = `${environment.apiUrl}/auth/discord`;
   }
 }

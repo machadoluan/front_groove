@@ -6,7 +6,7 @@
     <section class="first-section">
         <div class="content">
             Já se imaginou nas ruas de
- <span class="break">SAN ANDREAS?</span>
+            <span class="break">SAN ANDREAS?</span>
 
             <a (click)="entrarlink()" *ngIf="!user" class="btn-style-global">
                 Entrar na lista de espera</a>
@@ -17,7 +17,7 @@
                     JOGUE AGORA
                 </a>
 
-                <a routerLink="/allowlist" class="btn-style-global" *ngIf="!allowList">
+                <a routerLink="/allowlist" (click)="fazerAllowlist()" class="btn-style-global" *ngIf="!allowList">
                     Fazer Allowlist
                 </a>
 

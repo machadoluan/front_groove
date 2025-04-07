@@ -1,36 +1,41 @@
-<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Criar ticket">
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Criar ticket"
+    styleClass="ticket-dialog">
     <div class="create_suporte">
-        <div class="dados">
-            <div class="form-group" *ngIf="characters.length < 0">
-                <label for="personagem">Personagem</label>
-                <p-select [options]="formattedCharacters" id="personagem" name="personagem"
-                    [(ngModel)]="selectedCharacter" optionLabel="displayName" placeholder="Selecione um personagem"
-                    class="w-full md:w-56" (onChange)="selectCharacter($event.value)" />
+        <form [formGroup]="dadosTicket">
+            <div class="dados">
+                <div class="form-group" *ngIf="characters.length < 0">
+                    <label for="personagem">Personagem</label>
+                    <p-select [options]="formattedCharacters" id="personagem" name="personagem"
+                        [(ngModel)]="selectedCharacter" optionLabel="displayName" placeholder="Selecione um personagem"
+                        class="w-full md:w-56" (onChange)="selectCharacter($event.value)" formControlName="character" />
+                </div>
+                <div class="form-group">
+                    <label for="personagem">Selecione o motivo</label>
+                    <p-select [options]="categorias" id="personagem" name="name" [(ngModel)]="selectedCategoria"
+                        optionLabel="name" placeholder="Motivo" class="w-full md:w-56" formControlName="motivo" />
+                </div>
             </div>
             <div class="form-group">
-                <label for="personagem">Selecione o motivo</label>
-                <p-select [options]="categorias" id="personagem" name="name" [(ngModel)]="selectedCategoria"
-                    optionLabel="name" placeholder="Motivo" class="w-full md:w-56" />
+                <label for="assunto">Assunto</label>
+                <input type="text" pInputText placeholder="Deixe um assunto" formControlName="subject" />
             </div>
-        </div>
-        <div class="form-group">
-            <label for="assunto">Assunto</label>
-            <input type="text" pInputText placeholder="Deixe um assunto" />
-        </div>
-        <div class="form-group" *ngIf="selectedCategoria?.name === '[🚨] Denuncia'">
-            <label for="assunto">Id do denunciado*</label>
-            <input type="text" pInputText placeholder="Id" />
-        </div>
-        <div class="form-group" *ngIf="selectedCategoria?.name === '[🚨] Denuncia'">
-            <label for="assunto">Link do clipe</label>
-            <input type="text" pInputText placeholder="Url" />
-        </div>
-        <div class="form-group">
-            <label for="obs">Observações</label>
-            <textarea rows="5" cols="30" pTextarea autoResize="none" placeholder="Deixe sua mensagem"></textarea>
-        </div>
+            <div class="form-group" *ngIf="selectedCategoria?.name === '[🚨] Denuncia'">
+                <label for="assunto">Id do denunciado*</label>
+                <input type="text" pInputText placeholder="Id" formControlName="subject" />
+            </div>
+            <div class="form-group" *ngIf="selectedCategoria?.name === '[🚨] Denuncia'">
+                <label for="assunto">Link do clipe</label>
+                <input type="text" pInputText placeholder="Url" formControlName="url" />
+            </div>
+            <div class="form-group">
+                <label for="obs">Observações</label>
+                <textarea rows="5" cols="30" pTextarea autoResize="none" placeholder="Deixe sua mensagem"
+                    formControlName="observation"></textarea>
+            </div>
+        </form>
 
-        <button class="btn-style-global">
+
+        <button class="btn-style-global" [disabled]="!dadosTicket.valid" (click)="enviarTicket()">
             <i class="fa-solid fa-paper-plane"></i>
             Enviar ticket
         </button>
