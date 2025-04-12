@@ -153,17 +153,20 @@ export class InicioComponent implements OnInit {
       )
     }
     // VerifyAllowList
-    this.serverService.verifyAllowList(this.user.license).subscribe({
-      next: (res: any) => {
-        console.log("Valor recebido do backend:", res);
-        this.allowList = res;
-        console.log("allowList atualizado para:", this.allowList);
-        this.cdr.detectChanges(); // Força o Angular a atualizar a UI
-      },
-      error: (err) => {
-        console.error("Erro ao buscar AllowList:", err);
-      }
-    });
+    if(this.user){
+      this.serverService.verifyAllowList(this.user.license).subscribe({
+        next: (res: any) => {
+          console.log("Valor recebido do backend:", res);
+          this.allowList = res;
+          console.log("allowList atualizado para:", this.allowList);
+          this.cdr.detectChanges(); // Força o Angular a atualizar a UI
+        },
+        error: (err) => {
+          console.error("Erro ao buscar AllowList:", err);
+        }
+      });
+    }
+   
 
   }
 
