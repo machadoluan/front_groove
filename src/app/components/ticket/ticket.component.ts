@@ -60,19 +60,23 @@ export class TicketComponent implements OnInit {
   }
 
   sendMessage() {
-    // if (!this.ticket || !this.ticket.id || !this.newMessage.trim()) return;
+    if (!this.ticket || !this.ticket.id || !this.newMessage.trim()) return;
 
-    // this.ticketService.addMessage(this.ticket.id, { sender: 'USER', message: this.newMessage }).subscribe({
-    //   next: (res: any) => {
-    //     // Adiciona a nova mensagem ao chat
-    //     this.ticket.messages.push(res);
-    //     this.newMessage = '';
-    //   },
-    //   error: (err) => {
-    //     console.error('Erro ao enviar mensagem:', err);
-    //   }
-    // });
+    this.ticketService.addMessage(this.ticket.id, { sender: 'USER', message: this.newMessage }).subscribe({
+      next: (res: any) => {
+        // Adiciona a nova mensagem ao chat
+        this.ticket.messages.push(res);
+        this.newMessage = '';
+      },
+      error: (err) => {
+        console.error('Erro ao enviar mensagem:', err);
+      }
+    });
   }
 
+  get isLastMessageUser(): boolean {
+    const lastMessage = this.ticket?.messages?.[this.ticket.messages.length - 1];
+    return lastMessage?.sender === 'USER';
+  }
 
 }

@@ -1,10 +1,10 @@
-<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false"
-  header="Ticket">
+<p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" header="Ticket">
   <div class="create_suporte" *ngIf="ticket">
     <div class="dados">
       <div class="form-group">
         <label for="personagem">Motivo Selecionado</label>
-        <input class="motivo" type="text" pInputText placeholder="Deixe um assunto" [(ngModel)]="ticket.motivo" disabled="true" />
+        <input class="motivo" type="text" pInputText placeholder="Deixe um assunto" [(ngModel)]="ticket.motivo"
+          disabled="true" />
       </div>
     </div>
     <div class="form-group">
@@ -23,33 +23,26 @@
       <label for="obs">Observações</label>
       <span for="obs" class="msg-hearder"> {{ ticket.messages[0].sender === 'USER' ? 'Eu' : 'Staff' }},
         {{ ticket.messages[0].createdAt | date:'dd/MM HH:mm' }}</span>
-      <textarea id="obs"  pTextarea autoResize   placeholder="Deixe sua mensagem"
-        [(ngModel)]="ticket.messages[0].message" disabled="true"></textarea>
+      <textarea id="obs" pTextarea autoResize placeholder="Deixe sua mensagem" [(ngModel)]="ticket.messages[0].message"
+        disabled="true"></textarea>
     </div>
     <div class="form-group" *ngFor="let msg of ticket.messages.slice(1)">
       <label for="obs" class="msg-hearder">
         {{ msg.sender === 'USER' ? 'Eu' : 'Staff' }},
         {{ msg.createdAt | date:'dd/MM HH:mm' }}
       </label>
-      <textarea
-      id="obs"
-      rows="1"
-      pTextarea
-      autoResize
-      [(ngModel)]="msg.message"
-      disabled="true"
-      placeholder="Deixe sua mensagem">
+      <textarea id="obs" rows="1" pTextarea autoResize [(ngModel)]="msg.message" disabled="true"
+        placeholder="Deixe sua mensagem">
     </textarea>
-    
-    </div>
-    
-    <div class="form-group">
-      <label for="resposta">Responder</label>
-      <textarea id="resposta"  pTextarea autoResize   placeholder="Deixe sua mensagem"
-       ></textarea>
+
     </div>
 
-    <button class="btn-style-global">
+    <div class="form-group" *ngIf="!isLastMessageUser">
+      <label for="resposta">Responder</label>
+      <textarea id="resposta" pTextarea autoResize placeholder="Deixe sua mensagem" [(ngModel)]="newMessage"></textarea>
+    </div>
+
+    <button class="btn-style-global" [disabled]="isLastMessageUser" (click)="sendMessage()">
       <i class="fa-solid fa-paper-plane"></i>
       Enviar ticket
     </button>

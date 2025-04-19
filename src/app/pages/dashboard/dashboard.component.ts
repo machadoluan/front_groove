@@ -23,7 +23,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { CreateTicketComponent } from '../../components/create-ticket/create-ticket.component';
 import { TicketService } from '../../service/ticket.service';
 import { Router } from '@angular/router';
-import { TicketComponent } from '../ticket/ticket.component';
+import { TicketComponent } from '../../components/ticket/ticket.component';
 
 
 

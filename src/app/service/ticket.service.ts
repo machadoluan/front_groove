@@ -26,4 +26,11 @@ export class TicketService {
   getTicket(ticketId: number) {
     return this.http.get(`${this.apiUrl}/${ticketId}`)
   }
+
+  addMessage(tickeId: number, message: any) {
+    return this.http.post(`${this.apiUrl}/${tickeId}/messages`, {
+      sender: message.sender,
+      message: message.message
+    })
+  }
 }

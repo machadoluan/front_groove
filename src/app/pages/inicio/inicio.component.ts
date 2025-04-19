@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
@@ -31,7 +31,7 @@ import { LogService } from '../../service/log.service';
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit, AfterViewInit  {
   readonly panelOpenState = signal(false);
 
   @ViewChild('backgroundVideo') backgroundVideo!: ElementRef;
@@ -41,6 +41,7 @@ export class InicioComponent implements OnInit {
   @ViewChild('controleVolume') controleVolume!: ElementRef;
   @ViewChild('btnTelaCheia') btnTelaCheia!: ElementRef;
   @ViewChild('iconeFullScreen') iconeFullScreen!: ElementRef;
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
   videoPaused: boolean = true;
   videoMutado: boolean = true;
@@ -93,6 +94,11 @@ export class InicioComponent implements OnInit {
     private log: LogService
   ) { }
 
+
+
+  ngAfterViewInit() {
+    
+  }
 
 
 
