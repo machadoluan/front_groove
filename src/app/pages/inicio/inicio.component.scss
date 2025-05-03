@@ -107,7 +107,7 @@
     background: #222728;
     // height: 100vh;
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -147,35 +147,34 @@
       .card {
         width: 100%;
         /* Ocupa 100% da largura da coluna */
-        height: 420px;
+        height: 500px;
         background-color: #222728;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         overflow: hidden;
+        background-size: cover;
+
+        background-position: center center;
+
         /* Garante que o conteúdo não ultrapasse o card */
 
         &.prata {
-          background: url(/img/prata.png);
           background-position: center center;
-          background-size: cover;
         }
 
         &.ouro {
-          background: url(/img/ouro.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
           background-position: center center;
           background-size: cover;
         }
 
         &.diamante {
-          background: url(/img/diamante.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
           background-position: center center;
           background-size: cover;
         }
 
         &.esmeralda {
-          background: url(/img/esmeralda.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
           background-position: center center;
           background-size: cover;
         }
@@ -184,11 +183,21 @@
           display: flex;
           border-radius: 10px;
           flex-direction: column;
+          align-items: center;
           justify-content: end;
-          height: 250px;
+          height: 350px;
+          gap: .5rem;
           padding: 0 20px 15px;
           box-shadow: 3px 29px 30px -11px rgba(0, 0, 0, 0.75);
-          background: linear-gradient(180deg, rgba(42, 42, 42, 0.00) -2.25%, rgba(23, 24, 25, 0.71) 17.41%, #0D0F0F 100%);
+          background: linear-gradient(180deg, rgba(42, 42, 42, 0.00) -2.25%, rgba(23, 24, 25, 0.788) 17.41%, #0D0F0F 100%);
+
+          h1 {
+            margin: 0 !important;
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 900;
+            color: $primary;
+          }
 
           p {
             display: -webkit-box;
@@ -197,54 +206,48 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: #CAC4D0;
+            font-size: 14px;
+            font-weight: 300;
+            padding: 0 !important;
+            margin: 0 !important;
           }
 
-          .buttons {
+          .description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Limita a 3 linhas */
+            -webkit-box-orient: vertical;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+            color: white !important;
+            height: 50px;
             display: flex;
-            justify-content: end;
-            gap: 0.5rem;
-            align-items: center;
+            justify-content: center;
+          }
 
-            .detalhes {
-              padding: 5px 10px;
-              border-radius: 6px;
-              border: 1px solid $primary;
-              color: $primary;
-              font-size: 12px;
-              cursor: pointer;
-            }
+          .valor {
+            font-size: 18px;
+            color: $primary;
+          }
 
-            .comprar {
-              display: flex;
-              gap: 5px;
-              padding: 5px 10px;
-              font-size: 12px;
-              border-radius: 6px;
-              background: $primary;
-              transition: all 100ms ease-in-out;
-
-              align-items: center;
-              color: $secundary;
-              cursor: pointer;
-
-              i {
-                color: $secundary;
-              }
-            }
+          button {
+            padding: .5rem 1rem;
+            font-size: 14px;
+            border-radius: 50px;
+            border: none;
+            background-color: $primary;
+            cursor: pointer;
           }
 
 
           span {
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-          }
-
-          p {
-            color: #CAC4D0;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: normal;
+            cursor: pointer;
           }
 
 
@@ -349,35 +352,34 @@
       .card {
         width: 100%;
         /* Ocupa 100% da largura da coluna */
-        height: 420px;
+        height: 500px;
         background-color: #222728;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         overflow: hidden;
+        background-size: cover;
+
+        background-position: center center;
+
         /* Garante que o conteúdo não ultrapasse o card */
 
-        &.onek-dima {
-          background: url(/img/diamente1.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
+        &.prata {
+          background-position: center center;
+        }
+
+        &.ouro {
           background-position: center center;
           background-size: cover;
         }
 
-        &.fourk-dima {
-          background: url(/img/diamante2.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
+        &.diamante {
           background-position: center center;
           background-size: cover;
         }
 
-        &.eightk-dima {
-          background: url(/img/diamante3.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
-          background-position: center center;
-          background-size: cover;
-        }
-
-        &.sixteen-dima {
-          background: url(/img/diamante4.png), lightgray 0px -3.441px / 100% 115.471% no-repeat;
+        &.esmeralda {
           background-position: center center;
           background-size: cover;
         }
@@ -386,57 +388,68 @@
           display: flex;
           border-radius: 10px;
           flex-direction: column;
+          align-items: center;
           justify-content: end;
-          height: 250px;
-          padding: 0 20px 15px;
+          height: 190px;
+          gap: 1rem;
+          padding: 2rem 0;
           box-shadow: 3px 29px 30px -11px rgba(0, 0, 0, 0.75);
-          background: linear-gradient(180deg, rgba(42, 42, 42, 0.00) -2.25%, rgba(23, 24, 25, 0.71) 17.41%, #0D0F0F 100%);
+          background: linear-gradient(180deg, rgba(42, 42, 42, 0.00) -2.25%, rgba(23, 24, 25, 0.788) 17.41%, #0D0F0F 100%);
 
-          .buttons {
-            display: flex;
-            justify-content: end;
-            gap: 0.5rem;
-            align-items: center;
+          h1 {
+            margin: 0 !important;
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 700;
+            color: $primary;
+          }
 
-            .detalhes {
-              padding: 5px 10px;
-              border-radius: 6px;
-              border: 1px solid $primary;
-              color: $primary;
-              font-size: 12px;
-              cursor: pointer;
-            }
+          p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Limita a 3 linhas */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #CAC4D0;
+            font-size: 14px;
+            font-weight: 300;
+            padding: 0 !important;
+            margin: 0 !important;
+          }
 
-            .comprar {
-              display: flex;
-              gap: 5px;
-              padding: 5px 10px;
-              font-size: 12px;
-              border-radius: 6px;
-              background: $primary;
+          .description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Limita a 3 linhas */
+            -webkit-box-orient: vertical;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+            color: white !important;
+          }
 
-              align-items: center;
-              color: $secundary;
-              cursor: pointer;
+          .valor {
+            font-size: 18px;
+            color: $primary;
+          }
 
-              i {
-                color: $secundary;
-              }
-            }
+          button {
+            padding: .5rem 2rem;
+            font-size: 14px;
+            border-radius: 50px;
+            border: none;
+            background-color: $primary;
+            cursor: pointer;
           }
 
 
           span {
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-          }
-
-          p {
-            color: #CAC4D0;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: normal;
+            cursor: pointer;
           }
 
 
@@ -1185,5 +1198,35 @@ mat-expansion-panel {
   @media (max-width: 800px) {
     width: 90% !important;
     margin: 0 auto;
+  }
+}
+
+
+::ng-deep .detalis_vip {
+  width: 40vw !important;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+
+    li {
+      list-style: none;
+      position: relative;
+      padding-left: 20px;
+      margin: 10px 0;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        background-color: white;
+        border-radius: 50%;
+      }
+    }
   }
 }

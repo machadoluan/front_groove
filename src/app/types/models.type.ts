@@ -4,6 +4,8 @@ export type Item = {
   quantity: number;
   price: number;
   class: string;
+  photo: string;
+  dateValidade: string;
 }
 
 export type historicoCompra = {

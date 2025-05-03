@@ -29,4 +29,10 @@ export class ServerService {
   verifyAllowList(license: string) {
     return this.http.post(`${this.UrlApi}/account/virifyAllowlist`, { license: license })
   }
+
+
+  // Vipps
+  getVips() {
+    return this.http.get(`${this.UrlApi}/card/vip`)
+  }
 }

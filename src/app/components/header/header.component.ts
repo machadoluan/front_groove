@@ -71,17 +71,17 @@ export class HeaderComponent implements OnInit {
     this.carrinho = this.carrinhoService.getCarrinho()
     console.log('Carrinho: ', this.carrinho)
 
-    if (this.user) {
-      this.serverService.getAccount(this.user.discordId).subscribe({
-        next: (res: any) => {
-          this.account = res[0]
-        },
-        error(err) {
-          console.error(err)
+    // if (this.user) {
+    //   this.serverService.getAccount(this.user.discordId).subscribe({
+    //     next: (res: any) => {
+    //       this.account = res[0]
+    //     },
+    //     error(err) {
+    //       console.error(err)
 
-        },
-      })
-    }
+    //     },
+    //   })
+    // }
   }
 
   @HostListener('window:scroll', [])

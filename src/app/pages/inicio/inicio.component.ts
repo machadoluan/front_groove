@@ -34,6 +34,8 @@ import { LogService } from '../../service/log.service';
 export class InicioComponent implements OnInit, AfterViewInit  {
   readonly panelOpenState = signal(false);
 
+  vipDetalis: boolean = false
+
   @ViewChild('backgroundVideo') backgroundVideo!: ElementRef;
   @ViewChild('btnParar') btnParar!: ElementRef;
   @ViewChild('btnAudio') btnAudio!: ElementRef;
@@ -57,18 +59,19 @@ export class InicioComponent implements OnInit, AfterViewInit  {
   errorJogue: boolean = false;
   allowList: boolean | null = null; // Para diferenciar quando ainda não carregou
 
-  vipItem: Item[] = [
-    { title: 'Passaporte VIP PRATA', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'prata' },
-    { title: 'Passaporte VIP OURO', description: "Seja o destaque na cidade com nosso pacote VIP. Domine o jogo e surpreenda a todos!", quantity: 1, price: 65, class: 'ouro' },
-    { title: 'Passaporte VIP DIAMANTE', description: "Desfrute de privilégios especiais com nosso VIP. Conquiste a cidade com estilo e vantagens exclusivas!", quantity: 1, price: 125, class: 'diamante' },
-    { title: 'Passaporte VIP esmeralda', description: "Desfrute de privilégios especiais com nosso VIP. Conquiste a cidade com estilo e vantagens exclusivas!", quantity: 1, price: 125, class: 'esmeralda' },
+  vipItem: any[] = [
+    { title: 'Grove Beginner', photo: "/img/VIP_PRATA.png", dateValidade: "30 Dias", description: "Conquiste a cidade com estilo, poder e respeito.", quantity: 1, price: 25, class: '' },
+    { title: 'Veterano da Grove',  photo: "/img/VIP_OURO.png", dateValidade: "", description: "Pra quem cresceu no bairro e conhece o corre", quantity: 1, price: 30, class: '' },
+    { title: 'OG da Grove',  photo: "/img/VIP_DIAMANTE.png", dateValidade: "", description: "Agora você dita as regras no bairro.", quantity: 1, price: 55, class: '' },
+    { title: 'Lenda da Grove',  photo: "/img/VIP_ESMERALDA.png", dateValidade: "", description: "Você virou parte da história. Agora é você quem escreve o futuro. ", quantity: 1, price: 55, class: '' }
   ];
 
+
   dimaItem: Item[] = [
-    { title: '1.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 10, class: 'onek-dima' },
-    { title: '4.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 30, class: 'fourk-dima' },
-    { title: '8.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'eightk-dima' },
-    { title: '16.000 Diamantes', description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'sixteen-dima' }
+    { title: '1.000 Diamantes', photo: "/img/pacote_dima_1.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 10, class: 'onek-dima' },
+    { title: '4.000 Diamantes',  photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 30, class: 'fourk-dima' },
+    { title: '8.000 Diamantes',  photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'eightk-dima' },
+    { title: '16.000 Diamantes',  photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'sixteen-dima' }
   ];
 
   questions = [
@@ -147,32 +150,45 @@ export class InicioComponent implements OnInit, AfterViewInit  {
       }
     });
 
-    if (this.user && this.user.discordId) {
-      this.serverService.getAccount(this.user.discordId).subscribe(
-        (res: any) => {
-          this.account = res.length ? res[0] : null;
-          this.cdr.detectChanges();
-        },
-        (err: any) => {
-          console.error(err);
-        }
-      )
-    }
+    // if (this.user && this.user.discordId) {
+    //   this.serverService.getAccount(this.user.discordId).subscribe(
+    //     (res: any) => {
+    //       this.account = res.length ? res[0] : null;
+    //       this.cdr.detectChanges();
+    //     },
+    //     (err: any) => {
+    //       console.error(err);
+    //     }
+    //   )
+    // }
     // VerifyAllowList
-    if(this.user){
-      this.serverService.verifyAllowList(this.user.license).subscribe({
-        next: (res: any) => {
-          console.log("Valor recebido do backend:", res);
-          this.allowList = res;
-          console.log("allowList atualizado para:", this.allowList);
-          this.cdr.detectChanges(); // Força o Angular a atualizar a UI
-        },
-        error: (err) => {
-          console.error("Erro ao buscar AllowList:", err);
-        }
-      });
-    }
+    // if(this.user){
+    //   this.serverService.verifyAllowList(this.user.license).subscribe({
+    //     next: (res: any) => {
+    //       console.log("Valor recebido do backend:", res);
+    //       this.allowList = res;
+    //       console.log("allowList atualizado para:", this.allowList);
+    //       this.cdr.detectChanges(); // Força o Angular a atualizar a UI
+    //     },
+    //     error: (err) => {
+    //       console.error("Erro ao buscar AllowList:", err);
+    //     }
+    //   });
+    // }
    
+
+    // Get Vipps
+
+    // this.serverService.getVips().subscribe({
+    //   next: (res: any)  => {
+    //     this.vipItem = res
+    //     this.cdr.detectChanges();
+    //     console.log(this.vipItem)
+    //   },
+    //   error: (err) =>{
+    //     console.error(err)
+    //   }
+    // })
 
   }
 
@@ -230,26 +246,8 @@ export class InicioComponent implements OnInit, AfterViewInit  {
     this.showCarrinho = !this.showCarrinho
   }
 
-  addCart(item: Item): void {
-    const itemIndex = this.carrinho.findIndex(cartItem =>
-      cartItem.title === item.title
-    )
-    if (itemIndex > -1) {
-      console.log('Ja tem um item no carrinho.')
 
-    } else {
-      this.carrinho.push({ ...item });
 
-    }
-    console.log("Item foi adicionado ao carrinho", item)
-    console.log("Carrinho: ", this.carrinho)
-    this.carrinhoService.addCart(item)
-
-  }
-
-  removeCart(item: Item) {
-    this.carrinho = this.carrinho.filter(cartItem => cartItem.title !== item.title)
-  }
 
   fecharFila() {
     this.mostrarFila = false;
