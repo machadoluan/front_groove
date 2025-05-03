@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, OnInit, ChangeDetectionStrategy, signal, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, mapToResolve, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CarouselModule } from 'primeng/carousel';
 import { Item } from '../../types/models.type';
@@ -57,21 +57,111 @@ export class InicioComponent implements OnInit, AfterViewInit  {
   account: any;
   criouConta: boolean = false;
   errorJogue: boolean = false;
-  allowList: boolean | null = null; // Para diferenciar quando ainda não carregou
+  allowList: boolean | null = null; 
+  vipSelecionado: any;
 
   vipItem: any[] = [
-    { title: 'Grove Beginner', photo: "/img/VIP_PRATA.png", dateValidade: "30 Dias", description: "Conquiste a cidade com estilo, poder e respeito.", quantity: 1, price: 25, class: '' },
-    { title: 'Veterano da Grove',  photo: "/img/VIP_OURO.png", dateValidade: "", description: "Pra quem cresceu no bairro e conhece o corre", quantity: 1, price: 30, class: '' },
-    { title: 'OG da Grove',  photo: "/img/VIP_DIAMANTE.png", dateValidade: "", description: "Agora você dita as regras no bairro.", quantity: 1, price: 55, class: '' },
-    { title: 'Lenda da Grove',  photo: "/img/VIP_ESMERALDA.png", dateValidade: "", description: "Você virou parte da história. Agora é você quem escreve o futuro. ", quantity: 1, price: 55, class: '' }
+    {
+      title: 'Grove Beginner',
+      photo: "/img/VIP_PRATA.png",
+      dateValidade: "30 Dias",
+      description: "Ideal para quem quer começar bem e com estilo de rua",
+      quantity: 1,
+      price: 25,
+      class: 'prata',
+      detalis: [
+        "Spray personalizado com a tag da Grove (item de inventário)",
+        "Acesso a tatuagens e cortes de cabelo dos OGs",
+        "Acesso a roupas urbanas exclusivas (moletom, boné, camisa dos anos 90)",
+        "Baú do carro aumentado em +20kg",
+        "Salário simbólico de R$1.000/2 horas",
+        "Mochila com +10kg de capacidade",
+        "Acesso ao GROOVE STORE (Loja de itens Groove)",
+        "Caixa surpresa: Envelope do Ryder",
+        "Prioridade leve na fila (nível 20)",
+        "Tag “Iniciante da Grove” no Discord"
+      ]
+    },
+    {
+      title: 'Veterano da Grove',
+      photo: "/img/VIP_OURO.png",
+      dateValidade: "30 Dias",
+      description: "Pra quem cresceu no bairro e conhece o corre",
+      quantity: 1,
+      price: 75,
+      class: 'ouro',
+      detalis: [
+        "Spray personalizado com a tag da Grove (item de inventário)",
+        "Acesso a roupas urbanas exclusivas (moletom, boné, camisa dos anos 90)",
+        "Acesso a tatuagens e cortes de cabelo dos OGs",
+        "Estilo de andar exclusivo 'swagger anos 90'",
+        "Salário de R$5.000/2 horas",
+        "Desconto de 5% em todas lojas da Groove",
+        "+30kg de mochila / +1 slot de garagem",
+        "+10% de EXP em profissões ilegais",
+        "+1 slot no guarda-roupa",
+        "Caixa surpresa: Bolsa do CJ",
+        "Tag “Veterano Grove” no Discord",
+        "Prioridade média na fila (nível 50)"
+      ]
+    },
+    {
+      title: 'OG da Grove',
+      photo: "/img/VIP_DIAMANTE.png",
+      dateValidade: "30 Dias",
+      description: "Agora você dita as regras no bairro",
+      quantity: 1,
+      price: 150,
+      class: 'diamante',
+      detalis: [
+        "3x Spray personalizado com a tag da Grove (item de inventário)",
+        "Acesso a tatuagens e cortes de cabelo dos OGs",
+        "Acesso a roupas urbanas exclusivas (moletom, boné, camisa dos anos 90)",
+        "+100kg de baú (Residência em seu nome) / +3 slots de garagem - 30 dias",
+        "+20% de EXP geral em profissões (RP balanceado)",
+        "Bônus de contrato em missões ilegais (+10% do valor do contrato)",
+        "Imunidade a perda de itens na água",
+        "Chance de encontrar “memórias da infância” (itens que ativam falas ou áudios do CJ)",
+        "Caixa surpresa: Pacote do Smoke",
+        "Desconto de 10% em lojas e IPVA",
+        "Prioridade alta na fila (nível 80)",
+        "Tag “OG Grove” no Discord"
+      ]
+    },
+    {
+      title: 'Lenda da Grove',
+      photo: "/img/VIP_ESMERALDA.png",
+      dateValidade: "30 Dias",
+      description: "Você virou parte da história. Agora é você quem escreve o futuro.",
+      quantity: 1,
+      price: 220,
+      class: 'esmeralda',
+      detalis: [
+        "3x Spray personalizado com a tag da Grove (item de inventário)",
+        "Acesso a tatuagens e cortes de cabelo dos OGs",
+        "Acesso a roupas urbanas exclusivas (moletom, boné, camisa dos anos 90)",
+        "+100kg de baú (Residência em seu nome) / +3 slots de garagem - 30 dias",
+        "+20% de EXP geral em profissões (RP balanceado)",
+        "Bônus de contrato em missões ilegais (+10% do valor do contrato)",
+        "Imunidade a perda de itens na água",
+        "Caixa surpresa: Pacote do Smoke",
+        "Desconto de 15% em lojas e IPVA",
+        "Mansão VIP (Se disponível) - 30 dias",
+        "1x item Skin de arma à escolha",
+        "2x XP em missões de painel",
+        "Caixa surpresa: Caixa do Tenpenny",
+        "Efeito sonoro único ao logar: frase icônica do GTA SA",
+        "Prioridade máxima (fila zero)"
+      ]
+    }
   ];
-
+  
 
   dimaItem: Item[] = [
-    { title: '1.000 Diamantes', photo: "/img/pacote_dima_1.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 10, class: 'onek-dima' },
-    { title: '4.000 Diamantes',  photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 30, class: 'fourk-dima' },
-    { title: '8.000 Diamantes',  photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'eightk-dima' },
-    { title: '16.000 Diamantes',  photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 55, class: 'sixteen-dima' }
+    { title: '6.000 Diamantes', photo: "/img/pacote_dima_1.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 15, class: 'onek-dima' },
+    { title: '10.000 Diamantes',  photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
+    { title: '22.000 Diamantes',  photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
+    { title: '108.000 Diamantes',  photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
   ];
 
   questions = [
@@ -266,5 +356,11 @@ export class InicioComponent implements OnInit, AfterViewInit  {
 
   fazerAllowlist() {
     this.log.log('fazer_allowlist').subscribe()
+  }
+
+
+  seeMore(item: Item) {
+    this.vipSelecionado = item;
+    this.vipDetalis = true
   }
 }

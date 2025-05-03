@@ -33,7 +33,7 @@
 
     </section>
 
-    <section class="Vips" id="vips">
+    <section class="Vips" id="vips" *ngIf="user">
         <div class="margin-site">
             <div class="text">
                 <h1>Adquira seu VIP</h1>
@@ -49,7 +49,7 @@
                         <p class="description">{{item.description}}</p>
                         <p class="valor">R$ {{item.price}},00  <span class="vip_title">(30 dias)</span></p>
                         <button><i class="fas fa-crown"></i> Adquirir VIP</button>
-                        <span>Ver detalhes <i class="fas fa-chevron-right"></i></span>
+                        <span (click)="seeMore(item)">Ver detalhes <i class="fas fa-chevron-right"></i></span>
                     </div>
                 </div>
             </div>
@@ -274,29 +274,17 @@
 
 <!-- Dialogs -->
 
-<p-dialog header="Vip 1" [modal]="true" [(visible)]="vipDetalis" [style]="{ width: '25rem' }" styleClass="detalis_vip">
-    <h2>Ideal para quem quer começar bem e com estilo de rua</h2>
+<p-dialog [header]="vipSelecionado?.title" [modal]="true" [(visible)]="vipDetalis" [style]="{ width: '25rem' }" styleClass="detalis_vip">
+    <h2>{{vipSelecionado?.description}}</h2>
 
     <ul>
-        <li>Spray personalizado com a tag da Grove (item de inventário)</li>
-
-        <li>Acesso a tatuagens e cortes de cabelo dos OGs</li>
-
-        <li>Acesso a roupas urbanas exclusivas (moletom, boné, camisa dos anos 90)</li>
-
-        <li>Baú do carro aumentado em +20kg</li>
-
-        <li>Salário simbólico de R$1.000/2 horas</li>
-
-        <li>Mochila com +10kg de capacidade</li>
-
-        <li>Acesso ao GROOVE STORE (Loja de itens Groove)</li>
-
-        <li>Caixa surpresa: Envelope do Ryder</li>
-
-        <li>Prioridade leve na fila (nível 20)</li>
-
-        <li>Tag “Iniciante da Grove” no Discord</li>
+        <li *ngFor="let detalhe of vipSelecionado?.detalis">{{detalhe}}</li>
     </ul>
+
+    <div class="btn">
+        <button>
+            Comprar
+        </button>
+    </div>
 
 </p-dialog>
