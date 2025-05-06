@@ -1,27 +1,98 @@
-# Front end - Groove Street
+# Groove Street – Front-End
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+Este é o front-end do projeto **Groove Street**, desenvolvido com [Angular](https://angular.io/) e [Angular CLI](https://github.com/angular/angular-cli) versão 18.0.7.
 
-## Development server
+## ✅ Pré-requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Antes de começar, você precisa ter o seguinte instalado:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/) (versão 18 ou superior recomendada)
+- [npm](https://www.npmjs.com/) (vem com o Node.js)
+- [Angular CLI](https://angular.io/cli)  
+  Instale com o comando:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install -g @angular/cli
+```
 
-## Build
+> ⚠️ Caso você nunca tenha usado Angular, **não se preocupe** — este guia cobre o essencial para rodar o projeto.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🚀 Como rodar o projeto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Clone o repositório:**
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. **Instale as dependências:**
 
-## Further help
+```bash
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. **Inicie o servidor de desenvolvimento:**
+
+```bash
+ng serve
+```
+
+4. **Acesse no navegador:**
+
+Abra [http://localhost:4200](http://localhost:4200)
+
+---
+
+## 🛠️ Comandos úteis
+
+### Gerar novo componente:
+
+```bash
+ng generate component nome-do-componente
+```
+
+### Gerar outras estruturas:
+
+```bash
+ng generate directive|pipe|service|class|guard|interface|enum|module
+```
+
+### Build de produção:
+
+```bash
+ng build
+```
+
+Os arquivos finais serão gerados na pasta `dist/`.
+
+---
+
+## ✅ Rodar testes
+
+### Testes unitários:
+
+```bash
+ng test
+```
+
+### Testes end-to-end (e2e):
+
+Primeiro, adicione uma ferramenta como [Cypress](https://www.cypress.io/) ou [Playwright](https://playwright.dev/). Exemplo com Cypress:
+
+```bash
+ng add @cypress/schematic
+ng e2e
+```
+
+---
+
+## ❓ Dúvidas ou problemas?
+
+- Use `ng help` no terminal para ajuda rápida.
+- Ou acesse a [documentação oficial do Angular CLI](https://angular.dev/tools/cli).
+```
+
+Se quiser, posso adaptar esse README para monorepos, Docker, ou incluir instruções de CI/CD. Quer adicionar algo assim?
