@@ -1,4 +1,4 @@
-# Groove Street – Front-End
+# Groove Roleplay – Website
 
 Este é o front-end do projeto **Groove Street**, desenvolvido com [Angular](https://angular.io/) e [Angular CLI](https://github.com/angular/angular-cli) versão 18.0.7.
 
@@ -93,6 +93,3 @@ ng e2e
 
 - Use `ng help` no terminal para ajuda rápida.
 - Ou acesse a [documentação oficial do Angular CLI](https://angular.dev/tools/cli).
-```
-
-Se quiser, posso adaptar esse README para monorepos, Docker, ou incluir instruções de CI/CD. Quer adicionar algo assim?
