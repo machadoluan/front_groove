@@ -32,7 +32,6 @@
         </div>
 
     </section>
-
     <section class="gallery">
         <div class="margin-site">
             <div class="text">
@@ -41,32 +40,35 @@
                     otimizada, por aqui você encontrará atualizações importantes que estamos fazendo no servidor. Fique
                     a vontade para conhecer! :)</p>
             </div>
-            <div class="content-gallery">
-                <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [numVisible]="5"
-                    style="max-width:640px; height: 900px" thumbnailsPosition="right" thumbnailsPosition="right"
-                    [(activeIndex)]="activeIndex" [verticalThumbnailViewPortHeight]="'450px'"
-                    [showThumbnailNavigators]="true">
 
-                    <ng-template pTemplate="item" let-item>
-                        <img [src]="item.itemImageSrc" [alt]="item.alt" style="width: 100%;" />
-                    </ng-template>
-                    <ng-template pTemplate="thumbnail" let-item>
-                        <img [src]="item.thumbnailImageSrc" [alt]="item.alt" />
+            <div class="gallery-container">
+                <div class="main-image">
+                    <!-- Se for vídeo, exibe o iframe -->
+                    <ng-container *ngIf="selectedImage.video; else showImage">
+                        <div class="block-channel"></div>
+                        <iframe [src]="getSafeVideoLink(selectedImage.videoLink)" frameborder="0"></iframe>
+                    </ng-container>
+
+                    <!-- Se for imagem, exibe a imagem normalmente -->
+                    <ng-template #showImage>
+                        <img [src]="selectedImage.itemImageSrc" [alt]="selectedImage.alt">
                     </ng-template>
 
-                </p-galleria>
-                <div class="gallery-title" *ngIf="images.length">
-                    <h2>{{ images[activeIndex].title }}</h2>
+                    <p class="caption">{{ selectedImage.title }}</p>
                 </div>
 
+                <div class="thumbnails-wrapper">
+                    <i class="fas fa-chevron-up nav-btn up" (click)="scrollThumbnails('up')"></i>
+                    <div class="thumbnails" #thumbContainer>
+                        <img *ngFor="let img of novidades" [src]="img.thumbnailImageSrc" [alt]="img.alt"
+                            [class.active]="img === selectedImage" (click)="onSelectImage(img)">
+                    </div>
+                    <i class="fas fa-chevron-down nav-btn down" (click)="scrollThumbnails('down')"></i>
+                </div>
             </div>
+
         </div>
     </section>
-
-    <iframe width="560" height="315"
-        src="https://www.youtube-nocookie.com/embed/r_SRTbbtlD4?autoplay=1&controls=0&modestbranding=1&rel=0&mute=1"
-        title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-    </iframe>
 
 
     <section class="Vips" id="vips" *ngIf="user">

@@ -15,6 +15,8 @@ import { PanelModule } from 'primeng/panel';
 import { TermsComponent } from "../../components/terms/terms.component";
 import { LogService } from '../../service/log.service';
 import { GalleriaModule } from 'primeng/galleria';
+import { NovidadeService } from '../../service/novidade.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-inicio',
@@ -47,6 +49,8 @@ export class InicioComponent implements OnInit, AfterViewInit {
   @ViewChild('btnTelaCheia') btnTelaCheia!: ElementRef;
   @ViewChild('iconeFullScreen') iconeFullScreen!: ElementRef;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
+  @ViewChild('thumbContainer') thumbContainer!: ElementRef;
+
 
   videoPaused: boolean = true;
   videoMutado: boolean = true;
@@ -62,9 +66,10 @@ export class InicioComponent implements OnInit, AfterViewInit {
   errorJogue: boolean = false;
   allowList: boolean | null = null;
   vipSelecionado: any;
-  activeIndex: number = 0;     
+  activeIndex: number = 0;
 
-  images: any[] = [];
+  novidades: any[] = [];
+  selectedImage: any;
 
   responsiveOptions: any[] = [
     {
@@ -202,6 +207,8 @@ export class InicioComponent implements OnInit, AfterViewInit {
     private serverService: ServerService,
     private cdr: ChangeDetectorRef,
     private log: LogService,
+    private novidadeService: NovidadeService,
+    private sanitizer: DomSanitizer
   ) { }
 
 
@@ -213,23 +220,7 @@ export class InicioComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.images = [
-      {
-        itemImageSrc: 'https://rollingstone.com.br/media/uploads/2023/12/gta-6-jogo-game-rockstar-foto-divulgacao.jpg',
-        thumbnailImageSrc: 'https://rollingstone.com.br/media/uploads/2023/12/gta-6-jogo-game-rockstar-foto-divulgacao.jpg',
-        alt: 'Descrição para Imagem 1',
-        title: 'Inserção de blips de garagem similares aos do GTA San Andreas.'
-      },
-      {
-        itemImageSrc: 'https://cdn.motor1.com/images/mgl/QeKLQ8/s3/gta-vi-new-trailer.jpg',
-        thumbnailImageSrc: 'https://cdn.motor1.com/images/mgl/QeKLQ8/s3/gta-vi-new-trailer.jpg',
-        alt: 'Descrição para Imagem 2',
-        title: 'Título 2'
-      },
-      
-      // … outras imagens …
-    ];
-
+    this.loadNovidades();
 
     const fila = localStorage.getItem('token')
     // this.dialogVisible = true;
@@ -383,4 +374,59 @@ export class InicioComponent implements OnInit, AfterViewInit {
     this.vipSelecionado = item;
     this.vipDetalis = true
   }
+
+  loadNovidades() {
+    this.novidadeService.getNovidades().subscribe({
+      next: (res: any[]) => {
+        this.novidades = res
+          .filter(item => item.visibilidade === true)
+          .reverse() // Inverte a ordem para que o último apareça primeiro
+          .map(item => ({
+            itemImageSrc: item.fotoLink,
+            thumbnailImageSrc: item.fotoLink,
+            alt: item.title || 'Sem descrição',
+            title: item.title,
+            videoLink: item.videoLink,
+            video: item.video,
+            visibilidade: item.visibilidade
+          }));
+
+        if (this.novidades.length > 0) {
+          this.selectedImage = this.novidades[0];
+        }
+
+        console.log(this.novidades)
+      },
+      error: err => {
+        console.error('Erro ao carregar novidades:', err);
+      }
+    });
+  }
+
+  onSelectImage(img: any) {
+    this.selectedImage = img;
+  }
+
+  scrollThumbnails(direction: 'up' | 'down') {
+    const scrollAmount = 80; // pixels to scroll per click
+    const container = this.thumbContainer.nativeElement;
+
+    if (direction === 'up') {
+      container.scrollTop -= scrollAmount;
+    } else {
+      container.scrollTop += scrollAmount;
+    }
+  }
+
+  getSafeVideoLink(videoLink: string): SafeResourceUrl {
+    let videoId = '';
+    if (videoLink.includes('youtube.com/watch')) {
+      videoId = new URL(videoLink).searchParams.get('v') || '';
+    } else if (videoLink.includes('youtu.be/')) {
+      videoId = videoLink.split('youtu.be/')[1];
+    }
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?controls=0&rel=0&disablekb=1&modestbranding=1`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+  
 }
