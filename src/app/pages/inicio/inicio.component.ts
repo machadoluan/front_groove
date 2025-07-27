@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, mapToResolve, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CarouselModule } from 'primeng/carousel';
-import { Item } from '../../types/models.type';
+import { gallery, Item } from '../../types/models.type';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { FilaComponent } from '../../components/fila/fila.component';
@@ -14,6 +14,7 @@ import { environment } from '../../../environments/environment';
 import { PanelModule } from 'primeng/panel';
 import { TermsComponent } from "../../components/terms/terms.component";
 import { LogService } from '../../service/log.service';
+import { GalleriaModule } from 'primeng/galleria';
 
 @Component({
   selector: 'app-inicio',
@@ -25,13 +26,15 @@ import { LogService } from '../../service/log.service';
     Dialog,
     MessageComponent,
     RouterLink,
-    PanelModule
+    PanelModule,
+    GalleriaModule
   ],
+  standalone: true,
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InicioComponent implements OnInit, AfterViewInit  {
+export class InicioComponent implements OnInit, AfterViewInit {
   readonly panelOpenState = signal(false);
 
   vipDetalis: boolean = false
@@ -57,8 +60,22 @@ export class InicioComponent implements OnInit, AfterViewInit  {
   account: any;
   criouConta: boolean = false;
   errorJogue: boolean = false;
-  allowList: boolean | null = null; 
+  allowList: boolean | null = null;
   vipSelecionado: any;
+  activeIndex: number = 0;     
+
+  images: any[] = [];
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1300px',
+      numVisible: 4
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1
+    }
+  ]
 
   vipItem: any[] = [
     {
@@ -155,13 +172,13 @@ export class InicioComponent implements OnInit, AfterViewInit  {
       ]
     }
   ];
-  
+
 
   dimaItem: Item[] = [
     { title: '6.000 Diamantes', photo: "/img/pacote_dima_1.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 15, class: 'onek-dima' },
-    { title: '10.000 Diamantes',  photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
-    { title: '22.000 Diamantes',  photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
-    { title: '108.000 Diamantes',  photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
+    { title: '10.000 Diamantes', photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
+    { title: '22.000 Diamantes', photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
+    { title: '108.000 Diamantes', photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
   ];
 
   questions = [
@@ -184,18 +201,36 @@ export class InicioComponent implements OnInit, AfterViewInit  {
     private route: ActivatedRoute,
     private serverService: ServerService,
     private cdr: ChangeDetectorRef,
-    private log: LogService
+    private log: LogService,
   ) { }
 
 
 
   ngAfterViewInit() {
-    
+
   }
 
 
 
   ngOnInit(): void {
+    this.images = [
+      {
+        itemImageSrc: 'https://rollingstone.com.br/media/uploads/2023/12/gta-6-jogo-game-rockstar-foto-divulgacao.jpg',
+        thumbnailImageSrc: 'https://rollingstone.com.br/media/uploads/2023/12/gta-6-jogo-game-rockstar-foto-divulgacao.jpg',
+        alt: 'Descrição para Imagem 1',
+        title: 'Inserção de blips de garagem similares aos do GTA San Andreas.'
+      },
+      {
+        itemImageSrc: 'https://cdn.motor1.com/images/mgl/QeKLQ8/s3/gta-vi-new-trailer.jpg',
+        thumbnailImageSrc: 'https://cdn.motor1.com/images/mgl/QeKLQ8/s3/gta-vi-new-trailer.jpg',
+        alt: 'Descrição para Imagem 2',
+        title: 'Título 2'
+      },
+      
+      // … outras imagens …
+    ];
+
+
     const fila = localStorage.getItem('token')
     // this.dialogVisible = true;
 
@@ -240,46 +275,31 @@ export class InicioComponent implements OnInit, AfterViewInit  {
       }
     });
 
-    // if (this.user && this.user.discordId) {
-    //   this.serverService.getAccount(this.user.discordId).subscribe(
-    //     (res: any) => {
-    //       this.account = res.length ? res[0] : null;
-    //       this.cdr.detectChanges();
-    //     },
-    //     (err: any) => {
-    //       console.error(err);
-    //     }
-    //   )
-    // }
-    // VerifyAllowList
-    // if(this.user){
-    //   this.serverService.verifyAllowList(this.user.license).subscribe({
-    //     next: (res: any) => {
-    //       console.log("Valor recebido do backend:", res);
-    //       this.allowList = res;
-    //       console.log("allowList atualizado para:", this.allowList);
-    //       this.cdr.detectChanges(); // Força o Angular a atualizar a UI
-    //     },
-    //     error: (err) => {
-    //       console.error("Erro ao buscar AllowList:", err);
-    //     }
-    //   });
-    // }
-   
+    if (this.user && this.user.discordId) {
+      this.serverService.getAccount(this.user.discordId).subscribe(
+        (res: any) => {
+          this.account = res.length ? res[0] : null;
+          this.cdr.detectChanges();
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      )
+    }
 
-    // Get Vipps
-
-    // this.serverService.getVips().subscribe({
-    //   next: (res: any)  => {
-    //     this.vipItem = res
-    //     this.cdr.detectChanges();
-    //     console.log(this.vipItem)
-    //   },
-    //   error: (err) =>{
-    //     console.error(err)
-    //   }
-    // })
-
+    if (this.user) {
+      this.serverService.verifyAllowList(this.user.license).subscribe({
+        next: (res: any) => {
+          console.log("Valor recebido do backend:", res);
+          this.allowList = res;
+          console.log("allowList atualizado para:", this.allowList);
+          this.cdr.detectChanges(); // Força o Angular a atualizar a UI
+        },
+        error: (err) => {
+          console.error("Erro ao buscar AllowList:", err);
+        }
+      });
+    }
   }
 
 
