@@ -21,3 +21,9 @@ export type historicoSuporte = {
   motivo: string,
   status: string
 }
+
+
+export type gallery = {
+  img: string;
+  title: string;
+}

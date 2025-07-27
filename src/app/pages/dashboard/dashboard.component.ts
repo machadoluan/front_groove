@@ -138,6 +138,7 @@ export class DashboardComponent implements OnInit {
       },
       (err: any) => {
         console.error(err)
+
       }
     )
 
@@ -147,7 +148,6 @@ export class DashboardComponent implements OnInit {
     this.discordService.getUserRoles(this.user.discordId).subscribe(
       (res: any) => {
         this.cargosDiscord = res.roles.filter((role: any) => role !== '@everyone');
-
       },
       (err) => {
         console.log(err)
@@ -168,6 +168,7 @@ export class DashboardComponent implements OnInit {
     this.serverService.verifyAllowList(this.user.license).subscribe({
       next: (res: any) => {
         this.allowList = res
+        console.log(res)
       },
       error: (err) => {
         console.error(err)

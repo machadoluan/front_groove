@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, mapToResolve, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CarouselModule } from 'primeng/carousel';
-import { Item } from '../../types/models.type';
+import { gallery, Item } from '../../types/models.type';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CarrinhoService } from '../../service/carrinho.service';
 import { FilaComponent } from '../../components/fila/fila.component';
@@ -14,6 +14,9 @@ import { environment } from '../../../environments/environment';
 import { PanelModule } from 'primeng/panel';
 import { TermsComponent } from "../../components/terms/terms.component";
 import { LogService } from '../../service/log.service';
+import { GalleriaModule } from 'primeng/galleria';
+import { NovidadeService } from '../../service/novidade.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-inicio',
@@ -25,13 +28,15 @@ import { LogService } from '../../service/log.service';
     Dialog,
     MessageComponent,
     RouterLink,
-    PanelModule
+    PanelModule,
+    GalleriaModule
   ],
+  standalone: true,
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InicioComponent implements OnInit, AfterViewInit  {
+export class InicioComponent implements OnInit, AfterViewInit {
   readonly panelOpenState = signal(false);
 
   vipDetalis: boolean = false
@@ -44,6 +49,8 @@ export class InicioComponent implements OnInit, AfterViewInit  {
   @ViewChild('btnTelaCheia') btnTelaCheia!: ElementRef;
   @ViewChild('iconeFullScreen') iconeFullScreen!: ElementRef;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
+  @ViewChild('thumbContainer') thumbContainer!: ElementRef;
+
 
   videoPaused: boolean = true;
   videoMutado: boolean = true;
@@ -57,8 +64,23 @@ export class InicioComponent implements OnInit, AfterViewInit  {
   account: any;
   criouConta: boolean = false;
   errorJogue: boolean = false;
-  allowList: boolean | null = null; 
+  allowList: boolean | null = null;
   vipSelecionado: any;
+  activeIndex: number = 0;
+
+  novidades: any[] = [];
+  selectedImage: any;
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1300px',
+      numVisible: 4
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1
+    }
+  ]
 
   vipItem: any[] = [
     {
@@ -155,13 +177,13 @@ export class InicioComponent implements OnInit, AfterViewInit  {
       ]
     }
   ];
-  
+
 
   dimaItem: Item[] = [
     { title: '6.000 Diamantes', photo: "/img/pacote_dima_1.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 15, class: 'onek-dima' },
-    { title: '10.000 Diamantes',  photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
-    { title: '22.000 Diamantes',  photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
-    { title: '108.000 Diamantes',  photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
+    { title: '10.000 Diamantes', photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
+    { title: '22.000 Diamantes', photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
+    { title: '108.000 Diamantes', photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
   ];
 
   questions = [
@@ -184,18 +206,22 @@ export class InicioComponent implements OnInit, AfterViewInit  {
     private route: ActivatedRoute,
     private serverService: ServerService,
     private cdr: ChangeDetectorRef,
-    private log: LogService
+    private log: LogService,
+    private novidadeService: NovidadeService,
+    private sanitizer: DomSanitizer
   ) { }
 
 
 
   ngAfterViewInit() {
-    
+
   }
 
 
 
   ngOnInit(): void {
+    this.loadNovidades();
+
     const fila = localStorage.getItem('token')
     // this.dialogVisible = true;
 
@@ -240,46 +266,31 @@ export class InicioComponent implements OnInit, AfterViewInit  {
       }
     });
 
-    // if (this.user && this.user.discordId) {
-    //   this.serverService.getAccount(this.user.discordId).subscribe(
-    //     (res: any) => {
-    //       this.account = res.length ? res[0] : null;
-    //       this.cdr.detectChanges();
-    //     },
-    //     (err: any) => {
-    //       console.error(err);
-    //     }
-    //   )
-    // }
-    // VerifyAllowList
-    // if(this.user){
-    //   this.serverService.verifyAllowList(this.user.license).subscribe({
-    //     next: (res: any) => {
-    //       console.log("Valor recebido do backend:", res);
-    //       this.allowList = res;
-    //       console.log("allowList atualizado para:", this.allowList);
-    //       this.cdr.detectChanges(); // Força o Angular a atualizar a UI
-    //     },
-    //     error: (err) => {
-    //       console.error("Erro ao buscar AllowList:", err);
-    //     }
-    //   });
-    // }
-   
+    if (this.user && this.user.discordId) {
+      this.serverService.getAccount(this.user.discordId).subscribe(
+        (res: any) => {
+          this.account = res.length ? res[0] : null;
+          this.cdr.detectChanges();
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      )
+    }
 
-    // Get Vipps
-
-    // this.serverService.getVips().subscribe({
-    //   next: (res: any)  => {
-    //     this.vipItem = res
-    //     this.cdr.detectChanges();
-    //     console.log(this.vipItem)
-    //   },
-    //   error: (err) =>{
-    //     console.error(err)
-    //   }
-    // })
-
+    if (this.user) {
+      this.serverService.verifyAllowList(this.user.license).subscribe({
+        next: (res: any) => {
+          console.log("Valor recebido do backend:", res);
+          this.allowList = res;
+          console.log("allowList atualizado para:", this.allowList);
+          this.cdr.detectChanges(); // Força o Angular a atualizar a UI
+        },
+        error: (err) => {
+          console.error("Erro ao buscar AllowList:", err);
+        }
+      });
+    }
   }
 
 
@@ -363,4 +374,59 @@ export class InicioComponent implements OnInit, AfterViewInit  {
     this.vipSelecionado = item;
     this.vipDetalis = true
   }
+
+  loadNovidades() {
+    this.novidadeService.getNovidades().subscribe({
+      next: (res: any[]) => {
+        this.novidades = res
+          .filter(item => item.visibilidade === true)
+          .reverse() // Inverte a ordem para que o último apareça primeiro
+          .map(item => ({
+            itemImageSrc: item.fotoLink,
+            thumbnailImageSrc: item.fotoLink,
+            alt: item.title || 'Sem descrição',
+            title: item.title,
+            videoLink: item.videoLink,
+            video: item.video,
+            visibilidade: item.visibilidade
+          }));
+
+        if (this.novidades.length > 0) {
+          this.selectedImage = this.novidades[0];
+        }
+
+        console.log(this.novidades)
+      },
+      error: err => {
+        console.error('Erro ao carregar novidades:', err);
+      }
+    });
+  }
+
+  onSelectImage(img: any) {
+    this.selectedImage = img;
+  }
+
+  scrollThumbnails(direction: 'up' | 'down') {
+    const scrollAmount = 80; // pixels to scroll per click
+    const container = this.thumbContainer.nativeElement;
+
+    if (direction === 'up') {
+      container.scrollTop -= scrollAmount;
+    } else {
+      container.scrollTop += scrollAmount;
+    }
+  }
+
+  getSafeVideoLink(videoLink: string): SafeResourceUrl {
+    let videoId = '';
+    if (videoLink.includes('youtube.com/watch')) {
+      videoId = new URL(videoLink).searchParams.get('v') || '';
+    } else if (videoLink.includes('youtu.be/')) {
+      videoId = videoLink.split('youtu.be/')[1];
+    }
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?controls=0&rel=0&disablekb=1&modestbranding=1`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+  
 }

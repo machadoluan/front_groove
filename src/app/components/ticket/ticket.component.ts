@@ -11,7 +11,7 @@ import { AutoResizeDirective } from '../../auto-resize.directive';
 
 @Component({
   selector: 'app-ticket',
-  imports: [DialogModule, CommonModule, SelectModule, FormsModule, InputTextModule, TextareaModule, AutoResizeDirective],
+  imports: [DialogModule, CommonModule, SelectModule, FormsModule, InputTextModule, TextareaModule],
 
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.scss'

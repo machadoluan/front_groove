@@ -32,6 +32,44 @@
         </div>
 
     </section>
+    <section class="gallery">
+        <div class="margin-site">
+            <div class="text">
+                <h1>Notas de atualizações</h1>
+                <p>Sejabem vindo à Groove Roleplay! Estamos trabalhando para que a cidade esteja cada vez mais linda e
+                    otimizada, por aqui você encontrará atualizações importantes que estamos fazendo no servidor. Fique
+                    a vontade para conhecer! :)</p>
+            </div>
+
+            <div class="gallery-container">
+                <div class="main-image">
+                    <!-- Se for vídeo, exibe o iframe -->
+                    <ng-container *ngIf="selectedImage.video; else showImage">
+                        <div class="block-channel"></div>
+                        <iframe [src]="getSafeVideoLink(selectedImage.videoLink)" frameborder="0"></iframe>
+                    </ng-container>
+
+                    <!-- Se for imagem, exibe a imagem normalmente -->
+                    <ng-template #showImage>
+                        <img [src]="selectedImage.itemImageSrc" [alt]="selectedImage.alt">
+                    </ng-template>
+
+                    <p class="caption">{{ selectedImage.title }}</p>
+                </div>
+
+                <div class="thumbnails-wrapper">
+                    <i class="fas fa-chevron-up nav-btn up" (click)="scrollThumbnails('up')"></i>
+                    <div class="thumbnails" #thumbContainer>
+                        <img *ngFor="let img of novidades" [src]="img.thumbnailImageSrc" [alt]="img.alt"
+                            [class.active]="img === selectedImage" (click)="onSelectImage(img)">
+                    </div>
+                    <i class="fas fa-chevron-down nav-btn down" (click)="scrollThumbnails('down')"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
 
     <section class="Vips" id="vips" *ngIf="user">
         <div class="margin-site">
@@ -45,9 +83,9 @@
                     [ngStyle]="{'background-image': 'url(' + item.photo + ')'}">
                     <div class="content">
                         <h1 class="vip_title">{{item.title}}</h1>
-                       
+
                         <p class="description">{{item.description}}</p>
-                        <p class="valor">R$ {{item.price}},00  <span class="vip_title">(30 dias)</span></p>
+                        <p class="valor">R$ {{item.price}},00 <span class="vip_title">(30 dias)</span></p>
                         <button class="btn-style-global "><i class="fas fa-crown"></i> Adquirir VIP</button>
                         <span (click)="seeMore(item)">Ver detalhes <i class="fas fa-chevron-right"></i></span>
                     </div>
@@ -130,7 +168,8 @@
                     mais conquistas, mais história pra contar.</p>
             </div>
             <div class="cards">
-                <div class="card" *ngFor="let item of dimaItem" [ngClass]="item.class" [ngStyle]="{'background-image': 'url(' + item.photo + ')'}">
+                <div class="card" *ngFor="let item of dimaItem" [ngClass]="item.class"
+                    [ngStyle]="{'background-image': 'url(' + item.photo + ')'}">
                     <div class="content">
                         <h1 class="vip_title">{{item.title}}</h1>
                         <span class="valor">R$ {{item.price}},00</span>
@@ -274,7 +313,8 @@
 
 <!-- Dialogs -->
 
-<p-dialog [header]="vipSelecionado?.title" [modal]="true" [(visible)]="vipDetalis" [style]="{ width: '25rem' }" styleClass="detalis_vip">
+<p-dialog [header]="vipSelecionado?.title" [modal]="true" [(visible)]="vipDetalis" [style]="{ width: '25rem' }"
+    styleClass="detalis_vip">
     <h2>{{vipSelecionado?.description}}</h2>
 
     <ul>
