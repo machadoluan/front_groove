@@ -36,7 +36,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrl: './inicio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InicioComponent implements OnInit, AfterViewInit {
+export class InicioComponent implements OnInit {
   readonly panelOpenState = signal(false);
 
   vipDetalis: boolean = false
@@ -210,12 +210,6 @@ export class InicioComponent implements OnInit, AfterViewInit {
     private novidadeService: NovidadeService,
     private sanitizer: DomSanitizer
   ) { }
-
-
-
-  ngAfterViewInit() {
-
-  }
 
 
 

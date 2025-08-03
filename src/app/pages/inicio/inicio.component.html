@@ -32,7 +32,7 @@
         </div>
 
     </section>
-    <section class="gallery">
+    <section class="gallery" *ngIf="selectedImage">
         <div class="margin-site">
             <div class="text">
                 <h1>Notas de atualizações</h1>
@@ -191,6 +191,7 @@
                     [collapsed]="true">
                     <p class="m-0">
                         {{ question.content }}
+
                     </p>
                 </p-panel>
             </div>

@@ -12,18 +12,9 @@ import { provideNgxMask } from 'ngx-mask';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { SecretInterceptor } from './interceptors/secret.interceptor';
-import { GALLERY_CONFIG, GalleryConfig } from 'ng-gallery';
-
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {
   providers: [
-    {
-      provide: GALLERY_CONFIG,
-      useValue: {
-        autoHeight: true,
-        imageSize: 'cover'
-      } as GalleryConfig
-    },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(
