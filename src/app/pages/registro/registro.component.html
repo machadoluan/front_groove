@@ -3,11 +3,11 @@
 <div class="container-registro">
     <div class="content">
         <div class="logo">
-            <img src="/img/logo.png" alt="logo">
+            <img src="/img/logo.webp" alt="logo">
         </div>
 
         <div class="foto">
-            <img src="/img/imgCadastro-1.png" alt="foto">
+            <img src="/img/imgCadastro-1.webp" alt="foto">
         </div>
 
         <section class="cadastro section" *ngIf="!verifyCode && !steam">
@@ -44,7 +44,7 @@
                         <p-dropdown [options]="countryList" optionLabel="name" (onChange)="onCountryChange($event)">
                             <ng-template let-country pTemplate="selectedItem">
                                 <div class="country-item">
-                                    <img [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.png'"
+                                    <img [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.webp'"
                                         alt="flag" class="flag" />
                                     {{ country.code }}
                                 </div>
@@ -52,7 +52,7 @@
 
                             <ng-template let-country pTemplate="item">
                                 <div class="country-item">
-                                    <img [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.png'"
+                                    <img [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.webp'"
                                         alt="flag" class="flag" />
                                     {{ country.label }} {{ country.dialCode }}
                                 </div>
@@ -136,7 +136,7 @@
                 <span>Conecte sua conta Steam para realizar a WL:</span>
 
                 <div class="btn-steam">
-                    <img src="/img/steam.png" alt="steam">
+                    <img src="/img/steam.webp" alt="steam">
                     <div>
                         <button class="btn-style btn-style-global" (click)="vincularSteam()"
                             [disabled]="steamVinculado">Vincular</button>

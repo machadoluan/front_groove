@@ -188,7 +188,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getAvatar(userId: string, avatar: string) {
-    return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
+    return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.webp`
   }
 
   sair() {

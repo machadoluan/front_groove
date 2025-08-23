@@ -85,7 +85,7 @@ export class InicioComponent implements OnInit {
   vipItem: any[] = [
     {
       title: 'Grove Beginner',
-      photo: "/img/VIP_PRATA.png",
+      photo: "/img/VIP_PRATA.webp",
       dateValidade: "30 Dias",
       description: "Ideal para quem quer começar bem e com estilo de rua",
       quantity: 1,
@@ -106,7 +106,7 @@ export class InicioComponent implements OnInit {
     },
     {
       title: 'Veterano da Grove',
-      photo: "/img/VIP_OURO.png",
+      photo: "/img/VIP_OURO.webp",
       dateValidade: "30 Dias",
       description: "Pra quem cresceu no bairro e conhece o corre",
       quantity: 1,
@@ -129,7 +129,7 @@ export class InicioComponent implements OnInit {
     },
     {
       title: 'OG da Grove',
-      photo: "/img/VIP_DIAMANTE.png",
+      photo: "/img/VIP_DIAMANTE.webp",
       dateValidade: "30 Dias",
       description: "Agora você dita as regras no bairro",
       quantity: 1,
@@ -152,7 +152,7 @@ export class InicioComponent implements OnInit {
     },
     {
       title: 'Lenda da Grove',
-      photo: "/img/VIP_ESMERALDA.png",
+      photo: "/img/VIP_ESMERALDA.webp",
       dateValidade: "30 Dias",
       description: "Você virou parte da história. Agora é você quem escreve o futuro.",
       quantity: 1,
@@ -180,10 +180,10 @@ export class InicioComponent implements OnInit {
 
 
   dimaItem: Item[] = [
-    { title: '6.000 Diamantes', photo: "/img/pacote_dima_1.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 15, class: 'onek-dima' },
-    { title: '10.000 Diamantes', photo: "/img/pacote_dima_2.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
-    { title: '22.000 Diamantes', photo: "/img/pacote_dima_3.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
-    { title: '108.000 Diamantes', photo: "img/pacote_dima_4.png", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
+    { title: '6.000 Diamantes', photo: "/img/pacote_dima_1.webp", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 15, class: 'onek-dima' },
+    { title: '10.000 Diamantes', photo: "/img/pacote_dima_2.webp", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 25, class: 'fourk-dima' },
+    { title: '22.000 Diamantes', photo: "/img/pacote_dima_3.webp", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 50, class: 'eightk-dima' },
+    { title: '108.000 Diamantes', photo: "img/pacote_dima_4.webp", dateValidade: "", description: "Eleve sua experiência com nosso pacote VIP exclusivo. Destaque-se e conquiste a cidade!", quantity: 1, price: 240, class: 'sixteen-dima' }
   ];
 
   questions = [
@@ -289,7 +289,7 @@ export class InicioComponent implements OnInit {
 
 
   getAvatar(userId: string, avatar: string) {
-    return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png`
+    return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.webp`
   }
 
 
