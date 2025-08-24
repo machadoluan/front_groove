@@ -1,61 +1,59 @@
 import { Routes } from '@angular/router';
-import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { AuthGuard } from './auth.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { InicioComponent } from './pages/inicio/inicio.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { RegistroComponent } from './pages/registro/registro.component';
-import { AllowlistComponent } from './pages/allowlist/allowlist.component';
 import { allowlistGuard } from './allowlist.guard';
-import { TermsComponent } from './components/terms/terms.component';
-import { PolicyComponent } from './components/policy/policy.component';
-import { PolicyCookiesComponent } from './components/policy-cookies/policy-cookies.component';
-import { TicketComponent } from './components/ticket/ticket.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: InicioComponent
+    loadComponent: () =>
+      import('./pages/inicio/inicio.component').then((m) => m.InicioComponent)
   },
   {
     path: 'home',
-    component: InicioComponent
+    loadComponent: () =>
+      import('./pages/inicio/inicio.component').then((m) => m.InicioComponent)
   },
   {
     path: 'terms',
-    component: TermsComponent
-
+    loadComponent: () =>
+      import('./components/terms/terms.component').then((m) => m.TermsComponent)
   },
   {
     path: 'politica-de-privacidade',
-    component: PolicyComponent
-
+    loadComponent: () =>
+      import('./components/policy/policy.component').then((m) => m.PolicyComponent)
   },
   {
     path: 'politica-de-cookies',
-    component: PolicyCookiesComponent
-
+    loadComponent: () =>
+      import('./components/policy-cookies/policy-cookies.component').then((m) => m.PolicyCookiesComponent)
   },
   {
     path: 'ticket/:id',
-    component: TicketComponent
+    loadComponent: () =>
+      import('./components/ticket/ticket.component').then((m) => m.TicketComponent)
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./pages/dashboard/dashboard.component').then((m) => m.DashboardComponent)
   },
   {
     path: 'cadastro',
-    component: RegistroComponent
+    loadComponent: () =>
+      import('./pages/registro/registro.component').then((m) => m.RegistroComponent)
   },
   {
     path: 'allowlist',
-    component: AllowlistComponent,
-    canActivate: [allowlistGuard]
+    canActivate: [allowlistGuard],
+    loadComponent: () =>
+      import('./pages/allowlist/allowlist.component').then((m) => m.AllowlistComponent)
   },
   {
     path: '**',
-    component: NotFoundComponent
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then((m) => m.NotFoundComponent)
   }
 ];
+

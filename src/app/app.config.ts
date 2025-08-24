@@ -1,7 +1,5 @@
-import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import { provideToastr } from 'ngx-toastr';
-import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
@@ -12,11 +10,15 @@ import { provideNgxMask } from 'ngx-mask';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { SecretInterceptor } from './interceptors/secret.interceptor';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { routes } from './app.routes';
 registerLocaleData(localePt);
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    importProvidersFrom(
+      RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    ),
     provideHttpClient(
       withInterceptors([SecretInterceptor])
     ),

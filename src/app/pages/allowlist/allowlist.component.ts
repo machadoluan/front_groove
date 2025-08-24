@@ -13,6 +13,7 @@ import { LogService } from '../../service/log.service';
 
 @Component({
   selector: 'app-allowlist',
+  standalone: true,
   imports: [
     CommonModule,
     AllowAprovadComponent,

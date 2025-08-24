@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,15 @@ import { LogService } from './service/log.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule, ToastModule, CookiesComponent],
+  standalone: true,
+  imports: [
+    RouterModule,
+    HeaderComponent,
+    FooterComponent,
+    CommonModule,
+    ToastModule,
+    CookiesComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
