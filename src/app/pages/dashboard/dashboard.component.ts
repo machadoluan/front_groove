@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
 
   // Dados historico suporte
   dataSourceSuporte: historicoSuporte[] = []
-  selectedSuporte: any; // Para armazenar a compra selecionada
+  selectedSuporte: any;
 
   user: any;
   avatar: string = '';
