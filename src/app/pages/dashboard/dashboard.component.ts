@@ -29,6 +29,7 @@ import { TicketComponent } from '../../components/ticket/ticket.component';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   imports: [
     CommonModule,
     MatTabsModule,
