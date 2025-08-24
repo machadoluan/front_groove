@@ -2,7 +2,7 @@
     <header [ngClass]="{'scrolled': isScroll}">
         <div class="margin-site">
             <div class="logo">
-                <a routerLink="/"><img src="img/logo.webp" alt=""></a>
+                <a routerLink="/"><img src="impnggo.webp" alt="image"></a>
                 <!-- <div class="online">
                     {{players}}
                 </div> -->
@@ -43,10 +43,10 @@
                     Entrar com o discord
                 </button>
 
-                <button type="button" class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
+                <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
                     (click)=" toggleDropdown() ">
-                    <img [src]="getAvatar(user.discordId, user.avatar)" alt="">
-                </button>
+                    <img [src]="getAvatar(user.discordId, user.avatar)" alt="image">
+                </div>
                 <button type="button" class="icon-mobile" (click)="openMenuMobile()">
                     <i class="fa-solid" [ngClass]="{'fa-bars': !menuMobile, 'fa-xmark': menuMobile}"></i>
                 </button>

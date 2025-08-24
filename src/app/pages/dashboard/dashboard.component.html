@@ -98,9 +98,9 @@
                   Selecione seu personagem
                   <div class="personagem-img">
 
-                    <img [src]="character.profilePhoto" alt="" *ngFor="let character of characters"
+                    <img [src]="character.profilePhoto" alt="image" *ngFor="let character of characters"
                       [ngClass]="{'active': selectedCharacter === character}" (click)="selectCharacter(character)"
-                      alt="">
+                      alt="image">
                   </div>
                 </div>
 
@@ -108,7 +108,7 @@
                   <div class="vip">
                     <div class="dados-personagem">
                       <div class="icone">
-                        <img src="/img/vip.webp" alt="">
+                        <img src="/img/vip.webp" alt="image">
                         <div class="dados" *ngIf="selectedCharacter">
                           <span id="vip">PLATINA</span>
                         </div>
@@ -127,7 +127,7 @@
 
                   <div class="diamante">
                     <div class="icone">
-                      <img src="/img/vip.webp" alt="">
+                      <img src="/img/vip.webp" alt="image">
                     </div>
 
                     <div class="dados">
