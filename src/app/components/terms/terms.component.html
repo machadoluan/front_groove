@@ -1,4 +1,5 @@
 <main>
+    <app-breadcrumb [crumbs]="[{ label: 'Home', url: '/' }, { label: 'Termos' }]" />
     <h1>Termos de Serviço  - Groove Roleplay</h1>
     <section class="terms-content">
         <h2>1. Introdução</h2>
@@ -48,4 +49,13 @@
         </ul>
 
     </section>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Termos de Serviço",
+        "description": "Termos de serviço do Groove Roleplay.",
+        "url": "https://seu-dominio/terms"
+    }
+    </script>
 </main>

@@ -1,4 +1,5 @@
 <main>
+    <app-breadcrumb [crumbs]="[{ label: 'Home', url: '/' }, { label: 'Política de Privacidade' }]" />
     <h1>Política de Privacidade - Groove Roleplay</h1>
     <div class="container">
         <section class="privacy-content">
@@ -26,4 +27,13 @@
             </ul>
         </section>
     </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "PrivacyPolicy",
+        "name": "Política de Privacidade",
+        "description": "Como o Groove Roleplay trata seus dados pessoais.",
+        "url": "https://seu-dominio/politica-de-privacidade"
+    }
+    </script>
 </main>
