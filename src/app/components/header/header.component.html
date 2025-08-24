@@ -38,18 +38,18 @@
                     </div>
                 }
                 
-                <button type="button" class="login btn-style-global" (click)="loginWithDiscord()" *ngIf="!user">
+                <div type="button" class="login btn-style-global" (click)="loginWithDiscord()" *ngIf="!user">
                     <i class="fa-brands fa-discord"></i>
                     Entrar com o discord
-                </button>
+                </div>
 
                 <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
                     (click)=" toggleDropdown() ">
                     <img [src]="getAvatar(user.discordId, user.avatar)" alt="image">
                 </div>
-                <button type="button" class="icon-mobile" (click)="openMenuMobile()">
+                <div type="button" class="icon-mobile" (click)="openMenuMobile()">
                     <i class="fa-solid" [ngClass]="{'fa-bars': !menuMobile, 'fa-xmark': menuMobile}"></i>
-                </button>
+                </div>
             </div>
 
             <div class="profile-dropdown" *ngIf="profileDropdonw"
