@@ -2,17 +2,19 @@
     <header [ngClass]="{'scrolled': isScroll}">
         <div class="margin-site">
             <div class="logo">
-                <a href=""><img src="img/logo.webp" alt=""></a>
+                <a routerLink="/"><img src="img/logo.webp" width="616" height="208" alt=""></a>
                 <!-- <div class="online">
                     {{players}}
                 </div> -->
             </div>
             <nav>
-                <li><a href="#">INICIO</a></li>
-                <li *ngIf="user"><a href="#vips">VIP</a></li>
-                <li *ngIf="user"><a href="#diamente">DIAMANTE</a></li>
-                <li><a href="#perguntas">COMO CONECTAR</a></li>
-                <li><a href="#">LOJA</a></li>
+                <ul>
+                    <li><a routerLink="/">INICIO</a></li>
+                    <li *ngIf="user"><a href="#vips">VIP</a></li>
+                    <li *ngIf="user"><a href="#diamente">DIAMANTE</a></li>
+                    <li><a href="#perguntas">COMO CONECTAR</a></li>
+                    <li><a routerLink="/loja">LOJA</a></li>
+                </ul>
             </nav>
 
             <div class="dados">
@@ -36,28 +38,27 @@
                     </div>
                 }
                 
-                <div class="login btn-style-global" (click)="loginWithDiscord()" *ngIf="!user">
+                <button type="button" class="login btn-style-global" (click)="loginWithDiscord()" *ngIf="!user">
                     <i class="fa-brands fa-discord"></i>
                     Entrar com o discord
-                </div>
+                </button>
 
-                <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
+                <button type="button" class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
                     (click)=" toggleDropdown() ">
-                    <img [src]="getAvatar(user.discordId, user.avatar)" alt="">
-                </div>
-                <div class="icon-mobile">
-                    <i class="fa-solid" [ngClass]="{'fa-bars': !menuMobile, 'fa-xmark': menuMobile}"
-                        (click)="openMenuMobile()"></i>
-                </div>
+                    <img [src]="getAvatar(user.discordId, user.avatar)" width="40" height="40" alt="">
+                </button>
+                <button type="button" class="icon-mobile" (click)="openMenuMobile()">
+                    <i class="fa-solid" [ngClass]="{'fa-bars': !menuMobile, 'fa-xmark': menuMobile}"></i>
+                </button>
             </div>
 
             <div class="profile-dropdown" *ngIf="profileDropdonw"
                 [ngClass]="[animationClass, profileDropdonw ? 'd-flex' : 'd-none']">
                 <div class="profile-menu">
-                    <div class="menu" routerLink="/dashboard">
+                    <a class="menu" routerLink="/dashboard">
                         <i class="fa fa-user"></i>
                         Meu perfil
-                    </div>
+                    </a>
                     <!-- <div class="menu settings">
                         <i class="fa fa-gear"></i>
                         Configurações -->
@@ -66,10 +67,10 @@
                         <i class="fa-solid fa-gift"></i>
                         Indique um amigo!
                     </div>
-                    <div class="menu logout" (click)="confirm1($event)">
+                    <button type="button" class="menu logout" (click)="confirm1($event)">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         Sair
-                    </div>
+                    </button>
 
                 </div>
             </div>
@@ -79,44 +80,46 @@
 
     <div class="mobile" *ngIf="menuMobile">
         <nav>
-            <li>
-                <a href="#"><i class="fas fa-home"></i> Inicio</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li *ngIf="user"><a href="#vips"><i class="fas fa-crown"></i> VIP</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li *ngIf="user"><a href="#diamente"><i class="fas fa-gem"></i> DIAMANTE</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="#perguntas"><i class="fas fa-plug"></i> Como conectar</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="#"><i class="fas fa-shopping-cart"></i> Loja</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="#regras"><i class="fas fa-book"></i> Regras</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="#suporte"><i class="fas fa-lightbulb"></i> Sugestões</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="#suporte"><i class="fas fa-headset"></i> Suporte</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
-            <li><a href="#discord"><i class="fab fa-discord"></i> Discord</a>
-                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </li>
+            <ul>
+                <li>
+                    <a routerLink="/"><i class="fas fa-home"></i> Inicio</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li *ngIf="user"><a href="#vips"><i class="fas fa-crown"></i> VIP</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li *ngIf="user"><a href="#diamente"><i class="fas fa-gem"></i> DIAMANTE</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li><a href="#perguntas"><i class="fas fa-plug"></i> Como conectar</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li><a routerLink="/loja"><i class="fas fa-shopping-cart"></i> Loja</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li><a href="#regras"><i class="fas fa-book"></i> Regras</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li><a href="#suporte"><i class="fas fa-lightbulb"></i> Sugestões</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li><a href="#suporte"><i class="fas fa-headset"></i> Suporte</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+                <li><a href="#discord"><i class="fab fa-discord"></i> Discord</a>
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </li>
+            </ul>
         </nav>
 
-        <div class="login" (click)="loginWithDiscord()" *ngIf="!user">
+        <button type="button" class="login" (click)="loginWithDiscord()" *ngIf="!user">
             <i class="fa-brands fa-discord"></i>
             Entrar com o discord
-        </div>
+        </button>
 
 
         <div class="icons-redes" *ngIf="user">
-            <a href=""> <!--TikTok-->
+            <a href="https://www.tiktok.com" target="_blank"> <!--TikTok-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 133 133" fill="none">
                     <path
                         d="M26.3184 84.2609L26.6414 85.1728C26.6 85.0684 26.4818 84.7494 26.3184 84.2609ZM39.1004 63.595C39.6676 58.6949 41.5938 55.9514 45.2235 53.139C50.4171 49.33 56.9046 51.4846 56.9046 51.4846V38.7026C58.4818 38.6605 60.0596 38.7581 61.6196 38.9941V55.4433C61.6196 55.4433 55.134 53.2886 49.9405 57.0996C46.3127 59.9101 44.3826 62.6556 43.8173 67.5557C43.7996 70.2165 44.2782 73.6946 46.482 76.702C45.9372 76.4105 45.3818 76.0783 44.8159 75.7054C39.9611 72.3041 39.0767 67.2012 39.1004 63.595ZM88.4067 15.0686C84.834 10.9839 83.4829 6.85977 82.9945 3.96265H87.4889C87.4889 3.96265 86.5928 11.559 93.1236 19.0293L93.2142 19.1297C91.454 17.9745 89.8399 16.6109 88.4067 15.0686ZM110.057 26.6493V42.7676C110.057 42.7676 104.322 42.5332 100.078 41.4067C94.1517 39.8311 90.3427 37.4145 90.3427 37.4145C90.3427 37.4145 87.7115 35.6912 87.4988 35.5711V68.8555C87.4988 70.7088 87.0123 75.3371 85.5293 79.1974C83.5932 84.2471 80.6055 87.5618 80.056 88.2393C80.056 88.2393 76.4223 92.7199 70.0116 95.7372C64.2331 98.459 59.1597 98.3901 57.6432 98.459C57.6432 98.459 48.873 98.8214 40.9813 93.4703C39.2747 92.2908 37.6817 90.955 36.2229 89.4801L36.2623 89.5096C44.1561 94.8607 52.9243 94.4984 52.9243 94.4984C54.4427 94.4294 59.5162 94.4984 65.2927 91.7765C71.6975 88.7593 75.3371 84.2786 75.3371 84.2786C75.8807 83.6011 78.8822 80.2865 80.8103 75.2347C82.2894 71.3765 82.7798 66.7462 82.7798 64.8929V31.6124C82.9925 31.7345 85.6218 33.4578 85.6218 33.4578C85.6218 33.4578 89.4328 35.8763 95.359 37.45C99.6052 38.5765 105.338 38.8109 105.338 38.8109V26.1805C107.3 26.6394 108.972 26.7635 110.057 26.6493Z"
@@ -152,7 +155,7 @@
                         fill="#EF903C" />
                 </svg>
             </a>
-            <a href=""> <!--Youtube-->
+            <a href="https://www.youtube.com" target="_blank"> <!--Youtube-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="85" height="85" viewBox="0 0 115 115" fill="none">
                     <path
                         d="M47.9167 71.875L72.7854 57.5L47.9167 43.125V71.875ZM103.308 34.3563C103.931 36.6084 104.363 39.6271 104.65 43.4605C104.985 47.2938 105.129 50.6 105.129 53.475L105.417 57.5C105.417 67.9938 104.65 75.7084 103.308 80.6438C102.11 84.9563 99.3313 87.7355 95.0188 88.9334C92.7667 89.5563 88.6458 89.9875 82.3208 90.275C76.0917 90.6105 70.3896 90.7542 65.1188 90.7542L57.5 91.0417C37.4229 91.0417 24.9167 90.275 19.9813 88.9334C15.6688 87.7355 12.8896 84.9563 11.6917 80.6438C11.0688 78.3917 10.6375 75.373 10.35 71.5396C10.0146 67.7063 9.87084 64.4 9.87084 61.525L9.58334 57.5C9.58334 47.0063 10.35 39.2917 11.6917 34.3563C12.8896 30.0438 15.6688 27.2646 19.9813 26.0667C22.2333 25.4438 26.3542 25.0125 32.6792 24.725C38.9083 24.3896 44.6104 24.2459 49.8813 24.2459L57.5 23.9584C77.5771 23.9584 90.0833 24.725 95.0188 26.0667C99.3313 27.2646 102.11 30.0438 103.308 34.3563Z"
