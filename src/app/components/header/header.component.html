@@ -2,7 +2,7 @@
     <header [ngClass]="{'scrolled': isScroll}">
         <div class="margin-site">
             <div class="logo">
-                <a routerLink="/"><img src="/img/logo.webp" alt="image"></a>
+                <a routerLink="/"><img src="/img/logo.webp" alt="image" width="616" height="208"></a>
                 <!-- <div class="online">
                     {{players}}
                 </div> -->
@@ -45,7 +45,7 @@
 
                 <div class="conta" [ngClass]="{'d-flex': !entrar, 'd-none': entrar}" *ngIf="user"
                     (click)=" toggleDropdown() ">
-                    <img [src]="getAvatar(user.discordId, user.avatar)" alt="image">
+                    <img [src]="getAvatar(user.discordId, user.avatar)" alt="image" width="40" height="40">
                 </div>
                 <div type="button" class="icon-mobile" (click)="openMenuMobile()">
                     <i class="fa-solid" [ngClass]="{'fa-bars': !menuMobile, 'fa-xmark': menuMobile}"></i>
