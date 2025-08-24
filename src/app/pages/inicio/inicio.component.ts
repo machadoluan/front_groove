@@ -390,6 +390,8 @@ export class InicioComponent implements OnInit {
         }
 
         console.log(this.novidades)
+        this.cdr.detectChanges();
+
       },
       error: err => {
         console.error('Erro ao carregar novidades:', err);
@@ -422,5 +424,5 @@ export class InicioComponent implements OnInit {
     const embedUrl = `https://www.youtube.com/embed/${videoId}?controls=0&rel=0&disablekb=1&modestbranding=1`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
   }
-  
+
 }

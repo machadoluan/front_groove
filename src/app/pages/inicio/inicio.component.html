@@ -32,44 +32,46 @@
         </div>
 
     </section>
-    <section class="gallery" *ngIf="selectedImage">
-        <div class="margin-site">
-            <div class="text">
-                <h1>Notas de atualizações</h1>
-                <p>Sejabem vindo à Groove Roleplay! Estamos trabalhando para que a cidade esteja cada vez mais linda e
-                    otimizada, por aqui você encontrará atualizações importantes que estamos fazendo no servidor. Fique
-                    a vontade para conhecer! :)</p>
-            </div>
 
-            <div class="gallery-container">
-                <div class="main-image">
-                    <!-- Se for vídeo, exibe o iframe -->
-                    <ng-container *ngIf="selectedImage.video; else showImage">
-                        <div class="block-channel"></div>
-                        <iframe [src]="getSafeVideoLink(selectedImage.videoLink)" frameborder="0"></iframe>
-                    </ng-container>
-
-                    <!-- Se for imagem, exibe a imagem normalmente -->
-                    <ng-template #showImage>
-                        <img [src]="selectedImage.itemImageSrc" [alt]="selectedImage.alt">
-                    </ng-template>
-
-                    <p class="caption">{{ selectedImage.title }}</p>
+    @if(selectedImage) {
+        <section class="gallery">
+            <div class="margin-site">
+                <div class="text">
+                    <h1>Notas de atualizações</h1>
+                    <p>Sejabem vindo à Groove Roleplay! Estamos trabalhando para que a cidade esteja cada vez mais linda e
+                        otimizada, por aqui você encontrará atualizações importantes que estamos fazendo no servidor. Fique
+                        a vontade para conhecer! :)</p>
                 </div>
 
-                <div class="thumbnails-wrapper">
-                    <i class="fas fa-chevron-up nav-btn up" (click)="scrollThumbnails('up')"></i>
-                    <div class="thumbnails" #thumbContainer>
-                        <img *ngFor="let img of novidades" [src]="img.thumbnailImageSrc" [alt]="img.alt"
-                            [class.active]="img === selectedImage" (click)="onSelectImage(img)">
+                <div class="gallery-container">
+                    <div class="main-image">
+                        <!-- Se for vídeo, exibe o iframe -->
+                        <ng-container *ngIf="selectedImage.video; else showImage">
+                            <div class="block-channel"></div>
+                            <iframe [src]="getSafeVideoLink(selectedImage.videoLink)" frameborder="0"></iframe>
+                        </ng-container>
+
+                        <!-- Se for imagem, exibe a imagem normalmente -->
+                        <ng-template #showImage>
+                            <img [src]="selectedImage.itemImageSrc" [alt]="selectedImage.alt">
+                        </ng-template>
+
+                        <p class="caption">{{ selectedImage.title }}</p>
                     </div>
-                    <i class="fas fa-chevron-down nav-btn down" (click)="scrollThumbnails('down')"></i>
+
+                    <div class="thumbnails-wrapper">
+                        <i class="fas fa-chevron-up nav-btn up" (click)="scrollThumbnails('up')"></i>
+                        <div class="thumbnails" #thumbContainer>
+                            <img *ngFor="let img of novidades" [src]="img.thumbnailImageSrc" [alt]="img.alt"
+                                [class.active]="img === selectedImage" (click)="onSelectImage(img)">
+                        </div>
+                        <i class="fas fa-chevron-down nav-btn down" (click)="scrollThumbnails('down')"></i>
+                    </div>
                 </div>
+
             </div>
-
-        </div>
-    </section>
-
+        </section>
+    } 
 
     <section class="Vips" id="vips" *ngIf="user">
         <div class="margin-site">
